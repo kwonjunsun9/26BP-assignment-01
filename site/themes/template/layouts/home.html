@@ -1,89 +1,57 @@
 {{ define "main" }}
-<!-- Banner -->
-{{ with .Params.banner }}
-  <section class="bp-hero" aria-labelledby="bp-title">
-    <input
-      id="bp-motion"
-      class="bp-motion-input"
-      type="checkbox" />
+  <!-- Banner -->
+  {{ with .Params.banner }}
+    <section class="bp-hero" aria-labelledby="bp-title">
+      <input id="bp-motion" class="bp-motion-input" type="checkbox" />
 
-    <label class="bp-motion-label" for="bp-motion">
-      움직임 줄이기
-    </label>
+      <label class="bp-motion-label" for="bp-motion"> 움직임 줄이기 </label>
 
-    <div class="bp-art" aria-hidden="true">
-      <svg
-        viewBox="0 0 1200 800"
-        preserveAspectRatio="xMidYMid slice"
-        focusable="false">
+      <div class="bp-art" aria-hidden="true">
+        {{ with resources.Get "images/blueprint-paint.png" }}
+          {{ $paint := .Resize "1600x webp q82" }}
 
-        <!-- 번지는 물감 -->
-        <g class="bp-ink" fill="#b9d2ff">
-          <path d="
-            M361 353
-            C326 308 384 262 444 280
-            C468 231 544 244 575 273
-            C632 234 703 258 722 290
-            C790 270 852 309 831 358
-            C892 397 851 454 798 460
-            C804 512 728 536 681 506
-            C634 553 559 530 535 507
-            C470 537 404 507 411 465
-            C346 465 316 401 361 353Z" />
-          <circle cx="337" cy="320" r="9" />
-          <circle cx="864" cy="461" r="7" />
-          <circle cx="757" cy="253" r="5" />
-        </g>
 
-        <!-- 설계선 -->
-        <g
-          class="bp-lines"
-          fill="none"
-          stroke="#4775ba"
-          stroke-width="1.5">
-          <path pathLength="1" d="M260 270H940V560H260Z" />
-          <path pathLength="1" d="M290 310H430M290 330H380" />
-          <path pathLength="1" d="M810 310H910M860 330H910" />
-          <path pathLength="1" d="M290 520H470M730 520H910" />
-          <path pathLength="1" d="M600 240V270M600 560V590" />
-        </g>
-
-        <!-- 떨어지는 한 방울 -->
-        <path
-          class="bp-drop"
-          fill="#245fe5"
-          d="M600 104
-             C594 115 582 128 582 141
-             A18 18 0 0 0 618 141
-             C618 128 606 115 600 104Z" />
-      </svg>
-    </div>
-
-    <div class="bp-copy">
-      <p class="bp-kicker">{{ .content }}</p>
-      <h1 id="bp-title" class="bp-title">{{ .title }}</h1>
-      <p class="bp-description">{{ .description }}</p>
-
-      <div class="bp-actions">
-        <a class="bp-button bp-button-primary" href="#blueprint-work">
-          작업 보기 <span aria-hidden="true">↗</span>
-        </a>
-
-        {{ with site.GetPage "about" }}
-          <a class="bp-button bp-button-secondary"
-             href="{{ .RelPermalink }}">
-            소개 보기
-          </a>
+          <img
+            class="bp-paint"
+            src="{{ $paint.RelPermalink }}"
+            width="{{ $paint.Width }}"
+            height="{{ $paint.Height }}"
+            alt=""
+            loading="eager"
+            decoding="async"
+            fetchpriority="high" />
         {{ end }}
-      </div>
-    </div>
 
-    <a class="bp-scroll" href="#blueprint-work">
-      아래로 살펴보기 <span aria-hidden="true">↓</span>
-    </a>
-  </section>
-{{ end }}
-<!-- /Banner -->
+
+        <span class="bp-paint-drop bp-paint-drop-blue"></span>
+        <span class="bp-paint-drop bp-paint-drop-green"></span>
+        <span class="bp-paint-drop bp-paint-drop-pink"></span>
+      </div>
+
+      <div class="bp-copy">
+        <p class="bp-kicker">{{ .content }}</p>
+        <h1 id="bp-title" class="bp-title">{{ .title }}</h1>
+        <p class="bp-description">{{ .description }}</p>
+
+        <div class="bp-actions">
+          <a class="bp-button bp-button-primary" href="#blueprint-work">
+            My <span aria-hidden="true">↗</span>
+          </a>
+
+          {{ with site.GetPage "about" }}
+            <a class="bp-button bp-button-secondary" href="{{ .RelPermalink }}">
+              소개 보기
+            </a>
+          {{ end }}
+        </div>
+      </div>
+
+      <a class="bp-scroll" href="#blueprint-work">
+        아래로 살펴보기 <span aria-hidden="true">↓</span>
+      </a>
+    </section>
+  {{ end }}
+  <!-- /Banner -->
 
   <!-- Company Stats -->
   {{ with .Params.company_stats }}
@@ -166,9 +134,11 @@
               </p>
             </div>
             <div class="col-12">
-              <div class="testimonials-grid grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div
+                class="testimonials-grid grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {{ range .Params.testimonials }}
-                  <article class="testimonial-card bg-body px-7 py-10 transition-opacity duration-300">
+                  <article
+                    class="testimonial-card bg-body px-7 py-10 transition-opacity duration-300">
                     <div class="mb-6 flex items-center">
                       {{ partial "image" (dict "Src" .avatar "Size" "80x80" "Class" "" "Alt" .name) }}
                       <div class="ml-4">
