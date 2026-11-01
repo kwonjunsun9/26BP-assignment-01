@@ -1,17 +1,17 @@
 ---
 # Banner
 banner:
-  title: SEE THE FOREST, KNOW THE TREES.
+  title: SEE THE FOREST,     KNOW THE TREES.
   content: The Big Picture, The Every Details.
   description: "큰 그림을 바라보고, 모든 디테일을 만들어갑니다."
   image: /images/hero-background.jpg
   button_primary:
     enable: true
-    label: Connect With Us
+    label: Contact With Me
     link: /contact
   button_secondary:
     enable: true
-    label: See Our Work
+    label: See My Work
     link: /portfolio
 
 # Company Stats
@@ -31,7 +31,7 @@ company_stats:
 # Recent Works:
 recent_works:
   enable: true
-  title: ABOUT ME
-  description: Crafting experiences and seeking to make the complex clear & beautiful.
+  title: IT'S MY FOREST
+  description: 제 숲을 소개합니다.
 ---
 ​
