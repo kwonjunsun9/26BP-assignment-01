@@ -10,12 +10,12 @@
       <div class="container">
         <div class="row justify-center">
           <div class="lg:col-10 md:col-9 mb-8 text-center">
-            <p class="mb-2 text-text-dark font-extralight">
-              {{ .content | markdownify }}
-            </p>
             <h1 class="text-h3 lg:text-h1">
               {{ .title | markdownify }}
             </h1>
+            <p class="mt-4 text-text-dark font-extralight">
+              {{ .content | markdownify }}
+            </p>
 
             <div class="mt-18! flex gap-5 flex-wrap justify-center">
               {{ with .button_secondary }}
