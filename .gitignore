@@ -27,3 +27,7 @@ yarn.lock
 **/resources/_gen/
 **/.hugo_build.lock
 /.github-pages-setup-backups/
+
+# Local Hugo preview output
+/site/public/
+/site/resources/

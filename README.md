@@ -67,5 +67,7 @@ yarn preview
 ### Local Preview
 
 ```bash
-hugo server --config "hugo.toml,pages.json" --baseURL "http://localhost:1313/" --disableFastRender
+cd .\site
+
+hugo server --config "hugo.toml,pages.json" --theme template --port 1314 --baseURL "http://localhost:1314/" --disableFastRender --renderToMemory
 ```
