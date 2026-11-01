@@ -1,0 +1,50 @@
+name = "Roxo Hugo"
+license = "MIT"
+licenselink = "https://github.com/sitepins/roxo-hugo/blob/main/LICENSE"
+description = "Roxo Hugo is a digital agency Hugo theme for creative agencies, freelancers, graphic designers, and photographers. Can be used for any kind of corporate websites who provides digital services with many expertise such as Design, Digital Products, Development, Campaign & Content, Employer Branding."
+homepage = "https://github.com/sitepins/roxo-hugo"
+demosite = "https://roxo-hugo-site.vercel.app"
+min_version = "0.161.0"
+
+tags = [
+  "agency",
+  "creative",
+  "portfolio",
+  "freelancer",
+  "photography",
+  "graphic-design",
+  "digital-agency",
+  "corporate",
+  "business",
+  "marketing",
+  "branding",
+  "services",
+  "contact-form",
+  "tailwindcss",
+  "landing-page",
+]
+
+features = [
+  "Creative Agency Design",
+  "Portfolio Showcase",
+  "Blog Section",
+  "Freelancer Friendly",
+  "Photography Support",
+  "Corporate Business Layout",
+  "Digital Marketing Pages",
+  "Branding & Service Sections",
+  "Responsive Design",
+  "Modern UI",
+  "Contact Form Integration",
+  "Tailwind CSS",
+  "Landing Page Ready",
+]
+
+[author]
+name = "sitepins"
+homepage = "https://github.com/sitepins"
+
+[original]
+author = "Sitepins"
+homepage = "https://sitepins.com/"
+repo = "https://github.com/sitepins/roxo-hugo"

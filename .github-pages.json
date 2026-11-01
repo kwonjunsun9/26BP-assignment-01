@@ -1,0 +1,16 @@
+{
+  "config": "hugo.toml,pages.json",
+  "theme": "template",
+  "sample": "exampleSite",
+  "version": "0.167.0",
+  "slug": "roxo-hugo",
+  "npm": [
+    ".",
+    "themes/template"
+  ],
+  "asset_build": [],
+  "generator": "3.1",
+  "repo": "https://github.com/kwonjunsun9/26BP-assignment-01.git",
+  "baseURL": "https://kwonjunsun9.github.io/26BP-assignment-01/",
+  "audited": false
+}
