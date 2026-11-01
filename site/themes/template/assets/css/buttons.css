@@ -1,44 +1,82 @@
 .btn {
-  @apply inline-block border-0 rounded-none px-10 py-3.75 font-secondary font-light text-white transition-colors duration-300 cursor-pointer;
+  --button-bg: #f5f5f7;
+  --button-hover: #e8e8ed;
+  --button-pressed: #dddde3;
 
-  &:focus {
-    box-shadow: none;
-  }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  .btn-area {
-    @apply block overflow-hidden;
+  min-height: 44px;
+  min-width: 44px;
+  max-width: 100%;
+  padding: 0.8rem 1.6rem;
 
-    span {
-      @apply relative inline-block py-[2px] origin-left transition-transform duration-[900ms];
-      transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background-color: var(--button-bg);
+  color: #171719;
 
-      &::after {
-        content: attr(data-text);
-        @apply absolute left-0 top-[150%] origin-left;
-        transform: skewY(30deg);
-        transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
-      }
-    }
-  }
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: max(1rem, 14px);
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
 
-  &:hover,
-  &:visited {
-    .btn-area {
-      span {
-        transform: translateY(-150%) skewY(7deg);
+  cursor: pointer;
+  touch-action: manipulation;
 
-        &::after {
-          transform: skewY(-7deg);
-        }
-      }
-    }
-  }
+  transition:
+    background-color 160ms ease,
+    transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .btn-primary {
-  @apply border-primary bg-primary/85 hover:bg-primary text-text-light;
+  --button-bg: var(--color-primary, #e07b7b);
+  --button-hover: color-mix(in srgb, var(--button-bg) 92%, white);
+  --button-pressed: color-mix(in srgb, var(--button-bg) 90%, black);
 }
 
 .btn-secondary {
-  @apply border-secondary bg-secondary/85 hover:bg-secondary text-text-light;
+  --button-bg: var(--color-secondary, #8bc5bf);
+  --button-hover: color-mix(in srgb, var(--button-bg) 92%, white);
+  --button-pressed: color-mix(in srgb, var(--button-bg) 90%, black);
+}
+
+/* 마우스를 올렸을 때 */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover:not(:disabled) {
+    background-color: var(--button-hover);
+  }
+}
+
+/* 누르는 순간 */
+.btn:active:not(:disabled) {
+  background-color: var(--button-pressed);
+  transform: scale(0.97);
+  transition-duration: 80ms;
+}
+
+/* 키보드로 선택했을 때 */
+.btn:focus-visible {
+  outline: 3px solid var(--color-text-dark, #00113e);
+  outline-offset: 4px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 모션 감소 설정 */
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+
+  .btn:active:not(:disabled) {
+    transform: none;
+  }
 }
