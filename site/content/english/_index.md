@@ -1,8 +1,8 @@
 ---
 # Banner
 banner:
-  title: We're a Design Studio That Believes in Great Ideas
-  content: WE WORK HARD, WE PLAY HARD
+  title: Seeing the Bigger Picture, Building Every Detail.
+  content: SEE THE FOREST, KNOW THE TREES. 큰 그림을 바라보고, 모든 디테일을 만들어갑니다.
   image: /images/hero-background.jpg
   button_primary:
     enable: true
