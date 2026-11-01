@@ -1,8 +1,9 @@
 ---
 # Banner
 banner:
-  title: Seeing the Bigger Picture, Building Every Detail.
-  content: SEE THE FOREST, KNOW THE TREES. 큰 그림을 바라보고, 모든 디테일을 만들어갑니다.
+  title: SEE THE FOREST, KNOW THE TREES.
+  content: The Big Picture, The Every Details.
+  description: "큰 그림을 바라보고, 모든 디테일을 만들어갑니다."
   image: /images/hero-background.jpg
   button_primary:
     enable: true
@@ -16,7 +17,7 @@ banner:
 # Company Stats
 company_stats:
   enable: true
-  title: THE PROOF IS IN THE PUDDING!
+  title:  결과로 증명합니다!
   stats:
     - name: Happy Clients
       count: 250+
@@ -30,7 +31,7 @@ company_stats:
 # Recent Works:
 recent_works:
   enable: true
-  title: OUR RECENT WORKS
+  title: ABOUT ME
   description: Crafting experiences and seeking to make the complex clear & beautiful.
 ---
 ​

@@ -17,6 +17,12 @@
               {{ .title | markdownify }}
             </h1>
 
+            {{ with .description }}
+              <p class="mt-4 text-text-dark font-extralight">
+                {{ . | markdownify }}
+              </p>
+            {{ end }}
+
             <div class="mt-18! flex gap-5 flex-wrap justify-center">
               {{ with .button_secondary }}
                 {{ if .enable }}
