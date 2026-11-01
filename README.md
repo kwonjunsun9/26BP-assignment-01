@@ -63,3 +63,9 @@ Start the production server to preview your changes and test functionality:
 ```bash
 yarn preview
 ```
+
+### Local Preview
+
+```bash
+hugo server --config "hugo.toml,pages.json" --baseURL "http://localhost:1313/" --disableFastRender
+```

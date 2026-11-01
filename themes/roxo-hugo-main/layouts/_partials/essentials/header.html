@@ -18,7 +18,12 @@
       </a>
     </div>
     <!-- navbar toggler -->
-    <input id="nav-toggle" type="checkbox" class="hidden" />
+    <input
+      id="nav-toggle"
+      type="checkbox"
+      class="sr-only lg:hidden"
+      aria-label="메뉴 열기 또는 닫기"
+      aria-controls="nav-menu" />
     <label
       for="nav-toggle"
       class="order-2 cursor-pointer flex items-center lg:hidden text-text-dark lg:order-1 ml-auto">
@@ -35,7 +40,8 @@
     </label>
     <!-- /navbar toggler -->
 
-    <div class="order-3 flex flex-col lg:flex-row items-center lg:order-2 w-full lg:w-auto lg:justify-between">
+    <div
+      class="order-3 flex flex-col lg:flex-row items-center lg:order-2 w-full lg:w-auto lg:justify-between">
       <!-- main navbar -->
       <ul
         id="nav-menu"
@@ -133,8 +139,7 @@
           class="btn btn-primary hidden lg:inline-block rounded-full"
           {{ if (hasPrefix site.Params.navigation_button.link `http`) }}
             target="_blank" rel="noopener"
-          {{ end }}
-          >
+          {{ end }}>
           <span class="btn-area">
             <span data-text="{{ site.Params.navigation_button.label }}">
               {{ site.Params.navigation_button.label }}
@@ -147,33 +152,33 @@
 
   {{/* Header shrink on scroll */}}
   <script>
-    (function(){
-      var header = document.getElementById('site-header');
+    (function () {
+      var header = document.getElementById("site-header");
       var lastScrollTop = 0;
       var shrunk = false;
 
-      if(!header) return;
+      if (!header) return;
 
-      function handleScroll(){
+      function handleScroll() {
         var scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-        if(scrollTop > 50){
-          if(!shrunk){
-            header.classList.remove('py-6', 'lg:py-6');
-            header.classList.add('py-3', 'lg:py-3', 'shadow-md');
+        if (scrollTop > 50) {
+          if (!shrunk) {
+            header.classList.remove("py-6", "lg:py-6");
+            header.classList.add("py-3", "lg:py-3", "shadow-md");
             shrunk = true;
           }
         } else {
-          if(shrunk){
-            header.classList.remove('py-3', 'lg:py-3', 'shadow-md');
-            header.classList.add('py-6', 'lg:py-6');
+          if (shrunk) {
+            header.classList.remove("py-3", "lg:py-3", "shadow-md");
+            header.classList.add("py-6", "lg:py-6");
             shrunk = false;
           }
         }
         lastScrollTop = scrollTop;
       }
 
-      window.addEventListener('scroll', handleScroll, {passive: true});
+      window.addEventListener("scroll", handleScroll, { passive: true });
     })();
   </script>
 </header>

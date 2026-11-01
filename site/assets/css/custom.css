@@ -1,1 +1,246 @@
 /* Add your own custom styles here */
+.bp-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: 10rem 1.25rem 8rem;
+  overflow: clip;
+  color: #142544;
+  background: #f7f9fd;
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+.bp-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(36 95 229 / 5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(36 95 229 / 5%) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.bp-art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.bp-ink {
+  opacity: 0.65;
+  transform-origin: 600px 400px;
+}
+
+.bp-lines {
+  opacity: 0.4;
+}
+
+.bp-lines path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.bp-drop {
+  opacity: 0;
+  transform-origin: 600px 140px;
+}
+
+.bp-copy {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 68rem;
+  text-align: center;
+}
+
+.bp-kicker {
+  margin: 0 0 1.25rem;
+  color: #445775;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.bp-title {
+  margin: 0;
+  color: #142544;
+  font: inherit;
+  font-size: clamp(3rem, 9vw, 8rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.bp-description {
+  max-width: 34rem;
+  margin: 1.5rem auto 0;
+  color: #445775;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.8;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.bp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+}
+
+.bp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 48px;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bp-button-primary {
+  color: #fff;
+  background: #245fe5;
+}
+
+.bp-button-primary:hover {
+  background: #184dc6;
+}
+
+.bp-button-secondary {
+  color: #142544;
+  border-color: #b8c7de;
+  background: #fff;
+}
+
+.bp-button-secondary:hover {
+  background: #eaf0fb;
+}
+
+.bp-scroll,
+.bp-motion-label {
+  position: absolute;
+  bottom: 1.25rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  color: #445775;
+  font-size: 0.85rem;
+}
+
+.bp-scroll {
+  left: 1.25rem;
+}
+
+.bp-scroll:hover {
+  text-decoration: underline;
+}
+
+.bp-motion-label {
+  right: 1.25rem;
+  cursor: pointer;
+}
+
+.bp-motion-label::before {
+  content: "";
+  display: grid;
+  place-items: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+}
+
+.bp-motion-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.bp-motion-input:checked + .bp-motion-label::before {
+  content: "✓";
+  color: #fff;
+  border-color: #245fe5;
+  background: #245fe5;
+}
+
+.bp-motion-input:checked ~ .bp-art * {
+  animation: none;
+}
+
+:where(a, button, input, summary):focus-visible,
+.bp-motion-input:focus-visible + .bp-motion-label {
+  outline: 3px solid #245fe5;
+  outline-offset: 5px;
+}
+
+#blueprint-work {
+  scroll-margin-top: 8rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bp-drop {
+    animation: bp-drop 0.7s ease-in both;
+  }
+
+  .bp-ink {
+    animation: bp-spread 0.85s ease-out 0.6s both;
+  }
+
+  .bp-lines path {
+    animation: bp-draw 1.1s ease-out 0.95s both;
+  }
+}
+
+@keyframes bp-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  15% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(220px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(250px) scale(1.6, 0.2);
+  }
+}
+
+@keyframes bp-spread {
+  from {
+    opacity: 0;
+    transform: scale(0.06);
+  }
+  to {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+}
+
+@keyframes bp-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+#nav-toggle:focus-visible + label {
+  outline: 3px solid #245fe5;
+  outline-offset: 5px;
+}

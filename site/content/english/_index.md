@@ -1,9 +1,9 @@
 ---
 # Banner
 banner:
-  title: SEE THE FOREST, KNOW THE TREES.
-  content: The Big Picture, The Every Details.
-  description: "큰 그림을 바라보고, 모든 디테일을 만들어갑니다."
+  title: "My Blueprint"
+  content: Big Picture, More Details.
+  description: "아이디어를 그리고, 더 나은 결과로."
   image: /images/hero-background.jpg
   button_primary:
     enable: true
@@ -31,7 +31,7 @@ company_stats:
 # Recent Works:
 recent_works:
   enable: true
-  title: IT'S MY FOREST
-  description: 저만의 숲을 소개합니다.
+  title: THIS IS MY PRINT
+  description: "지금까지 만들어 온 작업들을 소개합니다."
 ---
 ​
