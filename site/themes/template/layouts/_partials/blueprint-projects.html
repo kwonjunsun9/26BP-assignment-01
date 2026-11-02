@@ -7,6 +7,14 @@
       <header class="bp-fan-heading">
         <h2 id="bp-fan-title">{{ .title }}</h2>
         <p>{{ .description }}</p>
+
+        {{ with site.GetPage "portfolio" }}
+          <a
+            class="bp-button bp-button-primary bp-fan-more"
+            href="{{ .RelPermalink }}">
+            더 알아보기
+          </a>
+        {{ end }}
       </header>
 
       <div class="bp-fan-stage">
@@ -26,8 +34,8 @@
               {{ end }}
               ">
               <span class="bp-poster-meta">
-                MY BLUEPRINT<br />
-                SELECTED PROJECT
+                COMPLETED<br />
+                PROJECT
               </span>
 
               <h3 class="bp-poster-title">

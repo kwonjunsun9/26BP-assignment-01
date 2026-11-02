@@ -829,3 +829,11 @@ html.bp-fan-modal-open {
 .bp-fan.is-fan .bp-fan-deck {
   top: 65%;
 }
+
+.bp-fan-more {
+  margin-top: 1.25rem;
+  min-height: 36px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  gap: 0.4rem;
+}
