@@ -728,7 +728,7 @@ html.bp-fan-modal-open {
 /* 카드 묶음을 줄이고 흰 바닥 가까이 배치 */
 .bp-fan.is-fan .bp-fan-deck {
   top: 60%;
-  transform: scale(calc(var(--fan-scale, 1) * 0.8));
+  transform: scale(calc(var(--fan-scale, 1) * 0.7));
 }
 
 /* 작은 카드에 맞춰 제목 크기 조정 */
@@ -759,5 +759,68 @@ html.bp-fan-modal-open {
       opacity: 1;
       transform: translateY(0) scale(1);
     }
+  }
+}
+
+/* 제목 · 카드 · 아래 화살표 공간 */
+.bp-fan {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.bp-fan-next {
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  width: 48px;
+  height: 48px;
+  margin-top: 0.5rem;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+}
+
+.bp-fan-next:focus-visible {
+  outline: 3px solid #f1d456;
+  outline-offset: 4px;
+}
+
+/* 화살표를 카드 영역 안으로 배치 */
+.bp-fan {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.bp-fan-next {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  z-index: 5;
+  transform: translateX(-50%);
+
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+
+  color: #111;
+  text-decoration: none;
+}
+
+.bp-fan-next:focus-visible {
+  outline: 3px solid #111;
+  outline-offset: 4px;
+}
+
+/* 좁거나 낮은 화면에서는 카드 아래에 공간 확보 */
+@media (max-width: 900px), (max-height: 640px) {
+  .bp-fan-stage {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bp-fan-next {
+    position: static;
+    align-self: center;
+    transform: none;
   }
 }

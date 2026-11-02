@@ -42,9 +42,31 @@
               </span>
             </a>
           {{ end }}
-        </div>
-      </div>
 
+        </div>
+        <!-- 카드 목록 끝 -->
+
+        <!-- 아래로 이동하는 화살표 -->
+        <a
+          class="bp-fan-next"
+          href="#after-projects"
+          aria-label="다음 섹션으로 이동">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false">
+            <path d="M12 4v16M5 13l7 7 7-7" />
+          </svg>
+        </a>
+      </div>
+      <!-- 흰색 바닥을 포함한 카드 영역 끝 -->
     </section>
 
     <dialog
@@ -92,6 +114,5 @@
     {{ else }}
       {{ warnf "Project script not found: site/assets/js/blueprint-projects.js" }}
     {{ end }}
-
   {{ end }}
 {{ end }}
