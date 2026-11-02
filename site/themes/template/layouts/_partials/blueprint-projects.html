@@ -1,0 +1,95 @@
+{{ with .Params.recent_works }}
+  {{ if .enable }}
+    {{ $projects := where (where site.RegularPages "Type" "portfolio") "Params.featured" true }}
+
+
+    <section id="blueprint-work" class="bp-fan" aria-labelledby="bp-fan-title">
+      <header class="bp-fan-heading">
+        <h2 id="bp-fan-title">{{ .title }}</h2>
+        <p>{{ .description }}</p>
+      </header>
+
+      <div class="bp-fan-stage">
+        <div class="bp-fan-deck" aria-label="프로젝트 목록">
+          {{ range $index, $project := $projects }}
+            {{ $summary := $project.Params.preview_summary | default $project.Description | default ($project.Summary | plainify) }}
+
+
+            <a
+              class="bp-fan-card"
+              href="{{ $project.RelPermalink }}"
+              data-title="{{ $project.Title }}"
+              data-summary="{{ $summary }}"
+              data-number="{{ printf "%02d" (add $index 1) }}"
+              data-category="{{ with $project.Params.category }}
+                {{ delimit . " · " }}
+              {{ end }}
+              ">
+              <span class="bp-poster-meta">
+                MY BLUEPRINT<br />
+                SELECTED PROJECT
+              </span>
+
+              <h3 class="bp-poster-title">
+                {{ $project.Title }}
+              </h3>
+
+              <span class="bp-poster-bottom">
+                <span class="bp-poster-number">
+                  {{ printf "%02d" (add $index 1) }}
+                </span>
+                <span aria-hidden="true">↗</span>
+              </span>
+            </a>
+          {{ end }}
+        </div>
+      </div>
+
+      <p class="bp-fan-hint">카드를 선택하면 프로젝트 요약을 볼 수 있습니다.</p>
+    </section>
+
+    <dialog
+      id="bp-project-dialog"
+      class="bp-project-dialog"
+      aria-labelledby="bp-dialog-title"
+      aria-describedby="bp-dialog-summary">
+      <div class="bp-dialog-sheet">
+        <div class="bp-dialog-top">
+          <p id="bp-dialog-number">PROJECT</p>
+
+          <form method="dialog">
+            <button
+              class="bp-dialog-close"
+              type="submit"
+              aria-label="프로젝트 요약 닫기"
+              autofocus>
+              ×
+            </button>
+          </form>
+        </div>
+
+        <p id="bp-dialog-category" class="bp-dialog-category"></p>
+        <h2 id="bp-dialog-title"></h2>
+        <p id="bp-dialog-summary"></p>
+
+        <div class="bp-dialog-actions">
+          <form method="dialog">
+            <button class="bp-dialog-back" type="submit">
+              카드로 돌아가기
+            </button>
+          </form>
+
+          <a id="bp-dialog-detail" class="bp-dialog-detail">
+            자세한 설명 보기
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </dialog>
+
+    {{ with resources.Get "js/blueprint-projects.js" }}
+      {{ $script := . | fingerprint }}
+      <script src="{{ $script.RelPermalink }}" defer></script>
+    {{ end }}
+  {{ end }}
+{{ end }}

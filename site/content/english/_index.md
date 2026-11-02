@@ -16,8 +16,8 @@ banner:
 
 # Company Stats
 company_stats:
-  enable: true
-  title:  결과로 증명합니다!
+  enable: false
+  title: 결과로 증명합니다!
   stats:
     - name: Happy Clients
       count: 250+
@@ -34,4 +34,5 @@ recent_works:
   title: THIS IS MY PRINT
   description: "지금까지 만들어 온 작업들을 소개합니다."
 ---
+
 ​

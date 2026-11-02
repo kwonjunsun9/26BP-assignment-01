@@ -9,8 +9,9 @@
   overflow: clip;
   color: #142544;
   background: #f7f9fd;
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo",
+    "Malgun Gothic", sans-serif;
 }
 
 .bp-art {
@@ -141,7 +142,11 @@
 }
 
 .bp-scroll {
-  left: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: center;
+  width: 48px;
+  height: 48px;
 }
 
 .bp-scroll:hover {
@@ -236,8 +241,12 @@
 }
 
 @keyframes bp-draw {
-  from { stroke-dashoffset: 1; }
-  to { stroke-dashoffset: 0; }
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 #nav-toggle:focus-visible + label {
@@ -346,22 +355,353 @@
   }
 }
 
-/* 모바일에서도 색감과 글자 가독성 확보 */
-@media (max-width: 640px) {
-  .bp-paint {
-    object-position: 76% center;
-  }
+html {
+  scroll-behavior: smooth;
+}
 
-  .bp-art::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(
-      ellipse at center,
-      #fff 0%,
-      rgb(255 255 255 / 90%) 35%,
-      rgb(255 255 255 / 20%) 100%
-    );
+/* 동작 줄이기 설정을 사용하면 즉시 이동 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.bp-fan,
+.bp-fan *,
+.bp-project-dialog,
+.bp-project-dialog * {
+  box-sizing: border-box;
+}
+.bp-fan {
+  --bp-header: 7rem;
+  height: calc(100svh - var(--bp-header));
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  padding: clamp(1.5rem, 4svh, 3rem) 1.25rem 1rem;
+  overflow: clip;
+  background: #050505;
+  color: #fff;
+  scroll-margin-top: var(--bp-header);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo",
+    "Malgun Gothic", sans-serif;
+}
+.bp-fan-heading {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+#blueprint-work.bp-fan {
+  scroll-margin-top: var(--bp-header);
+}
+.bp-fan-heading h2 {
+  margin: 0;
+  color: #fff;
+  font:
+    600 clamp(1.75rem, 3.4vw, 3rem)/1.2 -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
+}
+.bp-fan-heading p {
+  margin: 1rem auto 0;
+  color: #c8c8cd;
+  line-height: 1.6;
+}
+.bp-fan-stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+.bp-fan-stage::before {
+  content: "";
+  position: absolute;
+  width: 135%;
+  height: 75%;
+  left: 50%;
+  bottom: -55%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #f6f4ef;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.bp-fan-deck {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #777 #161616;
+}
+.bp-fan-card {
+  --poster: #cf3b36;
+  --ink: #fff;
+  --lift: 0px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 min(75vw, 260px);
+  min-height: 360px;
+  height: auto;
+  padding: 1.4rem;
+  border: 1px solid rgb(255 255 255 / 15%);
+  border-radius: 3px;
+  background: var(--poster);
+  color: var(--ink);
+  text-decoration: none;
+  scroll-snap-align: center;
+  box-shadow: 0 12px 28px rgb(0 0 0 / 18%);
+  -webkit-tap-highlight-color: transparent;
+}
+.bp-fan-card:nth-child(5n + 2) {
+  --poster: #f1d456;
+  --ink: #25251c;
+}
+.bp-fan-card:nth-child(5n + 3) {
+  --poster: #18724d;
+}
+.bp-fan-card:nth-child(5n + 4) {
+  --poster: #087eaa;
+}
+.bp-fan-card:nth-child(5n + 5) {
+  --poster: #7350a2;
+}
+.bp-poster-meta {
+  align-self: flex-end;
+  font-size: 0.65rem;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-align: right;
+}
+.bp-fan-card .bp-poster-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  margin: 1.2rem 0 1rem;
+  color: inherit;
+  font:
+    400 2.5rem/1.08 Georgia,
+    "Times New Roman",
+    serif;
+  letter-spacing: -0.035em;
+}
+.bp-poster-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+}
+.bp-poster-number {
+  font:
+    400 3rem/1 Georgia,
+    serif;
+}
+.bp-fan-card:focus-visible {
+  outline: 4px solid #fff;
+  outline-offset: 5px;
+}
+.bp-fan.is-fan .bp-fan-deck {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: visible;
+  transform: scale(var(--fan-scale, 1));
+  transform-origin: 0 0;
+}
+.bp-fan.is-fan .bp-fan-card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 220px;
+  height: 320px;
+  min-height: 0;
+  z-index: var(--card-z, 1);
+  transform: translate(
+      calc(-50% + var(--card-x)),
+      calc(-50% + var(--card-y) - var(--lift))
+    )
+    rotate(var(--card-angle));
+}
+.bp-fan.is-fan .bp-fan-card:is(:hover, :focus-visible, .is-selected) {
+  --lift: 16px;
+  z-index: 100;
+}
+.bp-fan-hint {
+  position: relative;
+  margin: 0.75rem 0 0;
+  text-align: center;
+  color: #aaaab2;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.bp-project-dialog {
+  width: min(820px, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  padding: 0;
+  overflow-y: auto;
+  border: 0;
+  border-radius: 12px;
+  background: #fff;
+  color: #171717;
+  box-shadow: 0 24px 100px rgb(0 0 0 / 35%);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
+}
+.bp-project-dialog::backdrop {
+  background: rgb(0 0 0 / 48%);
+}
+.bp-dialog-sheet {
+  padding: clamp(1.25rem, 4vw, 3rem);
+}
+.bp-dialog-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.bp-dialog-top p {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  color: #666;
+}
+.bp-project-dialog form {
+  margin: 0;
+}
+.bp-dialog-close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: #f1f1f4;
+  color: #171717;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+.bp-dialog-category {
+  margin: 1.5rem 0 0.75rem;
+  color: #765123;
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+.bp-project-dialog #bp-dialog-title {
+  margin: 0;
+  color: #171717;
+  font:
+    600 clamp(1.5rem, 3vw, 2.5rem)/1.25 -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  overflow-wrap: anywhere;
+}
+#bp-dialog-summary {
+  margin: 1.5rem 0 2.5rem;
+  line-height: 1.9;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.bp-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+.bp-dialog-back,
+.bp-dialog-detail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 46px;
+  padding: 0.75rem 1.1rem;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.bp-dialog-back {
+  background: #f0f0f4;
+  color: #24242b;
+}
+.bp-dialog-detail {
+  background: #4643cf;
+  color: #fff;
+}
+.bp-project-dialog :is(a, button):focus-visible {
+  outline: 3px solid #4643cf;
+  outline-offset: 4px;
+}
+html.bp-fan-modal-open {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bp-fan-card {
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  .bp-project-dialog[open] {
+    animation: bp-dialog-enter 0.2s ease-out;
+  }
+  @keyframes bp-dialog-enter {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+.bp-fan.no-motion .bp-fan-card,
+.bp-project-dialog.no-motion {
+  transition: none;
+  animation: none;
+}
+.bp-fan.is-fan.no-motion .bp-fan-card {
+  --lift: 0px;
+}
+@media (max-width: 900px), (max-height: 640px) {
+  .bp-fan {
+    height: auto;
+    min-height: calc(100svh - var(--bp-header));
+    grid-template-rows: auto auto auto;
+  }
+  .bp-fan-stage {
+    height: auto;
+    min-height: 410px;
+    margin-top: 1rem;
+  }
+  .bp-fan-deck {
+    height: auto;
+    min-height: 410px;
+    align-items: stretch;
   }
 }

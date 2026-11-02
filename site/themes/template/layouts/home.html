@@ -46,8 +46,23 @@
         </div>
       </div>
 
-      <a class="bp-scroll" href="#blueprint-work">
-        아래로 살펴보기 <span aria-hidden="true">↓</span>
+      <a
+        class="bp-scroll"
+        href="#blueprint-work"
+        aria-label="작업 영역으로 이동">
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false">
+          <path d="M12 4v16M5 13l7 7 7-7" />
+        </svg>
       </a>
     </section>
   {{ end }}
@@ -84,28 +99,7 @@
   <!-- /Company Stats -->
 
   <!-- Recent Works -->
-  {{ with .Params.recent_works }}
-    {{ if .enable }}
-      <section id="blueprint-work" class="section">
-        <div class="container">
-          <div class="row items-center justify-between">
-            <h2 class="mb-4 font-extralight tracking-widest">
-              {{ .title | markdownify }}
-            </h2>
-            <p class="h6">
-              {{ .description | markdownify }}
-            </p>
-
-            <div class="mt-14 grid gap-8 md:grid-cols-2">
-              {{ range where (where site.RegularPages "Type" "portfolio") "Params.featured" true }}
-                {{ partial "components/portfolio-card" . }}
-              {{ end }}
-            </div>
-          </div>
-        </div>
-      </section>
-    {{ end }}
-  {{ end }}
+  {{ partial "blueprint-projects.html" . }}
   <!-- /Features -->
 
   <!-- Testimonials -->

@@ -71,3 +71,9 @@ cd .\site
 
 hugo server --config "hugo.toml,pages.json" --theme template --port 1314 --baseURL "http://localhost:1314/" --disableFastRender --renderToMemory
 ```
+
+### Site
+
+```bash
+http://localhost:1314/ 
+```
