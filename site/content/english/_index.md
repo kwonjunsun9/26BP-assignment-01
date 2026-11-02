@@ -2,8 +2,8 @@
 # Banner
 banner:
   title: "My Blueprint"
-  content: Big Picture, More Details.
-  description: "아이디어를 그리고, 더 나은 결과로."
+  content: KWON JUNSUNG
+  description: "디테일을 그리고, 더 나은 결과로."
   image: /images/hero-background.jpg
   button_primary:
     enable: true
@@ -32,7 +32,7 @@ company_stats:
 recent_works:
   enable: true
   title: THIS IS MY PRINT
-  description: "지금까지 만들어 온 작업들을 소개합니다."
+  description: "지금까지 만들어 온 프로젝트들을 소개합니다."
 ---
 
 ​

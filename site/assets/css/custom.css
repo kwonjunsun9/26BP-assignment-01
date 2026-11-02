@@ -837,3 +837,11 @@ html.bp-fan-modal-open {
   font-size: 0.8rem;
   gap: 0.4rem;
 }
+
+/* 두 번째 화면에 도착할 때까지 카드 등장 대기 */
+.bp-fan.is-fan.bp-fan-pending .bp-fan-card {
+  opacity: 0;
+  pointer-events: none;
+  transition: none !important;
+  animation: none !important;
+}

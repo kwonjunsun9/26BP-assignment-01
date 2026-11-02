@@ -211,3 +211,65 @@
   measureHeader();
   syncMotion();
 })();
+
+(() => {
+  const root = document.getElementById("blueprint-work");
+  const cards = [...(root?.querySelectorAll(".bp-fan-card") || [])];
+  if (!cards.length || !("IntersectionObserver" in window)) return;
+  if (root.dataset.fanRevealReady) return;
+  root.dataset.fanRevealReady = "true";
+
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  const compact = matchMedia("(max-width: 900px), (max-height: 640px)");
+  const toggle = document.getElementById("bp-motion");
+  let played = false;
+  let effects = [];
+
+  const canAnimate = () => !reduced.matches && !toggle?.checked &&
+    !compact.matches && typeof cards[0].animate === "function";
+
+  function reveal(instant = false) {
+    if (played) {
+      if (instant) effects.forEach(effect => effect.cancel());
+      return;
+    }
+    played = true;
+    observer.disconnect();
+    const destinations = cards.map(card => getComputedStyle(card).transform);
+    root.classList.remove("bp-fan-pending");
+    if (instant || !canAnimate()) return;
+
+    effects = cards.map((card, index) => card.animate([
+      { opacity: 0, transform: "translate(-50%, calc(-50% + 48px)) rotate(0deg)" },
+      { opacity: 1, transform: destinations[index] }
+    ], {
+      duration: 900,
+      delay: index * 80,
+      easing: "cubic-bezier(0.2, 0.8, 0.2, 1)",
+      fill: "backwards"
+    }));
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.5)) reveal();
+  }, { threshold: 0.5, rootMargin: "0px 0px -80px 0px" });
+
+  if (canAnimate()) root.classList.add("bp-fan-pending");
+  requestAnimationFrame(() => observer.observe(cards[Math.floor(cards.length / 2)]));
+
+  root.addEventListener("focusin", event => {
+    if (event.target.closest(".bp-fan-card") && event.target.matches(":focus-visible")) reveal(true);
+  });
+  root.addEventListener("click", event => {
+    if (event.target.closest(".bp-fan-card")) reveal(true);
+  }, true);
+  const checkMotion = () => {
+    if (reduced.matches || toggle?.checked) reveal(true);
+  };
+  reduced.addEventListener("change", checkMotion);
+  toggle?.addEventListener("change", checkMotion);
+  addEventListener("resize", () => {
+    if (played) reveal(true);
+  });
+})();
+
