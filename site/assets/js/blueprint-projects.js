@@ -92,12 +92,11 @@
     dialog?.classList.toggle("no-motion", off);
   }
 
-  // Header shrinking can change the native anchor offset during smooth scrolling.
+  // Align the section edge to the viewport; the header is reserved inside its padding.
   function settleAnchor() {
     if (!anchorPending) return;
     anchorPending = false;
-    const height = parseFloat(root.style.getPropertyValue("--bp-header")) || 0;
-    const delta = root.getBoundingClientRect().top - height;
+    const delta = root.getBoundingClientRect().top;
     if (Math.abs(delta) > 1 && Math.abs(delta) < 180) {
       window.scrollTo({
         top: scrollY + delta,

@@ -45,7 +45,6 @@
         </div>
       </div>
 
-      <p class="bp-fan-hint">카드를 선택하면 프로젝트 요약을 볼 수 있습니다.</p>
     </section>
 
     <dialog
@@ -90,6 +89,9 @@
     {{ with resources.Get "js/blueprint-projects.js" }}
       {{ $script := . | fingerprint }}
       <script src="{{ $script.RelPermalink }}" defer></script>
+    {{ else }}
+      {{ warnf "Project script not found: site/assets/js/blueprint-projects.js" }}
     {{ end }}
+
   {{ end }}
 {{ end }}

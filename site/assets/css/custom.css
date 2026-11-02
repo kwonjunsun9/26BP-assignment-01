@@ -705,3 +705,59 @@ html.bp-fan-modal-open {
     align-items: stretch;
   }
 }
+
+/* 검은 배경을 화면 맨 위에 맞추기 */
+#blueprint-work.bp-fan {
+  scroll-margin-top: 0;
+  height: 100svh;
+  padding-top: calc(var(--bp-header, 0px) + clamp(1.5rem, 4svh, 3rem));
+}
+
+@media (max-width: 900px), (max-height: 640px) {
+  #blueprint-work.bp-fan {
+    height: auto;
+    min-height: 100svh;
+  }
+}
+
+/* 안내 문구를 제거한 뒤 제목·카드 두 영역으로 구성 */
+.bp-fan {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+/* 카드 묶음을 줄이고 흰 바닥 가까이 배치 */
+.bp-fan.is-fan .bp-fan-deck {
+  top: 60%;
+  transform: scale(calc(var(--fan-scale, 1) * 0.8));
+}
+
+/* 작은 카드에 맞춰 제목 크기 조정 */
+.bp-fan-card .bp-poster-title {
+  font-size: 2.1rem;
+  line-height: 1.12;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 클릭한 카드를 위로 꺼내는 효과 */
+  .bp-fan.is-fan:not(.no-motion) .bp-fan-card.is-selected {
+    --lift: 64px;
+    z-index: 200;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* 요약 창이 아래 흰 배경에서 올라오는 효과 */
+  .bp-project-dialog[open]:not(.no-motion) {
+    animation: bp-dialog-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes bp-dialog-rise {
+    from {
+      opacity: 0;
+      transform: translateY(55svh) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
