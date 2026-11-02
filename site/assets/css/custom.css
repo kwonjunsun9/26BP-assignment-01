@@ -824,3 +824,8 @@ html.bp-fan-modal-open {
     transform: none;
   }
 }
+
+/* 카드 묶음을 조금 아래로 이동 */
+.bp-fan.is-fan .bp-fan-deck {
+  top: 65%;
+}

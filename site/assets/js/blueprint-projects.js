@@ -64,10 +64,7 @@
         `${pose.y - (minY + maxY) / 2}px`,
       );
       pose.card.style.setProperty("--card-angle", `${pose.angle}deg`);
-      pose.card.style.setProperty(
-        "--card-z",
-        Math.round(cards.length * 2 - Math.abs(index - middle) * 2),
-      );
+      pose.card.style.setProperty("--card-z", index + 1);
     });
     root.style.setProperty("--fan-scale", scale);
     root.classList.add("is-fan");
