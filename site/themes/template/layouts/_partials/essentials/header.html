@@ -17,7 +17,9 @@
   {{ $external := gt (len (findRE `^(https?:)?//` $url)) 0 }}
   {{ $currentValue := "" }}
   {{ if hasPrefix $url "#" }}
-    {{ if not $current.IsHome }}{{ $href = printf "%s%s" site.Home.RelPermalink $url }}{{ end }}
+    {{ if not $current.IsHome }}
+      {{ $href = printf "%s%s" site.Home.RelPermalink $url }}
+    {{ end }}
   {{ else if not (or $external (gt (len (findRE `^(mailto:|tel:)` $url)) 0)) }}
     {{ $href = $url | relLangURL }}
     {{ $lookup := $url }}
@@ -37,226 +39,371 @@
   {{ $items = $items | append (dict "Label" .Label "Href" $href "External" $external "Current" $currentValue) }}
 {{ end }}
 
+
 <style>
-#site-header.bp-site-header {
-  --bp-nav-height: 56px;
-  position: relative;
-  z-index: 1000;
-  width: 100%;
-  height: var(--bp-nav-height);
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-bottom: 1px solid rgb(255 255 255 / 9%);
-  background: rgb(0 0 0 / 94%);
-  box-shadow: none;
-  color: #f5f5f7;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  -webkit-backdrop-filter: saturate(160%) blur(20px);
-  backdrop-filter: saturate(160%) blur(20px);
-}
+  #site-header.bp-site-header {
+    --bp-nav-height: 56px;
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+    height: var(--bp-nav-height);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid rgb(255 255 255 / 9%);
+    background: rgb(0 0 0 / 94%);
+    box-shadow: none;
+    color: #f5f5f7;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo",
+      "Malgun Gothic", sans-serif;
+    -webkit-backdrop-filter: saturate(160%) blur(20px);
+    backdrop-filter: saturate(160%) blur(20px);
+  }
 
-#site-header.bp-site-header[data-navbar-fixed="true"] {
-  position: fixed;
-  inset: 0 0 auto;
-}
+  #site-header.bp-site-header[data-navbar-fixed="true"] {
+    position: fixed;
+    inset: 0 0 auto;
+  }
 
-#site-header.bp-site-header,
-#site-header.bp-site-header * {
-  box-sizing: border-box;
-}
+  #site-header.bp-site-header,
+  #site-header.bp-site-header * {
+    box-sizing: border-box;
+  }
 
-#site-header .bp-nav-inner {
-  display: flex;
-  align-items: center;
-  gap: clamp(1.5rem, 3vw, 3rem);
-  width: 100%;
-  max-width: 64rem;
-  height: 100%;
-  margin-inline: auto;
-  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px)) max(1.25rem, env(safe-area-inset-right, 0px));
-}
-
-#site-header .bp-nav-brand {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  min-height: 44px;
-  color: #f5f5f7;
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-#site-header .bp-nav-brand::after {
-  content: "";
-  width: 1px;
-  height: 24px;
-  margin-left: 1.5rem;
-  background: rgb(255 255 255 / 26%);
-}
-
-#site-header .bp-nav-desktop {
-  align-self: stretch;
-}
-
-#site-header .bp-nav-list {
-  display: flex;
-  align-items: center;
-  gap: clamp(1.5rem, 4vw, 3rem);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-#site-header .bp-nav-link {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: var(--bp-nav-height);
-  padding-inline: 0.25rem;
-  color: #c4c4c8;
-  font-size: 0.8125rem;
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0.035em;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-#site-header .bp-nav-link:hover,
-#site-header .bp-nav-link[aria-current] {
-  color: #fff;
-}
-
-#site-header .bp-nav-link[aria-current]::after {
-  content: "";
-  position: absolute;
-  right: 0.25rem;
-  bottom: 8px;
-  left: 0.25rem;
-  height: 1px;
-  background: rgb(255 255 255 / 60%);
-}
-
-#site-header :is(.bp-nav-brand, .bp-nav-link, .bp-nav-toggle):focus-visible {
-  outline: 2px solid #2997ff;
-  outline-offset: 3px;
-  border-radius: 3px;
-}
-
-#site-header .bp-nav-mobile {
-  display: none;
-  margin-left: auto;
-}
-
-#site-header .bp-nav-toggle {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  color: #f5f5f7;
-  list-style: none;
-  cursor: pointer;
-}
-
-#site-header .bp-nav-toggle::-webkit-details-marker {
-  display: none;
-}
-
-#site-header .bp-nav-toggle svg {
-  display: block;
-  width: 22px;
-  height: 22px;
-}
-
-#site-header .bp-nav-toggle .bp-nav-close-icon,
-#site-header .bp-nav-mobile[open] .bp-nav-open-icon {
-  display: none;
-}
-
-#site-header .bp-nav-mobile[open] .bp-nav-close-icon {
-  display: block;
-}
-
-#site-header .bp-nav-mobile-panel {
-  position: absolute;
-  inset: 100% 0 auto;
-  max-height: calc(100svh - var(--bp-nav-height));
-  padding: 0.75rem max(1.25rem, env(safe-area-inset-right, 0px)) 1.25rem max(1.25rem, env(safe-area-inset-left, 0px));
-  overflow-y: auto;
-  border-bottom: 1px solid rgb(255 255 255 / 10%);
-  background: #161617;
-}
-
-#site-header .bp-nav-mobile-panel .bp-nav-list {
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0;
-  max-width: 38rem;
-  margin-inline: auto;
-}
-
-#site-header .bp-nav-mobile-panel .bp-nav-link {
-  min-height: 48px;
-  padding: 0.75rem 0.25rem;
-  font-size: 1.125rem;
-  letter-spacing: 0.01em;
-}
-
-#site-header .bp-nav-mobile-panel .bp-nav-link[aria-current]::after {
-  display: none;
-}
-
-@media (max-width: 900px) {
   #site-header .bp-nav-inner {
-    gap: 1rem;
+    display: flex;
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    width: 100%;
+    max-width: 64rem;
+    height: 100%;
+    margin-inline: auto;
+    padding-inline: max(1.25rem, env(safe-area-inset-left, 0px))
+      max(1.25rem, env(safe-area-inset-right, 0px));
   }
+
   #site-header .bp-nav-brand {
-    font-size: 1.375rem;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-height: 44px;
+    color: #f5f5f7;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-decoration: none;
+    white-space: nowrap;
   }
-  #site-header .bp-nav-brand::after,
+
+  #site-header .bp-nav-brand::after {
+    content: "";
+    width: 1px;
+    height: 24px;
+    margin-left: 1.5rem;
+    background: rgb(255 255 255 / 26%);
+  }
+
   #site-header .bp-nav-desktop {
+    align-self: stretch;
+  }
+
+  #site-header .bp-nav-list {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #site-header .bp-nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: var(--bp-nav-height);
+    padding-inline: 0.25rem;
+    color: #c4c4c8;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.035em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  #site-header .bp-nav-link:hover,
+  #site-header .bp-nav-link[aria-current] {
+    color: #fff;
+  }
+
+  #site-header .bp-nav-link[aria-current]::after {
+    content: "";
+    position: absolute;
+    right: 0.25rem;
+    bottom: 8px;
+    left: 0.25rem;
+    height: 1px;
+    background: rgb(255 255 255 / 60%);
+  }
+
+  #site-header :is(.bp-nav-brand, .bp-nav-link, .bp-nav-toggle):focus-visible {
+    outline: 2px solid #2997ff;
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  #site-header .bp-nav-mobile {
+    display: none;
+    margin-left: auto;
+  }
+
+  #site-header .bp-nav-toggle {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: #f5f5f7;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  #site-header .bp-nav-toggle::-webkit-details-marker {
     display: none;
   }
-  #site-header .bp-nav-mobile {
+
+  #site-header .bp-nav-toggle svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+  }
+
+  #site-header .bp-nav-toggle .bp-nav-close-icon,
+  #site-header .bp-nav-mobile[open] .bp-nav-open-icon {
+    display: none;
+  }
+
+  #site-header .bp-nav-mobile[open] .bp-nav-close-icon {
     display: block;
   }
-}
-#site-header.bp-site-header {
-  background: rgb(29 29 31 / 90%);
-}
 
-#site-header .bp-nav-mobile-panel {
-  background: #1d1d1f;
-}
+  #site-header .bp-nav-mobile-panel {
+    position: absolute;
+    inset: 100% 0 auto;
+    max-height: calc(100svh - var(--bp-nav-height));
+    padding: 0.75rem max(1.25rem, env(safe-area-inset-right, 0px)) 1.25rem
+      max(1.25rem, env(safe-area-inset-left, 0px));
+    overflow-y: auto;
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
+    background: #161617;
+  }
+
+  #site-header .bp-nav-mobile-panel .bp-nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-width: 38rem;
+    margin-inline: auto;
+  }
+
+  #site-header .bp-nav-mobile-panel .bp-nav-link {
+    min-height: 48px;
+    padding: 0.75rem 0.25rem;
+    font-size: 1.125rem;
+    letter-spacing: 0.01em;
+  }
+
+  #site-header .bp-nav-mobile-panel .bp-nav-link[aria-current]::after {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    #site-header .bp-nav-inner {
+      gap: 1rem;
+    }
+    #site-header .bp-nav-brand {
+      font-size: 1.375rem;
+    }
+    #site-header .bp-nav-brand::after,
+    #site-header .bp-nav-desktop {
+      display: none;
+    }
+    #site-header .bp-nav-mobile {
+      display: block;
+    }
+  }
+  #site-header.bp-site-header {
+    background: rgb(29 29 31 / 90%);
+  }
+
+  #site-header .bp-nav-mobile-panel {
+    background: #1d1d1f;
+  }
+  html {
+    --bp-shared-nav-height: 50px;
+    scrollbar-gutter: stable;
+  }
+
+  /* 공통 상단바 높이 */
+  #site-header.bp-site-header,
+  body.bp-contact-page #site-header.bp-site-header {
+    --bp-nav-height: var(--bp-shared-nav-height);
+    height: var(--bp-nav-height);
+    border: 0;
+  }
+
+  /* 내부 너비와 좌우 여백 */
+  #site-header .bp-nav-inner,
+  body.bp-contact-page #site-header .bp-nav-inner {
+    max-width: 864px;
+    gap: 40px;
+    padding-inline: max(20px, env(safe-area-inset-left, 0px))
+      max(20px, env(safe-area-inset-right, 0px));
+  }
+
+  /* 로고 */
+  #site-header .bp-nav-brand,
+  body.bp-contact-page #site-header .bp-nav-brand {
+    font-size: 20px;
+  }
+
+  #site-header .bp-nav-brand::after,
+  body.bp-contact-page #site-header .bp-nav-brand::after {
+    height: 22px;
+    margin-left: 20px;
+  }
+
+  /* 메뉴 간격과 글자 크기 */
+  #site-header .bp-nav-list,
+  body.bp-contact-page #site-header .bp-nav-list {
+    gap: 44px;
+  }
+
+  #site-header .bp-nav-link,
+  body.bp-contact-page #site-header .bp-nav-link {
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  /* 모바일 메뉴 */
+  #site-header .bp-nav-mobile-panel {
+    padding: 12px 20px 20px;
+  }
+
+  #site-header .bp-nav-mobile-panel .bp-nav-list,
+  body.bp-contact-page #site-header .bp-nav-mobile-panel .bp-nav-list {
+    gap: 8px;
+    max-width: 608px;
+  }
+
+  #site-header .bp-nav-mobile-panel .bp-nav-link,
+  body.bp-contact-page #site-header .bp-nav-mobile-panel .bp-nav-link {
+    font-size: 18px;
+    padding: 12px 4px;
+  }
+
+  /* 페이지별 본문 여백도 같은 높이에 연동 */
+  body.bp-contact-page {
+    --contact-nav-height: var(--bp-shared-nav-height);
+  }
+
+  body.bp-about-header-fixed {
+    --bp-about-header-space: var(--bp-shared-nav-height);
+  }
+
+  body.bp-project-page--fixed-nav {
+    padding-top: var(--bp-shared-nav-height);
+  }
+
+  @media (max-width: 900px) {
+    #site-header .bp-nav-inner,
+    body.bp-contact-page #site-header .bp-nav-inner {
+      gap: 16px;
+    }
+  }
 </style>
 
-<header id="site-header" class="bp-site-header" data-navbar-fixed="{{ if site.Params.navbar_fixed }}true{{ else }}false{{ end }}">
+<header
+  id="site-header"
+  class="bp-site-header"
+  data-navbar-fixed="{{ if site.Params.navbar_fixed }}
+    true
+  {{ else }}
+    false
+  {{ end }}">
   <div class="bp-nav-inner">
-    <a class="bp-nav-brand" href="{{ site.Home.RelPermalink }}" aria-label="KJS's 홈으로 이동">KJS's</a>
+    <a
+      class="bp-nav-brand"
+      href="{{ site.Home.RelPermalink }}"
+      aria-label="KJS's 홈으로 이동"
+      >KJS's</a
+    >
 
     <nav class="bp-nav-desktop" aria-label="주요 메뉴">
       <ul class="bp-nav-list">
         {{ range $items }}
-          <li><a class="bp-nav-link" href="{{ .Href }}"{{ with .Current }} aria-current="{{ . }}"{{ end }}{{ if .External }} target="_blank" rel="noopener"{{ end }}>{{ .Label }}</a></li>
+          <li>
+            <a
+              class="bp-nav-link"
+              href="{{ .Href }}"
+              {{ with .Current }}
+                aria-current="{{ . }}"
+              {{ end }}{{ if .External }}target="_blank" rel="noopener"{{ end }}
+              >{{ .Label }}</a
+            >
+          </li>
         {{ end }}
       </ul>
     </nav>
 
     <details id="bp-mobile-nav" class="bp-nav-mobile">
-      <summary class="bp-nav-toggle" aria-label="메뉴" aria-controls="bp-mobile-menu">
-        <svg class="bp-nav-open-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M5 9h14M5 15h14" /></svg>
-        <svg class="bp-nav-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18" /></svg>
+      <summary
+        class="bp-nav-toggle"
+        aria-label="메뉴"
+        aria-controls="bp-mobile-menu">
+        <svg
+          class="bp-nav-open-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          aria-hidden="true"
+          focusable="false">
+          <path d="M5 9h14M5 15h14" />
+        </svg>
+        <svg
+          class="bp-nav-close-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          aria-hidden="true"
+          focusable="false">
+          <path d="m6 6 12 12M18 6 6 18" />
+        </svg>
       </summary>
-      <nav id="bp-mobile-menu" class="bp-nav-mobile-panel" aria-label="모바일 주요 메뉴">
+      <nav
+        id="bp-mobile-menu"
+        class="bp-nav-mobile-panel"
+        aria-label="모바일 주요 메뉴">
         <ul class="bp-nav-list">
           {{ range $items }}
-            <li><a class="bp-nav-link" href="{{ .Href }}"{{ with .Current }} aria-current="{{ . }}"{{ end }}{{ if .External }} target="_blank" rel="noopener"{{ end }}>{{ .Label }}</a></li>
+            <li>
+              <a
+                class="bp-nav-link"
+                href="{{ .Href }}"
+                {{ with .Current }}
+                  aria-current="{{ . }}"
+                {{ end }}{{ if .External }}
+                  target="_blank" rel="noopener"
+                {{ end }}
+                >{{ .Label }}</a
+              >
+            </li>
           {{ end }}
         </ul>
       </nav>
@@ -265,27 +412,40 @@
 </header>
 
 <script>
-(() => {
-  const menu = document.getElementById("bp-mobile-nav");
-  if (!menu || menu.dataset.ready) return;
-  menu.dataset.ready = "true";
-  const toggle = menu.querySelector("summary");
-  const updateLabel = () => toggle.setAttribute("aria-label", menu.open ? "메뉴 닫기" : "메뉴 열기");
-  menu.addEventListener("toggle", updateLabel);
-  menu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => { menu.open = false; }));
-  document.addEventListener("pointerdown", event => {
-    if (menu.open && !menu.contains(event.target)) menu.open = false;
-  }, { capture: true, passive: true });
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && menu.open) {
+  (() => {
+    const menu = document.getElementById("bp-mobile-nav");
+    if (!menu || menu.dataset.ready) return;
+    menu.dataset.ready = "true";
+    const toggle = menu.querySelector("summary");
+    const updateLabel = () =>
+      toggle.setAttribute("aria-label", menu.open ? "메뉴 닫기" : "메뉴 열기");
+    menu.addEventListener("toggle", updateLabel);
+    menu.querySelectorAll("a").forEach((link) =>
+      link.addEventListener("click", () => {
+        menu.open = false;
+      }),
+    );
+    document.addEventListener(
+      "pointerdown",
+      (event) => {
+        if (menu.open && !menu.contains(event.target)) menu.open = false;
+      },
+      { capture: true, passive: true },
+    );
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menu.open) {
+        menu.open = false;
+        toggle.focus();
+      }
+    });
+    menu.addEventListener("focusout", () =>
+      requestAnimationFrame(() => {
+        if (!menu.contains(document.activeElement)) menu.open = false;
+      }),
+    );
+    matchMedia("(min-width: 901px)").addEventListener("change", () => {
       menu.open = false;
-      toggle.focus();
-    }
-  });
-  menu.addEventListener("focusout", () => requestAnimationFrame(() => {
-    if (!menu.contains(document.activeElement)) menu.open = false;
-  }));
-  matchMedia("(min-width: 901px)").addEventListener("change", () => { menu.open = false; });
-  updateLabel();
-})();
+    });
+    updateLabel();
+  })();
 </script>
