@@ -1060,3 +1060,105 @@
     motionToggle?.addEventListener("change", onMotionChange);
   })();
 </script>
+
+<style>
+  #blueprint-next.bp-print {
+    height: auto;
+    min-height: calc(100svh - var(--bp-print-inset, 80px));
+    padding-block: clamp(1rem, 2.5svh, 1.5rem);
+    scroll-margin-top: var(--bp-print-inset, 80px);
+  }
+
+  #blueprint-next .bp-print-inner {
+    gap: clamp(0.75rem, 2svh, 1.25rem);
+  }
+
+  #blueprint-next .bp-print-monitor {
+    width: min(
+      100%,
+      56.25rem,
+      max(12rem, calc((100svh - var(--bp-print-inset, 80px) - 19rem) * 1.25))
+    );
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+</style>
+<script>
+  (() => {
+    const root = document.getElementById("blueprint-next");
+    if (!root || root.dataset.bpPrintFitV2) return;
+
+    const inner = root.querySelector(".bp-print-inner");
+    const heading = root.querySelector(".bp-print-header");
+    const monitor = root.querySelector(".bp-print-monitor");
+    const header = document.getElementById("site-header");
+    if (!inner || !heading || !monitor) return;
+    root.dataset.bpPrintFitV2 = "true";
+
+    const px = (value) => parseFloat(value) || 0;
+    let frame;
+
+    function fit() {
+      let inset = 0;
+      if (header && /fixed|sticky/.test(getComputedStyle(header).position)) {
+        inset = Math.max(0, header.getBoundingClientRect().bottom);
+      }
+      root.style.setProperty("--bp-print-inset", inset + "px");
+
+      const style = getComputedStyle(root);
+      const available =
+        window.innerHeight -
+        inset -
+        px(style.paddingTop) -
+        px(style.paddingBottom) -
+        px(style.borderTopWidth) -
+        px(style.borderBottomWidth) -
+        heading.getBoundingClientRect().height -
+        px(getComputedStyle(inner).rowGap) -
+        12;
+
+      const rem = px(getComputedStyle(document.documentElement).fontSize);
+      let width = Math.min(inner.clientWidth, rem * 56.25);
+      const minimum = Math.min(width, 240);
+
+      monitor.style.setProperty("width", width + "px", "important");
+
+      for (let attempt = 0; attempt < 8; attempt++) {
+        const box = monitor.getBoundingClientRect();
+        const stand = monitor.querySelector(".bp-print-stand");
+        const bottom = Math.max(
+          box.bottom,
+          stand?.getBoundingClientRect().bottom || box.bottom,
+        );
+        const height = bottom - box.top;
+        if (height <= available || width <= minimum || !height) break;
+        width = Math.max(
+          minimum,
+          Math.floor(width * Math.min(0.98, available / height)),
+        );
+        monitor.style.setProperty("width", width + "px", "important");
+      }
+    }
+
+    function scheduleFit() {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(fit);
+    }
+
+    fit();
+    window.addEventListener("resize", scheduleFit, { passive: true });
+    window.addEventListener("load", scheduleFit, { once: true });
+    window.addEventListener("pageshow", scheduleFit);
+    document.querySelectorAll('a[href="#blueprint-next"]').forEach((link) => {
+      link.addEventListener("click", fit, true);
+    });
+    if ("ResizeObserver" in window) {
+      const observer = new ResizeObserver(scheduleFit);
+      observer.observe(heading);
+      if (header) observer.observe(header);
+    }
+    document.fonts?.ready.then(scheduleFit);
+  })();
+</script>
