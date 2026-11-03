@@ -1,6 +1,6 @@
 ---
 title: "About"
-meta_title: "KWON JUNSUNG"
+meta_title: "About - KWON JUNSUNG"
 description: "개발자 권준성의 소개, 기술과 프로젝트입니다."
 layout: "about"
 draft: false
