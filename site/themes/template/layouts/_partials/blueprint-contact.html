@@ -447,13 +447,13 @@
           class="bp-print-action bp-print-action--contact"
           href="{{ $contactURL }}"
           lang="en"
-          >Contact</a
+          >CONTACT</a
         >
         <a
           class="bp-print-action bp-print-action--about"
           href="{{ $aboutURL }}"
           lang="en"
-          >About me</a
+          >ABOUT ME</a
         >
       </div>
     </header>
@@ -1255,3 +1255,26 @@
     }
   })();
 </script>
+
+<style>
+  #blueprint-next .bp-print-title {
+    font-size: clamp(1.75rem, 3.5vw, 3rem);
+  }
+
+  #blueprint-next .bp-print-tagline {
+    font-size: clamp(1rem, 1.3vw, 1.25rem);
+  }
+</style>
+
+<style>
+  #blueprint-next .bp-print-action {
+    min-width: min(7rem, 100%);
+    min-height: 2.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9375rem;
+  }
+
+  #blueprint-next .bp-print-actions {
+    gap: 0.625rem;
+  }
+</style>
