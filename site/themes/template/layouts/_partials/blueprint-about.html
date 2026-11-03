@@ -389,33 +389,35 @@
     if (!section || section.dataset.bpSkillLandingReady) return;
     section.dataset.bpSkillLandingReady = "true";
 
-    // One wheel-step approximation, capped by the header that covers the old page.
-    const MAX_SCROLL_UP = 80;
     const header = document.getElementById("site-header");
     const title = section.querySelector(".bp-catalog-title");
     const brush = section.querySelector(".bp-catalog-brush");
-    const previous = document.querySelector(".bp-fan-next");
+    const links = document.querySelectorAll(
+      '.bp-fan-next, .bp-hero a[href="#after-projects"]',
+    );
     const arrow = section.querySelector(
       'a.bp-catalog-next, a[href="#blueprint-next"]',
     );
     let pending = false;
-    let timer;
+    let frame = 0;
+    let lastY = 0;
+    let lastInset = 0;
+    let requestedY = 0;
+    let startedAt = 0;
+    let moved = false;
+    let stableFrames = 0;
 
     if (arrow) {
       arrow.classList.add("bp-catalog-next");
       arrow.setAttribute("href", "#blueprint-next");
       section.appendChild(arrow);
     }
-    previous?.setAttribute("href", "#after-projects");
+    links.forEach((link) => link.setAttribute("href", "#after-projects"));
 
     function landingInset() {
-      if (!header) return 0;
-      const position = getComputedStyle(header).position;
-      if (position !== "fixed" && position !== "sticky") return 0;
-      return Math.max(
-        0,
-        Math.min(MAX_SCROLL_UP, header.getBoundingClientRect().bottom),
-      );
+      if (!header || !/fixed|sticky/.test(getComputedStyle(header).position))
+        return 0;
+      return Math.max(0, Math.min(80, header.getBoundingClientRect().bottom));
     }
 
     function setVariable(name, value) {
@@ -433,18 +435,17 @@
           visibleTop,
           Math.min(bounds.height, paint.bottom - bounds.top),
         );
-        const paintCenter = (visibleTop + visibleBottom) / 2;
         const minimum = Math.max(
           16,
           parseFloat(getComputedStyle(section).fontSize) || 16,
         );
         const top = Math.max(
           minimum,
-          paintCenter - title.getBoundingClientRect().height / 2,
+          (visibleTop + visibleBottom) / 2 -
+            title.getBoundingClientRect().height / 2,
         );
         setVariable("--bp-skill-content-top", top.toFixed(2) + "px");
       }
-      if (pending) scheduleAlign();
     }
 
     function destination() {
@@ -456,57 +457,75 @@
 
     function cancel() {
       pending = false;
-      clearTimeout(timer);
+      cancelAnimationFrame(frame);
     }
 
-    function align() {
+    function settleNavigation() {
       if (!pending) return;
-      cancel();
-      measure();
-      window.scrollTo({ top: destination(), behavior: "instant" });
-    }
-
-    function scheduleAlign() {
-      if (!pending) return;
-      clearTimeout(timer);
-      timer = setTimeout(align, 140);
-    }
-
-    previous?.addEventListener(
-      "click",
-      (event) => {
-        if (
-          event.button !== 0 ||
-          event.metaKey ||
-          event.ctrlKey ||
-          event.shiftKey ||
-          event.altKey
-        )
-          return;
-        event.preventDefault();
-        event.stopImmediatePropagation();
+      const y = window.scrollY;
+      const inset = landingInset();
+      const scrollChanged = Math.abs(y - lastY) > 0.25;
+      const headerChanged = Math.abs(inset - lastInset) > 0.25;
+      if (scrollChanged) moved = true;
+      stableFrames = scrollChanged || headerChanged ? 0 : stableFrames + 1;
+      lastY = y;
+      lastInset = inset;
+      const reached = Math.abs(y - requestedY) < 1;
+      if (
+        ((moved || reached) && stableFrames >= 4) ||
+        performance.now() - startedAt > 2500
+      ) {
+        cancel();
         measure();
-        pending = true;
-        if (location.hash !== "#after-projects")
-          history.pushState(null, "", "#after-projects");
-        const reduced =
-          matchMedia("(prefers-reduced-motion: reduce)").matches ||
-          document.getElementById("bp-motion")?.checked;
-        window.scrollTo({
-          top: destination(),
-          behavior: reduced ? "instant" : "smooth",
-        });
-        scheduleAlign();
-      },
-      true,
+        window.scrollTo({ top: destination(), behavior: "instant" });
+        return;
+      }
+      frame = requestAnimationFrame(settleNavigation);
+    }
+
+    links.forEach((link) =>
+      link.addEventListener(
+        "click",
+        (event) => {
+          if (
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          )
+            return;
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          cancel();
+          measure();
+          pending = true;
+          requestedY = destination();
+          lastY = window.scrollY;
+          lastInset = landingInset();
+          startedAt = performance.now();
+          moved = false;
+          stableFrames = 0;
+          if (location.hash !== "#after-projects")
+            history.pushState(history.state, "", "#after-projects");
+          const reduced =
+            matchMedia("(prefers-reduced-motion: reduce)").matches ||
+            document.getElementById("bp-motion")?.checked;
+          window.scrollTo({
+            top: requestedY,
+            behavior: reduced ? "instant" : "smooth",
+          });
+          frame = requestAnimationFrame(settleNavigation);
+        },
+        true,
+      ),
     );
 
-    window.addEventListener("scroll", scheduleAlign, { passive: true });
-    window.addEventListener("scrollend", scheduleAlign);
     window.addEventListener("resize", measure, { passive: true });
-    for (const type of ["wheel", "touchstart", "pointerdown"]) {
+    window.addEventListener("popstate", cancel);
+    window.addEventListener("click", cancel, true);
+    for (const type of ["wheel", "touchstart", "pointerdown"])
       window.addEventListener(type, cancel, { passive: true });
-    }
     window.addEventListener("keydown", (event) => {
       if (
         [
@@ -521,7 +540,6 @@
       )
         cancel();
     });
-
     if ("ResizeObserver" in window) {
       const observer = new ResizeObserver(measure);
       for (const element of [header, title, brush])

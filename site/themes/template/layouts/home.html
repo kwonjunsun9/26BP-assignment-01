@@ -1,4 +1,171 @@
 {{ define "main" }}
+<style>
+/* Monochrome ink blends into the following #050505 project section. */
+.bp-hero,
+.bp-hero * {
+  box-sizing: border-box;
+}
+
+.bp-hero {
+  --bp-ink-brightness: 0.76;
+  --bp-ink-contrast: 2.1;
+  --bp-project-ground: #050505;
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  padding: clamp(6rem, 10svh, 8rem) 1.5rem clamp(10rem, 24svh, 16rem);
+  overflow: clip;
+  background: #fff;
+  color: #071026;
+}
+
+.bp-hero .bp-art {
+  background: none;
+}
+
+.bp-hero .bp-paint {
+  filter: grayscale(1) brightness(var(--bp-ink-brightness)) contrast(var(--bp-ink-contrast));
+}
+
+.bp-hero .bp-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgb(5 5 5 / 0) 0%,
+    rgb(5 5 5 / 0) 64%,
+    rgb(5 5 5 / 0.12) 73%,
+    rgb(5 5 5 / 0.55) 86%,
+    rgb(5 5 5 / 0.90) 96%,
+    var(--bp-project-ground) 100%
+  );
+}
+
+.bp-hero .bp-paint-drop {
+  --paint: #111;
+}
+
+.bp-hero .bp-copy {
+  width: 100%;
+  max-width: 64rem;
+  min-width: 0;
+}
+
+.bp-hero .bp-kicker {
+  margin: 0 0 1.5rem;
+  color: #111;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+}
+
+.bp-hero .bp-title {
+  color: #071026;
+  font-size: clamp(3rem, min(6vw, 11svh), 5.75rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.055em;
+}
+
+.bp-hero .bp-description {
+  margin: 1.75rem auto 0;
+  color: #172033;
+  font-size: clamp(1.125rem, 1.7vw, 1.5rem);
+  line-height: 1.45;
+  letter-spacing: -0.035em;
+}
+
+.bp-hero .bp-role {
+  margin: 0.75rem 0 0;
+  color: #172033;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.bp-hero .bp-actions {
+  gap: 0.625rem;
+  margin-top: 2.5rem;
+}
+
+.bp-hero .bp-button {
+  min-width: min(6.875rem, 100%);
+  max-width: 100%;
+  min-height: 2.75rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.bp-hero .bp-button-primary {
+  background: #1457ff;
+  color: #fff;
+}
+
+.bp-hero .bp-button-primary:hover {
+  background: #0646df;
+}
+
+.bp-hero .bp-button-secondary {
+  border-color: #c9c9ce;
+  background: #fff;
+  color: #111;
+}
+
+.bp-hero .bp-button-secondary:hover {
+  border-color: #999;
+  background: #f5f5f7;
+}
+
+.bp-hero .bp-scroll,
+.bp-hero .bp-motion-label {
+  color: #fff;
+}
+
+.bp-hero .bp-motion-label {
+  font-size: 0.75rem;
+}
+
+@media (max-width: 599px) {
+  .bp-hero {
+    padding: 7rem 1rem 9rem;
+  }
+  .bp-hero .bp-title {
+    font-size: clamp(2.6rem, 10.8vw, 3.5rem);
+  }
+  .bp-hero .bp-kicker {
+    margin-bottom: 1.25rem;
+  }
+  .bp-hero .bp-description {
+    margin-top: 1.5rem;
+  }
+  .bp-hero .bp-actions {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-height: 680px) and (min-width: 600px) {
+  .bp-hero {
+    padding-block: 5.5rem 8rem;
+  }
+  .bp-hero .bp-title {
+    font-size: clamp(2.8rem, min(5vw, 10svh), 4.75rem);
+  }
+  .bp-hero .bp-kicker {
+    margin-bottom: 1rem;
+  }
+  .bp-hero .bp-description {
+    margin-top: 1.25rem;
+  }
+  .bp-hero .bp-actions {
+    margin-top: 1.5rem;
+  }
+}
+</style>
   <!-- Banner -->
   {{ with .Params.banner }}
     <section class="bp-hero" aria-labelledby="bp-title">
@@ -29,20 +196,19 @@
       </div>
 
       <div class="bp-copy">
-        <p class="bp-kicker">{{ .content }}</p>
+        <p class="bp-kicker">{{ .name | default "KWON JUNSUNG" }}</p>
         <h1 id="bp-title" class="bp-title">{{ .title }}</h1>
         <p class="bp-description">{{ .description }}</p>
+        <p class="bp-role">{{ .role | default "Software Engineer" }}</p>
 
         <div class="bp-actions">
           <a class="bp-button bp-button-primary" href="#blueprint-work">
             PROJECTS
           </a>
 
-          {{ with site.GetPage "about" }}
-            <a class="bp-button bp-button-secondary" href="{{ .RelPermalink }}">
-              ABOUT ME
-            </a>
-          {{ end }}
+          <a class="bp-button bp-button-secondary" href="#after-projects">
+            ABOUT ME
+          </a>
         </div>
       </div>
 
@@ -108,3 +274,4 @@
 
   {{ partial "blueprint-contact.html" . }}
 {{ end }}
+
