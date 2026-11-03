@@ -323,6 +323,31 @@
       gap: 16px;
     }
   }
+
+  /* 모든 페이지의 상단바 높이 */
+  html {
+    --bp-shared-nav-height: 52px;
+  }
+
+  /* PROJECT의 상단 빈 공간 제거 */
+  body.bp-project-page,
+  body.bp-project-page--fixed-nav {
+    margin: 0;
+    padding-top: 0;
+  }
+
+  /* PROJECT 상단바를 화면 맨 위에 고정 */
+  body.bp-project-page #site-header.bp-site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    height: var(--bp-shared-nav-height, 52px);
+    margin: 0;
+  }
+
+  /* 상단바 아래부터 본문 시작 */
+  body.bp-project-page #bp-project-main {
+    padding-top: var(--bp-shared-nav-height, 52px);
+  }
 </style>
 
 <header
