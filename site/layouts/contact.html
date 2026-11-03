@@ -1,0 +1,165 @@
+{{ define "page-head" }}
+  {{ $contactCSS := resources.Get "css/bp-contact-page.css" | minify | fingerprint }}
+  {{ $contactJS := resources.Get "js/bp-contact-page.js" | minify | fingerprint }}
+  <link
+    rel="preload"
+    href="{{ "fonts/contact-anton.woff2" | relURL }}"
+    as="font"
+    type="font/woff2"
+    crossorigin />
+  <link
+    rel="preload"
+    href="{{ "images/contact/rainbow-brush.png" | relURL }}"
+    as="image" />
+  <link
+    rel="stylesheet"
+    href="{{ $contactCSS.RelPermalink }}"
+    integrity="{{ $contactCSS.Data.Integrity }}" />
+  <script>
+    document.documentElement.classList.add("bp-contact-motion");
+  </script>
+  <script
+    defer
+    src="{{ $contactJS.RelPermalink }}"
+    integrity="{{ $contactJS.Data.Integrity }}"
+    onerror="document.documentElement.classList.remove('bp-contact-motion')"></script>
+{{ end }}
+
+{{ define "main" }}
+  <section class="bp-contact" aria-labelledby="bp-contact-title">
+    <div class="bp-contact-canvas">
+      <h1
+        id="bp-contact-title"
+        class="bp-contact-title"
+        lang="en"
+        aria-label="Let's draw together">
+        <span class="bp-contact-word bp-contact-word--lets">LET’S</span>
+        <span class="bp-contact-word bp-contact-word--draw">DRAW</span>
+        <span class="bp-contact-word bp-contact-word--together">TOGETHER</span>
+      </h1>
+
+      <svg
+        class="bp-contact-art"
+        viewBox="0 0 1200 1400"
+        fill="none"
+        aria-hidden="true"
+        focusable="false"
+        data-contact-scene
+        data-state="idle">
+        <defs>
+          <mask
+            id="bp-contact-paint-mask"
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width="1200"
+            height="1400"
+            style="mask-type: luminance">
+            <rect width="1200" height="1400" fill="black" />
+            <path
+              class="bp-contact-reveal"
+              d="M 105 1400 C 150 1060 335 680 610 460 S 935 280 1120 260"
+              pathLength="1"
+              stroke="white"
+              stroke-width="720"
+              stroke-linecap="round" />
+          </mask>
+        </defs>
+
+        <g transform="translate(115 1275)">
+          <g class="bp-contact-drop" data-contact-drop data-delay="0">
+            <path
+              d="M 0 -30 C -2 -17 -14 -7 -14 3 A 14 14 0 0 0 14 3 C 14 -7 2 -17 0 -30 Z"
+              fill="#d824c6" />
+          </g>
+          <ellipse
+            class="bp-contact-splash"
+            data-contact-splash
+            rx="23"
+            ry="7"
+            fill="#d824c6" />
+        </g>
+        <g transform="translate(165 1240)">
+          <g class="bp-contact-drop" data-contact-drop data-delay="150">
+            <path
+              d="M 0 -30 C -2 -17 -14 -7 -14 3 A 14 14 0 0 0 14 3 C 14 -7 2 -17 0 -30 Z"
+              fill="#12b5f0" />
+          </g>
+          <ellipse
+            class="bp-contact-splash"
+            data-contact-splash
+            rx="23"
+            ry="7"
+            fill="#12b5f0" />
+        </g>
+        <g transform="translate(240 1285)">
+          <g class="bp-contact-drop" data-contact-drop data-delay="300">
+            <path
+              d="M 0 -30 C -2 -17 -14 -7 -14 3 A 14 14 0 0 0 14 3 C 14 -7 2 -17 0 -30 Z"
+              fill="#ff4935" />
+          </g>
+          <ellipse
+            class="bp-contact-splash"
+            data-contact-splash
+            rx="23"
+            ry="7"
+            fill="#ff4935" />
+        </g>
+
+        <image
+          class="bp-contact-paint"
+          href="{{ "images/contact/rainbow-brush.png" | relURL }}"
+          width="1200"
+          height="1400"
+          preserveAspectRatio="xMidYMid meet"
+          mask="url(#bp-contact-paint-mask)" />
+      </svg>
+    </div>
+
+    <div class="bp-contact-details">
+      <address class="bp-contact-card" aria-labelledby="bp-contact-name">
+        <h2 id="bp-contact-name">{{ .Params.contact_name }}</h2>
+        <div class="bp-contact-links">
+          <a
+            class="bp-contact-link bp-contact-link--email"
+            href="mailto:{{ .Params.contact_email }}">
+            <svg
+              viewBox="0 0 28 28"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false">
+              <rect x="3" y="5" width="22" height="19" rx="2" />
+              <path d="m4 7 10 9L24 7" />
+            </svg>
+            <span>{{ .Params.contact_email }}</span>
+          </a>
+          <a
+            class="bp-contact-link bp-contact-link--github"
+            href="{{ .Params.contact_github }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="KWON JUNSUNG GitHub (새 탭)">
+            <svg
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+              focusable="false">
+              <path
+                d="M12 .75a11.25 11.25 0 0 0-3.558 21.922c.562.103.768-.244.768-.542 0-.267-.01-.974-.015-1.912-3.13.68-3.79-1.508-3.79-1.508-.512-1.3-1.25-1.646-1.25-1.646-1.022-.699.078-.685.078-.685 1.13.08 1.724 1.16 1.724 1.16 1.004 1.721 2.635 1.224 3.277.936.102-.728.393-1.224.714-1.506-2.499-.284-5.126-1.25-5.126-5.565 0-1.23.44-2.234 1.16-3.022-.117-.285-.503-1.43.11-2.98 0 0 .945-.303 3.094 1.155A10.77 10.77 0 0 1 12 6.178c.956.004 1.918.129 2.818.379 2.148-1.458 3.091-1.154 3.091-1.154.615 1.549.229 2.694.113 2.98.722.787 1.158 1.791 1.158 3.021 0 4.327-2.632 5.278-5.14 5.557.404.35.765 1.042.765 2.1 0 1.516-.014 2.738-.014 3.11 0 .3.202.65.774.54A11.25 11.25 0 0 0 12 .75Z" />
+            </svg>
+            <span
+              >GitHub
+              <span class="bp-contact-external" aria-hidden="true"
+                >↗</span
+              ></span
+            >
+          </a>
+        </div>
+      </address>
+    </div>
+  </section>
+{{ end }}

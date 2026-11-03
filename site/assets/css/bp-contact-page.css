@@ -1,0 +1,312 @@
+@font-face {
+  font-family: "Contact Anton";
+  src: url("../fonts/contact-anton.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.bp-contact-page {
+  --contact-black: #000;
+  --contact-white: #fff;
+  --contact-ink: #202020;
+  --contact-muted: #68686c;
+  --contact-header: #323234;
+  --contact-nav-height: 44px;
+  background: var(--contact-black);
+}
+
+.bp-contact-page #site-header.bp-site-header {
+  --bp-nav-height: var(--contact-nav-height);
+  background: var(--contact-header);
+  border: 0;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.bp-contact-page #site-header .bp-nav-inner {
+  max-width: 54rem;
+  gap: 2.5rem;
+}
+
+.bp-contact-page #site-header .bp-nav-brand {
+  font-size: 1.25rem;
+}
+
+.bp-contact-page #site-header .bp-nav-brand::after {
+  height: 22px;
+  margin-left: 1.25rem;
+}
+
+.bp-contact-page #site-header .bp-nav-list {
+  gap: 2.75rem;
+}
+
+.bp-contact-page #site-header .bp-nav-link {
+  font-size: 0.75rem;
+  letter-spacing: 0;
+}
+
+.bp-contact-page main.grow {
+  padding-top: var(--contact-nav-height);
+}
+
+.bp-contact,
+.bp-contact * {
+  box-sizing: border-box;
+}
+
+.bp-contact {
+  display: grid;
+  grid-template-columns: 63.2226% 36.7774%;
+  min-height: calc(100svh - var(--contact-nav-height));
+  color: var(--contact-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+.bp-contact-canvas {
+  position: relative;
+  min-width: 0;
+  min-height: max(38rem, calc(100svh - var(--contact-nav-height)));
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--contact-black);
+}
+
+.bp-contact-title {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  margin: 0;
+  color: var(--contact-white);
+  font-family: "Contact Anton", Impact, "Arial Narrow", sans-serif;
+  font-size: clamp(3rem, min(6.15vw, 12svh), 7.25rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.bp-contact-title .bp-contact-word {
+  position: absolute;
+  right: 1.6%;
+  display: block;
+  color: inherit;
+  white-space: nowrap;
+  transform-origin: right center;
+}
+
+.bp-contact-word--lets {
+  top: 15.9%;
+}
+
+.bp-contact-word--draw {
+  top: 41.2%;
+  transform: scaleX(0.94);
+}
+
+.bp-contact-word--together {
+  top: 71.6%;
+  transform: scaleX(0.745);
+}
+
+.bp-contact-art {
+  position: absolute;
+  top: 15%;
+  left: -1.5%;
+  display: block;
+  width: 61%;
+  height: 80%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.bp-contact-reveal {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.bp-contact-drop,
+.bp-contact-splash {
+  opacity: 0;
+}
+
+.bp-contact-motion .bp-contact-reveal {
+  stroke-dashoffset: 1;
+}
+
+.bp-contact-motion .bp-contact-paint {
+  visibility: hidden;
+}
+
+.bp-contact-motion [data-state="painting"] .bp-contact-paint {
+  visibility: visible;
+}
+
+.bp-contact-details {
+  position: relative;
+  min-width: 0;
+  background: var(--contact-white);
+}
+
+.bp-contact-card {
+  position: absolute;
+  right: 9.5%;
+  bottom: 6.5%;
+  width: max-content;
+  max-width: calc(100% - 2.5rem);
+  margin: 0;
+  font-style: normal;
+}
+
+.bp-contact-card h2 {
+  margin: 0 0 1.5rem;
+  color: var(--contact-ink);
+  font: 700 clamp(1rem, 1.35vw, 1.5rem)/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  letter-spacing: -0.045em;
+}
+
+.bp-contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bp-contact-link {
+  display: flex;
+  align-items: center;
+  gap: 1.125rem;
+  min-height: 44px;
+  width: fit-content;
+  max-width: 100%;
+  padding-block: 0.25rem;
+  color: var(--contact-ink);
+  font-size: clamp(0.875rem, 1.17vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.025em;
+  text-decoration: none;
+  text-underline-offset: 0.25em;
+  transition: opacity 160ms ease;
+}
+
+.bp-contact-link--email {
+  color: var(--contact-muted);
+}
+
+.bp-contact-link svg {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+}
+
+.bp-contact-link > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.bp-contact-external {
+  display: inline-block;
+  font-size: 0.9em;
+}
+
+.bp-contact-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+@media (hover: hover) {
+  .bp-contact-link:hover {
+    text-decoration: underline;
+    opacity: 0.75;
+  }
+}
+
+.bp-contact-link:active {
+  opacity: 0.6;
+}
+
+@media (max-width: 900px) {
+  .bp-contact-page #site-header .bp-nav-inner {
+    gap: 1rem;
+  }
+
+  .bp-contact-page #site-header .bp-nav-mobile-panel .bp-nav-link {
+    font-size: 1.125rem;
+  }
+
+  .bp-contact-page #site-header .bp-nav-mobile-panel .bp-nav-list {
+    gap: 0.5rem;
+  }
+
+  .bp-contact-card {
+    right: 1.25rem;
+  }
+
+  .bp-contact-link {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .bp-contact {
+    grid-template-columns: 1fr;
+  }
+
+  .bp-contact-canvas {
+    min-height: clamp(30rem, 72svh, 44rem);
+  }
+
+  .bp-contact-title {
+    font-size: clamp(3rem, 10vw, 4.75rem);
+  }
+
+  .bp-contact-title .bp-contact-word {
+    right: 4%;
+  }
+
+  .bp-contact-art {
+    top: 13%;
+    left: -4%;
+    width: 66%;
+    height: 84%;
+  }
+
+  .bp-contact-details {
+    display: flex;
+    justify-content: flex-end;
+    padding: 3rem max(1.5rem, env(safe-area-inset-right)) 2.5rem 1.5rem;
+  }
+
+  .bp-contact-card {
+    position: static;
+    max-width: 100%;
+  }
+
+  .bp-contact-card h2 {
+    font-size: 1.125rem;
+  }
+
+  .bp-contact-links {
+    gap: 1rem;
+  }
+
+  .bp-contact-link {
+    gap: 1rem;
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bp-contact-motion .bp-contact-reveal {
+    stroke-dashoffset: 0;
+  }
+
+  .bp-contact-motion .bp-contact-paint {
+    visibility: visible;
+  }
+
+  .bp-contact-link {
+    transition: none;
+  }
+}
