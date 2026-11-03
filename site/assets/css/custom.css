@@ -2331,7 +2331,6 @@ summary.bp-about-story__row {
   }
 }
 
-
 #after-projects.bp-about-catalog {
   position: relative;
   isolation: isolate;
@@ -2374,5 +2373,42 @@ summary.bp-about-story__row {
     left: -0.25rem;
     width: 5rem;
     opacity: 0.3;
+  }
+}
+
+#blueprint-work.bp-fan {
+  --bp-next-ground: #fcfcfd;
+  padding-inline: 0;
+  padding-bottom: 0;
+  border: 0;
+}
+
+#blueprint-work .bp-fan-heading {
+  padding-inline: clamp(1.25rem, 3vw, 3rem);
+}
+
+#blueprint-work .bp-fan-stage::before {
+  background: var(--bp-next-ground);
+}
+
+#blueprint-work .bp-fan-next {
+  bottom: 1rem;
+  border: 0;
+  background: transparent;
+  color: #171b24;
+}
+
+#blueprint-work .bp-fan-next:hover {
+  background: rgb(23 27 36 / 5%);
+}
+
+#blueprint-work .bp-fan-next:focus-visible {
+  outline: 2px solid #245fe5;
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px), (max-height: 640px) {
+  #blueprint-work .bp-fan-next {
+    margin: auto auto 1rem;
   }
 }
