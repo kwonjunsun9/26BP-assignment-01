@@ -166,13 +166,41 @@
         margin-top: 1.5rem;
       }
     }
+    body {
+      margin: 0;
+      padding-top: 0;
+    }
+
+    body #site-header.bp-site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      height: var(--bp-shared-nav-height, 52px);
+    }
+
+    main.grow {
+      padding-top: var(--bp-shared-nav-height, 52px);
+    }
+
+    /* 상단바와 배너를 합쳐 한 화면에 맞춤 */
+    .bp-hero {
+      box-sizing: border-box;
+      height: calc(100svh - var(--bp-shared-nav-height, 52px));
+      min-height: 0;
+      padding-top: clamp(24px, 5svh, 72px);
+      padding-bottom: clamp(88px, 12svh, 144px);
+    }
+
+    .bp-hero .bp-scroll,
+    .bp-hero .bp-motion-label {
+      bottom: max(20px, env(safe-area-inset-bottom, 0px));
+    }
   </style>
   <!-- Banner -->
   {{ with .Params.banner }}
     <section class="bp-hero" aria-labelledby="bp-title">
       <input id="bp-motion" class="bp-motion-input" type="checkbox" />
 
-      <label class="bp-motion-label" for="bp-motion"> 움직임 줄이기 </label>
+      <input id="bp-motion" class="bp-motion-input" type="checkbox" hidden />
 
       <div class="bp-art" aria-hidden="true">
         {{ with resources.Get "images/paint.png" }}

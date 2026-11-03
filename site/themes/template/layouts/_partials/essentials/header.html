@@ -348,6 +348,97 @@
   body.bp-project-page #bp-project-main {
     padding-top: var(--bp-shared-nav-height, 52px);
   }
+  #site-header .bp-nav-motion {
+    position: absolute;
+    top: 50%;
+    right: max(20px, env(safe-area-inset-right, 0px));
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    color: #f5f5f7;
+    font-size: 12px;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transform: translateY(-50%);
+  }
+
+  #site-header .bp-nav-motion-input {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  #site-header .bp-nav-motion-track {
+    position: relative;
+    width: 42px;
+    height: 24px;
+    border-radius: 999px;
+    background: #626269;
+    transition: background 160ms ease;
+  }
+
+  #site-header .bp-nav-motion-track::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 160ms ease;
+  }
+
+  #site-header .bp-nav-motion-state {
+    width: 24px;
+  }
+
+  #site-header .bp-nav-motion-state::after {
+    content: "OFF";
+  }
+
+  html:has(#bp-nav-motion-enabled:checked) #site-header .bp-nav-motion-track {
+    background: #1457ff;
+  }
+
+  html:has(#bp-nav-motion-enabled:checked)
+    #site-header
+    .bp-nav-motion-track::before {
+    transform: translateX(18px);
+  }
+
+  html:has(#bp-nav-motion-enabled:checked)
+    #site-header
+    .bp-nav-motion-state::after {
+    content: "ON";
+  }
+
+  html:has(#bp-nav-motion-enabled:focus-visible) #site-header .bp-nav-motion {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 900px) {
+    #site-header:has(.bp-nav-motion) .bp-nav-mobile {
+      margin-right: 128px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #site-header .bp-nav-motion-track,
+    #site-header .bp-nav-motion-track::before {
+      transition: none;
+    }
+  }
 </style>
 
 <header
@@ -434,6 +525,49 @@
       </nav>
     </details>
   </div>
+  {{ if .IsHome }}
+    <label
+      class="bp-nav-motion"
+      for="bp-nav-motion-enabled"
+      title="ON: 모션 켜기 / OFF: 모션 끄기">
+      <span>모션</span>
+
+      <input
+        id="bp-nav-motion-enabled"
+        class="bp-nav-motion-input"
+        type="checkbox"
+        role="switch"
+        aria-label="모션"
+        checked />
+
+      <span class="bp-nav-motion-track" aria-hidden="true"></span>
+      <span class="bp-nav-motion-state" aria-hidden="true"></span>
+    </label>
+
+    <script>
+      document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+          const enabled = document.getElementById("bp-nav-motion-enabled");
+          const reduced = document.getElementById("bp-motion");
+
+          if (!enabled || !reduced) return;
+
+          const syncMotion = () => {
+            reduced.checked = !enabled.checked;
+            reduced.dispatchEvent(new Event("change", { bubbles: true }));
+          };
+
+          enabled.checked = !matchMedia("(prefers-reduced-motion: reduce)")
+            .matches;
+
+          enabled.addEventListener("change", syncMotion);
+          syncMotion();
+        },
+        { once: true },
+      );
+    </script>
+  {{ end }}
 </header>
 
 <script>
