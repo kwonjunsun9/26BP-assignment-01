@@ -1,0 +1,51 @@
+{
+  "heading": "Project",
+  "tagline": "지금까지 칠해온 색깔들.",
+  "projects": [
+    {
+      "title": "KIO-TAPE-BRAND",
+      "description": "프로젝트 상세 소개",
+      "people": "정보 입력 예정",
+      "period": "정보 입력 예정",
+      "page": "portfolio/kio-tape-2",
+      "image": "",
+      "color": "coral"
+    },
+    {
+      "title": "PROJECT 02",
+      "description": "프로젝트 소개가 들어갈 자리",
+      "people": "정보 입력 예정",
+      "period": "정보 입력 예정",
+      "page": "",
+      "image": "",
+      "color": "yellow"
+    },
+    {
+      "title": "PROJECT 03",
+      "description": "프로젝트 소개가 들어갈 자리",
+      "people": "정보 입력 예정",
+      "period": "정보 입력 예정",
+      "page": "",
+      "image": "",
+      "color": "green"
+    },
+    {
+      "title": "PROJECT 04",
+      "description": "프로젝트 소개가 들어갈 자리",
+      "people": "정보 입력 예정",
+      "period": "정보 입력 예정",
+      "page": "",
+      "image": "",
+      "color": "blue"
+    },
+    {
+      "title": "PROJECT 05",
+      "description": "프로젝트 소개가 들어갈 자리",
+      "people": "정보 입력 예정",
+      "period": "정보 입력 예정",
+      "page": "",
+      "image": "",
+      "color": "purple"
+    }
+  ]
+}

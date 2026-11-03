@@ -1,0 +1,102 @@
+{{- /* Standalone list template: overrides only the portfolio listing page. */ -}}
+{{- $config := hugo.Data.bp_projects -}}
+<!doctype html>
+<html lang="{{ site.Language.Locale | default `ko-KR` }}">
+  <head>
+    {{ partial "essentials/head.html" . }}
+    <meta name="color-scheme" content="light" />
+    <link rel="stylesheet" href="{{ `css/bp-project-page.css` | relURL }}" />
+  </head>
+  <body class="bp-project-page{{ if site.Params.navbar_fixed }} bp-project-page--fixed-nav{{ end }}">
+    {{ partial "essentials/header.html" . }}
+
+    <main id="bp-project-main">
+      <section class="bp-project-hero" aria-labelledby="bp-project-title">
+        <div class="bp-project-hero__copy">
+          <h1 id="bp-project-title">{{ $config.heading | default "Project" }}</h1>
+          <p>{{ $config.tagline | default "지금까지 칠해온 색깔들." }}</p>
+        </div>
+      </section>
+
+      <section class="bp-project-stage" aria-label="프로젝트 목록">
+        <ul class="bp-project-list">
+          {{ range $index, $project := $config.projects }}
+            {{ $href := "" }}
+            {{ with $project.page }}
+              {{ with site.GetPage . }}
+                {{ $href = .RelPermalink }}
+              {{ else }}
+                {{ $href = printf "%s/" (strings.TrimSuffix "/" $project.page) | relLangURL }}
+              {{ end }}
+            {{ end }}
+
+            <li class="bp-project-row bp-project-row--{{ $project.color | default `coral` }}">
+              <span class="bp-project-paint" aria-hidden="true">
+                <img
+                  src="{{ `images/project/brush-source.webp` | relURL }}"
+                  width="640"
+                  height="533"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false" />
+              </span>
+
+              <article class="bp-project-card"{{ if $href }} data-linked="true"{{ end }}>
+                <div class="bp-project-card__thumb" aria-hidden="true">
+                  {{ with $project.image }}
+                    <img src="{{ . | relURL }}" width="48" height="48" alt="" loading="lazy" decoding="async" />
+                  {{ else }}
+                    {{/* Decorative placeholders; replace using the image field. */}}
+                    <svg viewBox="0 0 48 48" fill="none" focusable="false">
+                      <rect width="48" height="48" rx="2" fill="#f5e9db" />
+                      {{ if eq $index 0 }}
+                        <circle cx="0" cy="14" r="20" fill="#222325" />
+                        <path d="M14 48 48 20v28Z" fill="#222325" />
+                      {{ else if eq (mod $index 3) 2 }}
+                        <path d="m0 36 25-24 23 24v12H0Z" fill="var(--bp-thumb-color)" />
+                        <path d="m25 12 23 24v12H25Z" fill="#243831" fill-opacity=".35" />
+                      {{ else }}
+                        <circle cx="4" cy="2" r="29" fill="var(--bp-thumb-color)" />
+                        <circle cx="42" cy="49" r="22" fill="#293d4b" fill-opacity=".85" />
+                      {{ end }}
+                    </svg>
+                  {{ end }}
+                </div>
+
+                <div class="bp-project-card__summary">
+                  <h2>
+                    {{ if $href }}
+                      <a class="bp-project-card__link" href="{{ $href }}" aria-label="{{ $project.title }} 상세 소개 보기">{{ $project.title }}</a>
+                    {{ else }}
+                      {{ $project.title }}
+                    {{ end }}
+                  </h2>
+                  <p>{{ $project.description }}</p>
+                </div>
+
+                <dl class="bp-project-card__meta">
+                  <div>
+                    <dt>
+                      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="10" cy="5.5" r="3" /><path d="M3.5 17v-1.5a6.5 6.5 0 0 1 13 0V17Z" /></svg>
+                      <span>참여 인원</span>
+                    </dt>
+                    <dd>{{ $project.people | default "정보 입력 예정" }}</dd>
+                  </div>
+                  <div>
+                    <dt>
+                      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="14" height="13" rx="1.5" /><path d="M6.5 2.5v4m7-4v4M3 8.5h14M6.5 11.5h.1m3.4 0h.1m3.4 0h.1m-7.1 3h.1m3.4 0h.1" /></svg>
+                      <span>작업 기간</span>
+                    </dt>
+                    <dd>{{ $project.period | default "정보 입력 예정" }}</dd>
+                  </div>
+                </dl>
+                <span class="bp-project-card__tab" aria-hidden="true"></span>
+              </article>
+            </li>
+          {{ end }}
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
