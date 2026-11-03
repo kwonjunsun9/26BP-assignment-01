@@ -439,6 +439,46 @@
       transition: none;
     }
   }
+  #site-header .bp-nav-motion-icon {
+    display: block;
+    flex: 0 0 auto;
+    width: 26px;
+    height: 26px;
+  }
+
+  #site-header .bp-nav-motion-track {
+    width: 64px;
+    height: 32px;
+    background: #626269;
+  }
+
+  #site-header .bp-nav-motion-track::before {
+    content: "OFF";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #fff;
+    color: #171717;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  html:has(#bp-nav-motion-enabled:checked) #site-header .bp-nav-motion-track {
+    background: #626269;
+  }
+
+  html:has(#bp-nav-motion-enabled:checked)
+    #site-header
+    .bp-nav-motion-track::before {
+    content: "ON";
+    transform: translateX(32px);
+  }
 </style>
 
 <header
@@ -530,7 +570,23 @@
       class="bp-nav-motion"
       for="bp-nav-motion-enabled"
       title="ON: 모션 켜기 / OFF: 모션 끄기">
-      <span>모션</span>
+      <svg
+        class="bp-nav-motion-icon"
+        viewBox="0 0 32 32"
+        aria-hidden="true"
+        focusable="false">
+        <circle cx="22" cy="5" r="3" fill="currentColor" />
+
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M10 13 13.5 8 20 9 25 17 30 14.5" stroke-width="3.5" />
+          <path d="M19 11 15 18" stroke-width="6" />
+          <path d="M16 18 12 25 4.5 21M16 18 23 23 23 29" stroke-width="4" />
+        </g>
+      </svg>
 
       <input
         id="bp-nav-motion-enabled"
@@ -541,7 +597,6 @@
         checked />
 
       <span class="bp-nav-motion-track" aria-hidden="true"></span>
-      <span class="bp-nav-motion-state" aria-hidden="true"></span>
     </label>
 
     <script>
