@@ -2376,3 +2376,10 @@ summary.bp-about-story__row {
     opacity: 0.3;
   }
 }
+
+/* 다음 디자인을 넣을 공백 섹션 */
+#blueprint-next.bp-next-section {
+  min-height: 100vh;
+  min-height: 100svh;
+  background: #fcfcfd;
+}

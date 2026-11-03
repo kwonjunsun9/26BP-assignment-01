@@ -38,11 +38,12 @@
       {{ block "main" . }}{{ end }}
     </main>
 
-    <!-- footer -->
-    {{ partial "essentials/footer.html" . }}
+    {{ if not .IsHome }}
+      {{ partial "essentials/footer.html" . }}
+    {{ end }}
 
 
     <!-- script (always cache it) -->
-    {{/*  {{ partialCached "essentials/script.html" . }}  */}}
+    {{/* {{ partialCached "essentials/script.html" . }} */}}
   </body>
 </html>
