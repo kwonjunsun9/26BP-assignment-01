@@ -1509,6 +1509,7 @@
 
     function animate(node, keyframes, timing) {
       const effect = node.animate(keyframes, { fill: "both", ...timing });
+      effect.playbackRate = 2.3;
       effects.push(effect);
       return effect;
     }
