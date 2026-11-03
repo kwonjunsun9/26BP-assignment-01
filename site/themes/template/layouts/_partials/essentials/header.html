@@ -1,179 +1,284 @@
-<header
-  id="site-header"
-  data-navbar-fixed="{{ if site.Params.navbar_fixed }}
-    true
-  {{ else }}
-    false
-  {{ end }}"
-  class="header {{ if site.Params.navbar_fixed }}
-    fixed top-0
-  {{ end }} inset-x-0 z-50 py-6 lg:py-6 transition-all duration-300 ease-in-out">
-  <nav class="navbar container">
-    <!-- logo -->
-    <div class="order-0">
-      <!-- navbar brand/logo -->
-      <a class="navbar-brand block" href="{{ site.Home.RelPermalink }}">
-        {{/* https://github.com/gethugothemes/hugo-modules/tree/master/images */}}
-        {{ partial "logo" }}
-      </a>
-    </div>
-    <!-- navbar toggler -->
-    <input id="nav-toggle" type="checkbox" class="hidden" />
-    <label
-      for="nav-toggle"
-      class="order-2 cursor-pointer flex items-center lg:hidden text-text-dark lg:order-1 ml-auto">
-      <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
-        <title>{{ T "menu-open" | default "Menu Open" }}</title>
-        <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
-      </svg>
-      <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
-        <title>{{ T "menu-close" | default "Menu Close" }}</title>
-        <polygon
-          points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
-          transform="rotate(45 10 10)"></polygon>
-      </svg>
-    </label>
-    <!-- /navbar toggler -->
+{{/* Keep the original Home/About/Portfolio URLs and the Get In Touch destination. */}}
+{{ $current := . }}
+{{ $labels := dict "home" "HOME" "about" "ABOUT" "portfolio" "PROJECT" }}
+{{ $rawItems := slice }}
+{{ range site.Menus.main }}
+  {{ $label := index $labels (lower .Name) }}
+  {{ if $label }}
+    {{ $rawItems = $rawItems | append (dict "Label" $label "URL" .URL) }}
+  {{ end }}
+{{ end }}
+{{ $contactURL := site.Params.navigation_button.link | default "/contact" }}
+{{ $rawItems = $rawItems | append (dict "Label" "CONTACT" "URL" $contactURL) }}
+{{ $items := slice }}
+{{ range $rawItems }}
+  {{ $url := .URL }}
+  {{ $href := $url }}
+  {{ $external := gt (len (findRE `^(https?:)?//` $url)) 0 }}
+  {{ $currentValue := "" }}
+  {{ if hasPrefix $url "#" }}
+    {{ if not $current.IsHome }}{{ $href = printf "%s%s" site.Home.RelPermalink $url }}{{ end }}
+  {{ else if not (or $external (gt (len (findRE `^(mailto:|tel:)` $url)) 0)) }}
+    {{ $href = $url | relLangURL }}
+    {{ $lookup := $url }}
+    {{ $basePath := (urls.Parse site.BaseURL).Path }}
+    {{ if and (ne $basePath "/") (hasPrefix $lookup $basePath) }}
+      {{ $lookup = printf "/%s" (strings.TrimPrefix $basePath $lookup) }}
+    {{ end }}
+    {{ with site.GetPage $lookup }}
+      {{ $href = .RelPermalink }}
+      {{ if eq $current.RelPermalink .RelPermalink }}
+        {{ $currentValue = "page" }}
+      {{ else if and (not .IsHome) (hasPrefix $current.RelPermalink .RelPermalink) }}
+        {{ $currentValue = "location" }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $items = $items | append (dict "Label" .Label "Href" $href "External" $external "Current" $currentValue) }}
+{{ end }}
 
-    <div class="order-3 flex flex-col lg:flex-row items-center lg:order-2 w-full lg:w-auto lg:justify-between">
-      <!-- main navbar -->
-      <ul
-        id="nav-menu"
-        class="navbar-nav hidden lg:flex w-full pb-6 lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
-        {{ $currentPage := . }}
-        {{ range site.Menus.main }}
-          {{ $menuURL := .URL | absLangURL }}
-          {{ $pageURL:= $currentPage.Permalink | absLangURL }}
-          {{ $active := eq $menuURL $pageURL }}
-          {{ if .HasChildren }}
-            <li class="nav-item nav-dropdown group relative">
-              <input
-                type="checkbox"
-                id="submenu-{{ .Name | urlize }}"
-                class="peer lg:hidden" />
-              <label
-                for="submenu-{{ .Name | urlize }}"
-                class="nav-link {{ range .Children }}
-                  {{ $childURL := .URL | absLangURL }}
-                  {{ $active := eq $childURL $pageURL }}
-                  {{ if $active }}active{{ end }}
-                {{ end }} inline-flex items-center">
-                {{ .Name }}
-                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
-                  <path
-                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </label>
-              <ul
-                class="nav-dropdown-list hidden peer-checked:block lg:invisible lg:absolute lg:block lg:opacity-0 lg:group-hover:visible lg:group-hover:opacity-100">
-                {{ range .Children }}
-                  {{ $childURL := .URL | absLangURL }}
-                  {{ $active := eq $childURL $pageURL }}
-                  <li class="nav-dropdown-item">
-                    <a
-                      class="nav-dropdown-link {{ if $active }}
-                        active
-                      {{- end -}}"
-                      {{ if findRE `^http` .URL }}
-                        target="_blank" rel="noopener"
-                      {{ end }}
-                      href="{{- if findRE `^#` .URL -}}
-                        {{- if not $.IsHome -}}
-                          {{- site.Home.RelPermalink -}}
-                        {{- end }}
-                        {{- .URL -}}
-                      {{- else -}}
-                        {{- .URL | relLangURL -}}
-                      {{- end -}}">
-                      {{ .Name }}
-                    </a>
-                  </li>
-                {{ end }}
-              </ul>
-            </li>
-          {{ else }}
-            <li class="nav-item">
-              <a
-                class="nav-link {{ if $active }}active{{- end -}}"
-                {{ if findRE `^http` .URL }}
-                  target="_blank" rel="noopener"
-                {{ end }}
-                href="{{- if findRE `^#` .URL -}}
-                  {{- if not $.IsHome -}}
-                    {{- site.Home.RelPermalink -}}
-                  {{- end }}{{- .URL -}}
-                {{- else -}}
-                  {{- .URL | relLangURL -}}
-                {{- end -}}"
-                >{{ .Name }}</a
-              >
-            </li>
-          {{ end }}
-        {{ end }}
-        {{ if site.Params.navigation_button.enable }}
-          <li class="mt-4 inline-block lg:hidden">
-            <a
-              class="btn btn-primary"
-              href="{{ site.Params.navigation_button.link | relLangURL }}"
-              {{ if (hasPrefix site.Params.navigation_button.link `http`) }}
-                target="_blank" rel="noopener"
-              {{ end }}>
-              {{ site.Params.navigation_button.label }}
-            </a>
-          </li>
+<style>
+#site-header.bp-site-header {
+  --bp-nav-height: 56px;
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  height: var(--bp-nav-height);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid rgb(255 255 255 / 9%);
+  background: rgb(0 0 0 / 94%);
+  box-shadow: none;
+  color: #f5f5f7;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  -webkit-backdrop-filter: saturate(160%) blur(20px);
+  backdrop-filter: saturate(160%) blur(20px);
+}
+
+#site-header.bp-site-header[data-navbar-fixed="true"] {
+  position: fixed;
+  inset: 0 0 auto;
+}
+
+#site-header.bp-site-header,
+#site-header.bp-site-header * {
+  box-sizing: border-box;
+}
+
+#site-header .bp-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  width: 100%;
+  max-width: 64rem;
+  height: 100%;
+  margin-inline: auto;
+  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px)) max(1.25rem, env(safe-area-inset-right, 0px));
+}
+
+#site-header .bp-nav-brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 44px;
+  color: #f5f5f7;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#site-header .bp-nav-brand::after {
+  content: "";
+  width: 1px;
+  height: 24px;
+  margin-left: 1.5rem;
+  background: rgb(255 255 255 / 26%);
+}
+
+#site-header .bp-nav-desktop {
+  align-self: stretch;
+}
+
+#site-header .bp-nav-list {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#site-header .bp-nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--bp-nav-height);
+  padding-inline: 0.25rem;
+  color: #c4c4c8;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.035em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#site-header .bp-nav-link:hover,
+#site-header .bp-nav-link[aria-current] {
+  color: #fff;
+}
+
+#site-header .bp-nav-link[aria-current]::after {
+  content: "";
+  position: absolute;
+  right: 0.25rem;
+  bottom: 8px;
+  left: 0.25rem;
+  height: 1px;
+  background: rgb(255 255 255 / 60%);
+}
+
+#site-header :is(.bp-nav-brand, .bp-nav-link, .bp-nav-toggle):focus-visible {
+  outline: 2px solid #2997ff;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+#site-header .bp-nav-mobile {
+  display: none;
+  margin-left: auto;
+}
+
+#site-header .bp-nav-toggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: #f5f5f7;
+  list-style: none;
+  cursor: pointer;
+}
+
+#site-header .bp-nav-toggle::-webkit-details-marker {
+  display: none;
+}
+
+#site-header .bp-nav-toggle svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+#site-header .bp-nav-toggle .bp-nav-close-icon,
+#site-header .bp-nav-mobile[open] .bp-nav-open-icon {
+  display: none;
+}
+
+#site-header .bp-nav-mobile[open] .bp-nav-close-icon {
+  display: block;
+}
+
+#site-header .bp-nav-mobile-panel {
+  position: absolute;
+  inset: 100% 0 auto;
+  max-height: calc(100svh - var(--bp-nav-height));
+  padding: 0.75rem max(1.25rem, env(safe-area-inset-right, 0px)) 1.25rem max(1.25rem, env(safe-area-inset-left, 0px));
+  overflow-y: auto;
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  background: #161617;
+}
+
+#site-header .bp-nav-mobile-panel .bp-nav-list {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  max-width: 38rem;
+  margin-inline: auto;
+}
+
+#site-header .bp-nav-mobile-panel .bp-nav-link {
+  min-height: 48px;
+  padding: 0.75rem 0.25rem;
+  font-size: 1.125rem;
+  letter-spacing: 0.01em;
+}
+
+#site-header .bp-nav-mobile-panel .bp-nav-link[aria-current]::after {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  #site-header .bp-nav-inner {
+    gap: 1rem;
+  }
+  #site-header .bp-nav-brand {
+    font-size: 1.375rem;
+  }
+  #site-header .bp-nav-brand::after,
+  #site-header .bp-nav-desktop {
+    display: none;
+  }
+  #site-header .bp-nav-mobile {
+    display: block;
+  }
+}
+</style>
+
+<header id="site-header" class="bp-site-header" data-navbar-fixed="{{ if site.Params.navbar_fixed }}true{{ else }}false{{ end }}">
+  <div class="bp-nav-inner">
+    <a class="bp-nav-brand" href="{{ site.Home.RelPermalink }}" aria-label="KJS's 홈으로 이동">KJS's</a>
+
+    <nav class="bp-nav-desktop" aria-label="주요 메뉴">
+      <ul class="bp-nav-list">
+        {{ range $items }}
+          <li><a class="bp-nav-link" href="{{ .Href }}"{{ with .Current }} aria-current="{{ . }}"{{ end }}{{ if .External }} target="_blank" rel="noopener"{{ end }}>{{ .Label }}</a></li>
         {{ end }}
       </ul>
-      {{ partial "components/language-switcher" (dict "Context" . "Class" "mr-5 pl-2 py-1 rounded") }}
+    </nav>
 
-
-      <!-- navigation btn -->
-      {{ if site.Params.navigation_button.enable }}
-        <a
-          href="{{ site.Params.navigation_button.link | relLangURL }}"
-          class="btn btn-primary hidden lg:inline-block rounded-full"
-          {{ if (hasPrefix site.Params.navigation_button.link `http`) }}
-            target="_blank" rel="noopener"
+    <details id="bp-mobile-nav" class="bp-nav-mobile">
+      <summary class="bp-nav-toggle" aria-label="메뉴" aria-controls="bp-mobile-menu">
+        <svg class="bp-nav-open-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M5 9h14M5 15h14" /></svg>
+        <svg class="bp-nav-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18" /></svg>
+      </summary>
+      <nav id="bp-mobile-menu" class="bp-nav-mobile-panel" aria-label="모바일 주요 메뉴">
+        <ul class="bp-nav-list">
+          {{ range $items }}
+            <li><a class="bp-nav-link" href="{{ .Href }}"{{ with .Current }} aria-current="{{ . }}"{{ end }}{{ if .External }} target="_blank" rel="noopener"{{ end }}>{{ .Label }}</a></li>
           {{ end }}
-          >
-          <span class="btn-area">
-            <span data-text="{{ site.Params.navigation_button.label }}">
-              {{ site.Params.navigation_button.label }}
-            </span>
-          </span>
-        </a>
-      {{ end }}
-    </div>
-  </nav>
-
-  {{/* Header shrink on scroll */}}
-  <script>
-    (function(){
-      var header = document.getElementById('site-header');
-      var lastScrollTop = 0;
-      var shrunk = false;
-
-      if(!header) return;
-
-      function handleScroll(){
-        var scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-        if(scrollTop > 50){
-          if(!shrunk){
-            header.classList.remove('py-6', 'lg:py-6');
-            header.classList.add('py-3', 'lg:py-3', 'shadow-md');
-            shrunk = true;
-          }
-        } else {
-          if(shrunk){
-            header.classList.remove('py-3', 'lg:py-3', 'shadow-md');
-            header.classList.add('py-6', 'lg:py-6');
-            shrunk = false;
-          }
-        }
-        lastScrollTop = scrollTop;
-      }
-
-      window.addEventListener('scroll', handleScroll, {passive: true});
-    })();
-  </script>
+        </ul>
+      </nav>
+    </details>
+  </div>
 </header>
+
+<script>
+(() => {
+  const menu = document.getElementById("bp-mobile-nav");
+  if (!menu || menu.dataset.ready) return;
+  menu.dataset.ready = "true";
+  const toggle = menu.querySelector("summary");
+  const updateLabel = () => toggle.setAttribute("aria-label", menu.open ? "메뉴 닫기" : "메뉴 열기");
+  menu.addEventListener("toggle", updateLabel);
+  menu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => { menu.open = false; }));
+  document.addEventListener("pointerdown", event => {
+    if (menu.open && !menu.contains(event.target)) menu.open = false;
+  }, { capture: true, passive: true });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && menu.open) {
+      menu.open = false;
+      toggle.focus();
+    }
+  });
+  menu.addEventListener("focusout", () => requestAnimationFrame(() => {
+    if (!menu.contains(document.activeElement)) menu.open = false;
+  }));
+  matchMedia("(min-width: 901px)").addEventListener("change", () => { menu.open = false; });
+  updateLabel();
+})();
+</script>
