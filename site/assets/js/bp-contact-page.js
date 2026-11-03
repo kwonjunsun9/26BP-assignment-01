@@ -7,6 +7,9 @@
   }
 
   const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const motionToggle = document.getElementById("bp-nav-motion-enabled");
+  const motionDisabled = () =>
+    preference.matches || motionToggle?.checked === false;
   const animations = new Set();
   let completed = false;
 
@@ -29,6 +32,10 @@
     if (event.matches) finish();
   });
 
+  document.addEventListener("bp:motionchange", () => {
+    if (motionDisabled()) finish();
+  });
+
   const start = async () => {
     if (completed) return;
 
@@ -39,7 +46,7 @@
       await image.decode();
       imageReady = true;
       if (completed) return;
-      if (preference.matches || !Element.prototype.animate) {
+      if (motionDisabled() || !Element.prototype.animate) {
         finish();
         return;
       }

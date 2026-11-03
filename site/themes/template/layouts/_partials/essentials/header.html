@@ -671,6 +671,14 @@
       height: clamp(32px, 5.5svh, 48px);
     }
   }
+  html.bp-motion-off,
+  html.bp-motion-off *,
+  html.bp-motion-off *::before,
+  html.bp-motion-off *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 </style>
 
 <header
@@ -757,64 +765,111 @@
       </nav>
     </details>
   </div>
-  {{ if .IsHome }}
-    <label
-      class="bp-nav-motion"
-      for="bp-nav-motion-enabled"
-      title="ON: 모션 켜기 / OFF: 모션 끄기">
-      <svg
-        class="bp-nav-motion-icon"
-        viewBox="0 0 32 32"
-        aria-hidden="true"
-        focusable="false">
-        <circle cx="22" cy="5" r="3" fill="currentColor" />
+  <label
+    class="bp-nav-motion"
+    for="bp-nav-motion-enabled"
+    title="ON: 모션 켜기 / OFF: 모션 끄기">
+    <svg
+      class="bp-nav-motion-icon"
+      viewBox="0 0 32 32"
+      aria-hidden="true"
+      focusable="false">
+      <circle cx="22" cy="5" r="3" fill="currentColor" />
 
-        <g
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round">
-          <path d="M10 13 13.5 8 20 9 25 17 30 14.5" stroke-width="3.5" />
-          <path d="M19 11 15 18" stroke-width="6" />
-          <path d="M16 18 12 25 4.5 21M16 18 23 23 23 29" stroke-width="4" />
-        </g>
-      </svg>
+      <g
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M10 13 13.5 8 20 9 25 17 30 14.5" stroke-width="3.5" />
+        <path d="M19 11 15 18" stroke-width="6" />
+        <path d="M16 18 12 25 4.5 21M16 18 23 23 23 29" stroke-width="4" />
+      </g>
+    </svg>
 
-      <input
-        id="bp-nav-motion-enabled"
-        class="bp-nav-motion-input"
-        type="checkbox"
-        role="switch"
-        aria-label="모션"
-        checked />
+    <input
+      id="bp-nav-motion-enabled"
+      class="bp-nav-motion-input"
+      type="checkbox"
+      role="switch"
+      aria-label="모션"
+      checked />
 
-      <span class="bp-nav-motion-track" aria-hidden="true"></span>
-    </label>
+    <span class="bp-nav-motion-track" aria-hidden="true"></span>
+  </label>
 
-    <script>
-      document.addEventListener(
-        "DOMContentLoaded",
-        () => {
-          const enabled = document.getElementById("bp-nav-motion-enabled");
-          const reduced = document.getElementById("bp-motion");
+  <script>
+    (() => {
+      const enabled = document.getElementById("bp-nav-motion-enabled");
+      if (!enabled) return;
 
-          if (!enabled || !reduced) return;
+      const preference = matchMedia("(prefers-reduced-motion: reduce)");
+      const storageKey = "bp-motion-enabled";
+      let saved = null;
 
-          const syncMotion = () => {
-            reduced.checked = !enabled.checked;
-            reduced.dispatchEvent(new Event("change", { bubbles: true }));
-          };
+      try {
+        saved = localStorage.getItem(storageKey);
+      } catch (_) {}
 
-          enabled.checked = !matchMedia("(prefers-reduced-motion: reduce)")
-            .matches;
+      const syncMotion = () => {
+        document.documentElement.classList.toggle(
+          "bp-motion-off",
+          !enabled.checked,
+        );
 
-          enabled.addEventListener("change", syncMotion);
-          syncMotion();
-        },
-        { once: true },
-      );
-    </script>
-  {{ end }}
+        // 기존 HOME 애니메이션과 연결
+        const reduced = document.getElementById("bp-motion");
+        if (reduced) {
+          reduced.checked = !enabled.checked;
+          reduced.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+
+        document.dispatchEvent(
+          new CustomEvent("bp:motionchange", {
+            detail: { enabled: enabled.checked },
+          }),
+        );
+      };
+
+      enabled.checked =
+        saved === "on" || (saved !== "off" && !preference.matches);
+
+      enabled.addEventListener("change", () => {
+        saved = enabled.checked ? "on" : "off";
+
+        try {
+          localStorage.setItem(storageKey, saved);
+        } catch (_) {}
+
+        syncMotion();
+      });
+
+      preference.addEventListener("change", () => {
+        if (saved === "on" || saved === "off") return;
+        enabled.checked = !preference.matches;
+        syncMotion();
+      });
+
+      syncMotion();
+      document.addEventListener("DOMContentLoaded", syncMotion, {
+        once: true,
+      });
+
+      // 뒤로 가기로 돌아왔을 때도 최신 설정 적용
+      window.addEventListener("pageshow", (event) => {
+        if (!event.persisted) return;
+
+        try {
+          saved = localStorage.getItem(storageKey);
+        } catch (_) {}
+
+        enabled.checked =
+          saved === "on" || (saved !== "off" && !preference.matches);
+
+        syncMotion();
+      });
+    })();
+  </script>
 </header>
 
 <script>
