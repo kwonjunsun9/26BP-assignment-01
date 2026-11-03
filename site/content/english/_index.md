@@ -14,20 +14,6 @@ banner:
     label: See My Work
     link: /portfolio
 
-# Company Stats
-company_stats:
-  enable: false
-  title: 결과로 증명합니다!
-  stats:
-    - name: Happy Clients
-      count: 250+
-    - name: Projects Completed
-      count: 100+
-    - name: Cups of coffee
-      count: 350+
-    - name: Telephone Talks
-      count: 775+
-
 # Recent Works:
 recent_works:
   enable: true
