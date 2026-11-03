@@ -2331,7 +2331,7 @@ summary.bp-about-story__row {
   }
 }
 
-/* Skilled Brush: 왼쪽 상단 무지개 붓터치 */
+
 #after-projects.bp-about-catalog {
   position: relative;
   isolation: isolate;
@@ -2375,11 +2375,4 @@ summary.bp-about-story__row {
     width: 5rem;
     opacity: 0.3;
   }
-}
-
-/* 다음 디자인을 넣을 공백 섹션 */
-#blueprint-next.bp-next-section {
-  min-height: 100vh;
-  min-height: 100svh;
-  background: #fcfcfd;
 }
