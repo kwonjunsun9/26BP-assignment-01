@@ -319,3 +319,10 @@
     transition: none;
   }
 }
+
+.bp-contact-link--email,
+.bp-contact-link--email:hover,
+.bp-contact-link--email:active {
+  opacity: 1;
+  text-decoration: none;
+}

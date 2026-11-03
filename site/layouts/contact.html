@@ -120,9 +120,7 @@
       <address class="bp-contact-card" aria-labelledby="bp-contact-name">
         <h2 id="bp-contact-name">{{ .Params.contact_name }}</h2>
         <div class="bp-contact-links">
-          <a
-            class="bp-contact-link bp-contact-link--email"
-            href="mailto:{{ .Params.contact_email }}">
+          <div class="bp-contact-link bp-contact-link--email">
             <svg
               viewBox="0 0 28 28"
               fill="none"
@@ -135,8 +133,9 @@
               <rect x="3" y="5" width="22" height="19" rx="2" />
               <path d="m4 7 10 9L24 7" />
             </svg>
+
             <span>{{ .Params.contact_email }}</span>
-          </a>
+          </div>
           <a
             class="bp-contact-link bp-contact-link--github"
             href="{{ .Params.contact_github }}"
