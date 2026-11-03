@@ -24,4 +24,6 @@ skills:
       tags: ["React", "TypeScript", "Next.js", "Supabase", "PostgreSQL"]
     - title: "Backend"
       description: "안정적이고 확장 가능한 서버 아키텍처 설계"
-      tags: ["React", "TypeScript", "Next.js", "Supabase", "PostgreSQL"]
+      tags: ["Node.js", "Python", "FastAPI", "Supabase", "PostgreSQL"]
+    - title: "Language"
+      tags: ["JavaScript", "TypeScript", "Python"]
