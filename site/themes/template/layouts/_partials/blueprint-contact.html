@@ -1162,3 +1162,96 @@
     document.fonts?.ready.then(scheduleFit);
   })();
 </script>
+
+<style>
+  #blueprint-next.bp-print {
+    position: relative;
+  }
+
+  #blueprint-next .bp-print-to-top {
+    position: absolute;
+    right: clamp(1rem, 3vw, 2rem);
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #1d1d1f;
+    cursor: pointer;
+  }
+
+  #blueprint-next .bp-print-to-top:hover {
+    background: #f5f5f7;
+  }
+
+  #blueprint-next .bp-print-to-top:focus-visible {
+    outline: 2px solid #0071e3;
+    outline-offset: 3px;
+  }
+
+  #blueprint-next .bp-print-to-top svg {
+    display: block;
+    width: 26px;
+    height: 26px;
+  }
+</style>
+
+<script>
+  (() => {
+    function init() {
+      const section = document.getElementById("blueprint-next");
+      if (!section || section.querySelector(".bp-print-to-top")) return;
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "bp-print-to-top";
+      button.setAttribute("aria-label", "페이지 맨 위로 이동");
+      button.title = "맨 위로";
+      button.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true" focusable="false">
+        <path d="M12 20V4M5 11l7-7 7 7" />
+      </svg>
+    `;
+
+      button.addEventListener("click", (event) => {
+        const reduced =
+          matchMedia("(prefers-reduced-motion: reduce)").matches ||
+          document.getElementById("bp-motion")?.checked;
+
+        if (location.hash) {
+          history.replaceState(history.state, "", location.href.split("#")[0]);
+        }
+
+        if (event.detail === 0) {
+          const heading = document.querySelector("main h1");
+          if (heading) {
+            heading.setAttribute("tabindex", "-1");
+            heading.focus({ preventScroll: true });
+          }
+        }
+
+        window.scrollTo({
+          top: 0,
+          behavior: reduced ? "instant" : "smooth",
+        });
+      });
+
+      section.appendChild(button);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init, { once: true });
+    } else {
+      init();
+    }
+  })();
+</script>
