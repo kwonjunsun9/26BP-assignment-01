@@ -1,0 +1,106 @@
+{{/* 데이터가 없으면 아래 기본 예시를 사용합니다. */}}
+{{ $about := hugo.Data.blueprint_about }}
+{{ if not $about }}
+  {{ $about = transform.Unmarshal `
+# 카드 문구와 태그를 수정하는 파일입니다.
+enable: true
+title: "ABOUT ME."
+name: "권준성"
+intro: "생각을 정리하고, 직접 만들며 배워갑니다."
+link_label: "더 알아보기"
+draft_note: "내용 작성 중 · 아래 문구는 구성 확인용 예시입니다."
+
+currently:
+  label: "CURRENTLY"
+  headline: "Software Engineer"
+  affiliation: "@JBNU Computer Science & AI"
+
+focus:
+  label: "FOCUS"
+  tags: ["React", "TypeScript", "Next.js", "Supabase", "PostgreSQL"]
+
+skills:
+  label: "Technical Skills"
+  groups:
+    - title: "Frontend"
+      description: "사용자 경험을 우선으로 생각하는 UI/UX 개발"
+      tags: ["React", "TypeScript", "Next.js", "Supabase", "PostgreSQL"]
+    - title: "Backend"
+      description: "안정적이고 확장 가능한 서버 아키텍처 설계"
+      tags: ["React", "TypeScript", "Next.js", "Supabase", "PostgreSQL"]
+` }}
+  {{ warnf "ABOUT: site/data/blueprint_about.yaml을 찾지 못해 기본 예시를 표시합니다." }}
+{{ end }}
+{{ with $about }}
+  {{ if ne .enable false }}
+    {{ $about := . }}
+    <section id="after-projects" class="bp-about bp-about-simple" lang="ko" aria-labelledby="bp-about-title">
+      <div class="bp-about-inner">
+        <header class="bp-about-header">
+          <div>
+            <h2 id="bp-about-title" class="bp-about-title">{{ .title }}</h2>
+            <p class="bp-about-name">{{ .name }}</p>
+            <p class="bp-about-intro">{{ .intro }}</p>
+          </div>
+
+          {{ with site.GetPage "about" }}
+            <a class="bp-about-more" href="{{ .RelPermalink }}">
+              <span>{{ $about.link_label }}</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="m9 5 7 7-7 7" />
+              </svg>
+            </a>
+          {{ end }}
+        </header>
+
+        <div class="bp-about-grid">
+          {{ with .currently }}
+            <article class="bp-about-card bp-about-current" aria-labelledby="bp-current-label">
+              <h3 id="bp-current-label" class="bp-about-label" lang="en">{{ .label }}</h3>
+              <p class="bp-about-role" lang="en">{{ .headline }}</p>
+              <p class="bp-about-affiliation" lang="en">{{ .affiliation }}</p>
+            </article>
+          {{ end }}
+
+          {{ with .focus }}
+            <article class="bp-about-card bp-about-focus" aria-labelledby="bp-focus-label">
+              <h3 id="bp-focus-label" class="bp-about-label" lang="en">{{ .label }}</h3>
+              <ul class="bp-about-tags bp-about-focus-tags" aria-label="관심 분야">
+                {{ range .tags }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            </article>
+          {{ end }}
+
+          {{ with .skills }}
+            <article class="bp-about-card bp-about-skills" aria-labelledby="bp-skills-label">
+              <h3 id="bp-skills-label" class="bp-about-technical-title" lang="en">{{ .label }}</h3>
+              <div class="bp-about-skill-groups">
+                {{ range .groups }}
+                  <div class="bp-about-skill-group">
+                    <div class="bp-about-skill-heading">
+                      <h4 lang="en">{{ .title }}</h4>
+                      <p class="bp-about-body">{{ .description }}</p>
+                    </div>
+                    <ul class="bp-about-tags" aria-label="사용 기술">
+                      {{ range .tags }}
+                        <li>{{ . }}</li>
+                      {{ end }}
+                    </ul>
+                  </div>
+                {{ end }}
+              </div>
+            </article>
+          {{ end }}
+        </div>
+
+        {{ with .draft_note }}
+          <p class="bp-about-draft">{{ . }}</p>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+{{ end }}

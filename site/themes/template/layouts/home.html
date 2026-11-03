@@ -102,62 +102,9 @@
   {{ partial "blueprint-projects.html" . }}
   <!-- /Features -->
 
-  <!-- Testimonials -->
-  <section id="after-projects" class="section bg-tertiary">
-  {{ with site.GetPage "sections/testimonial" }}
-    {{ if .Params.enable }}
-      <section class="section bg-tertiary">
-        <style>
-          @media (min-width: 1024px) {
-            .testimonials-grid:hover .testimonial-card {
-              opacity: 0.4;
-            }
-
-            .testimonials-grid:hover .testimonial-card:hover {
-              opacity: 1;
-            }
-          }
-        </style>
-        <div class="container">
-          <div class="row">
-            <div class="mb-12">
-              <h2 class="mb-4 font-extralight">
-                {{ .Title | markdownify }}
-              </h2>
-              <p class="h6">
-                {{ .Params.description | markdownify }}
-              </p>
-            </div>
-            <div class="col-12">
-              <div
-                class="testimonials-grid grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {{ range .Params.testimonials }}
-                  <article
-                    class="testimonial-card bg-body px-7 py-10 transition-opacity duration-300">
-                    <div class="mb-6 flex items-center">
-                      {{ partial "image" (dict "Src" .avatar "Size" "80x80" "Class" "" "Alt" .name) }}
-                      <div class="ml-4">
-                        <h3 class="h6 font-primary font-semibold">
-                          {{ .name }}
-                        </h3>
-                        <p>
-                          {{ .designation | markdownify }}
-                        </p>
-                      </div>
-                    </div>
-                    <blockquote>
-                      {{ .content | markdownify }}
-                    </blockquote>
-                  </article>
-                {{ end }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    {{ end }}
-  {{ end }}
-  <!-- /Testimonials -->
+  <!-- About me -->
+  {{ partial "blueprint-about.html" . }}
+  <!-- /About me -->
 
   <!-- Call to action -->
   {{ partial "call-to-action" . }}

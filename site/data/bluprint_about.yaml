@@ -1,0 +1,27 @@
+# 이 파일의 문구는 디자인 확인용 예시입니다. 실제 관심 분야와 경험으로 수정하세요.
+# 제목에서 줄을 바꾸려면 큰따옴표 안에 \n을 사용하세요.
+enable: true
+title: "ABOUT ME."
+name: "권준성"
+intro: "생각을 정리하고, 직접 만들며 배워갑니다."
+link_label: "더 알아보기"
+draft_note: "내용 작성 중 · 아래 문구는 구성 확인용 예시입니다."
+
+currently:
+  label: "CURRENTLY"
+  headline: "Software Engineer"
+  affiliation: "@JBNU Computer Science & AI"
+
+focus:
+  label: "FOCUS"
+  tags: ["React", "TypeScript", "Next.js", "Supabase", "PostgreSQL"]
+
+skills:
+  label: "Technical Skills"
+  groups:
+    - title: "Frontend"
+      description: "사용자 경험을 우선으로 생각하는 UI/UX 개발"
+      tags: ["React", "TypeScript", "Next.js", "Supabase", "PostgreSQL"]
+    - title: "Backend"
+      description: "안정적이고 확장 가능한 서버 아키텍처 설계"
+      tags: ["React", "TypeScript", "Next.js", "Supabase", "PostgreSQL"]

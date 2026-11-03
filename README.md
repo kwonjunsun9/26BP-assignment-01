@@ -64,6 +64,12 @@ Start the production server to preview your changes and test functionality:
 yarn preview
 ```
 
+### Site
+
+```bash
+https://kwonjunsun9.github.io/26BP-assignment-01/
+```
+
 ### Local Preview
 
 ```bash
@@ -72,7 +78,7 @@ cd .\site
 hugo server --config "hugo.toml,pages.json" --theme template --port 1314 --baseURL "http://localhost:1314/" --disableFastRender --renderToMemory
 ```
 
-### Site
+### Local Site
 
 ```bash
 http://localhost:1314/ 
