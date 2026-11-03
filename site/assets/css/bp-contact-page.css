@@ -142,6 +142,10 @@
   visibility: visible;
 }
 
+.bp-contact-art[data-state="error"] .bp-contact-paint {
+  display: none;
+}
+
 .bp-contact-details {
   position: relative;
   min-width: 0;
@@ -161,7 +165,12 @@
 .bp-contact-card h2 {
   margin: 0 0 1.5rem;
   color: var(--contact-ink);
-  font: 700 clamp(1rem, 1.35vw, 1.5rem)/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font:
+    700 clamp(1rem, 1.35vw, 1.5rem)/1.2 -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
   letter-spacing: -0.045em;
 }
 
