@@ -1,6 +1,6 @@
 ---
 title: "About"
-meta_title: "About | KWON JUNSUNG"
+meta_title: "KWON JUNSUNG"
 description: "개발자 권준성의 소개, 기술과 프로젝트입니다."
 layout: "about"
 draft: false
@@ -8,22 +8,24 @@ draft: false
 navigation_glow: true
 
 profile:
-  greeting: "반갑습니다"
+  greeting: "반갑습니다"  
   heading: "개발자 권준성입니다."
   subtitle: ""
   initials: "KJS"
-  image: ""
-  image_alt: "권준성 프로필 사진"
-
+  # 예: /images/about/profile.webp
+  # 실제 사진 파일은 site/static/images/about/profile.webp 에 넣으세요.
+  image: "site/static/images/about/profile.webp"
+  image_alt: "KJS"
 
 contact:
   title: "Contact"
   url: "/contact/"
   email: ""
-  email_placeholder: "이메일을 입력해주세요"
+  email_placeholder: "saer6114@gmail.com"
   github_label: "GitHub"
   github_url: "https://github.com/kwonjunsun9"
 
+# ④ 왼쪽 Profile 카드. 항목 추가 시 - label 부터 note 까지 복사하세요.
 profile_card:
   title: "Profile"
   subtitle: ""
@@ -33,14 +35,14 @@ profile_card:
       note: ""
     - label: "Education"
       value: "전북대학교 컴퓨터공학과"
-      note: "2023.08 — 재학 중"
+      note: "2022.03 — 현재 재학 중"
     - label: "Currently"
       value: "Software Engineer"
       note: "@ JBNU Computer Science & AI"
 
 
 skills_card:
-  title: "Technical Skills"
+  title: "Skills"
   groups:
     - title: "Frontend"
       items: ["React", "TypeScript", "Next.js", "Supabase", "PostgreSQL"]
@@ -48,7 +50,6 @@ skills_card:
       items: ["Node.js", "Python", "FastAPI", "Supabase", "PostgreSQL"]
     - title: "Focus"
       items: ["React Native", "Android", "UI / UX"]
-
 
 projects_card:
   title: "Projects"
