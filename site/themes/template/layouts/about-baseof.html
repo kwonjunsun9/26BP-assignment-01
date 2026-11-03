@@ -1,0 +1,28 @@
+{{/* About 전용 기본 레이아웃. 다른 페이지의 공통 baseof.html은 수정하지 않습니다. */}}
+<!doctype html>
+<html
+  itemscope
+  class="{{ if not site.Params.theme_switcher }}{{ site.Params.theme_default }}{{ end }}"
+  lang="{{ site.Language.Locale | default `ko-KR` }}"
+  itemtype="http://schema.org/WebPage">
+  <head>
+    {{ partial "essentials/head.html" . }}
+    {{ partialCached "essentials/style.html" . }}
+    {{ block "about-page-style" . }}{{ end }}
+  </head>
+  <body
+    class="flex flex-col min-h-screen bp-about-page-body{{ if site.Params.navbar_fixed }} bp-about-header-fixed{{ end }}"
+    data-about-glow="{{ if .Params.navigation_glow }}true{{ else }}false{{ end }}">
+    {{ if hugo.IsProduction }}
+      {{ partialCached "preloader.html" . }}
+      {{ partialCached "gtm-noscript.html" . }}
+    {{ else }}
+      {{ partial "preloader.html" . }}
+      {{ partial "components/tw-size-indicator.html" . }}
+    {{ end }}
+    {{ partial "essentials/header.html" . }}
+    <main class="grow">
+      {{ block "main" . }}{{ end }}
+    </main>
+  </body>
+</html>

@@ -7,14 +7,14 @@ draft: false
 
 navigation_glow: true
 
+  # 예: /images/about/profile.webp
+  # 실제 사진 파일은 site/static/images/about/profile.webp 에 넣으세요.
 profile:
   greeting: "반갑습니다"  
   heading: "개발자 권준성입니다."
   subtitle: ""
   initials: "KJS"
-  # 예: /images/about/profile.webp
-  # 실제 사진 파일은 site/static/images/about/profile.webp 에 넣으세요.
-  image: "site/static/images/about/profile.webp"
+  image: "/images/about/profile.webp"
   image_alt: "KJS"
 
 contact:
@@ -25,7 +25,6 @@ contact:
   github_label: "GitHub"
   github_url: "https://github.com/kwonjunsun9"
 
-# ④ 왼쪽 Profile 카드. 항목 추가 시 - label 부터 note 까지 복사하세요.
 profile_card:
   title: "Profile"
   subtitle: ""
