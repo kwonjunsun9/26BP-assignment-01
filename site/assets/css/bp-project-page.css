@@ -6,7 +6,9 @@ body.bp-project-page {
   min-width: 280px;
   color: #1d1d1f;
   background: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans CJK KR", "Malgun Gothic", sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo",
+    "Noto Sans CJK KR", "Malgun Gothic", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -158,7 +160,12 @@ body.bp-project-page--fixed-nav {
   overflow: hidden;
   opacity: 0.45;
   transform: translateY(-50%);
-  -webkit-mask-image: linear-gradient(transparent, #000 7%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(
+    transparent,
+    #000 7%,
+    #000 92%,
+    transparent
+  );
   mask-image: linear-gradient(transparent, #000 7%, #000 92%, transparent);
   pointer-events: none;
   user-select: none;
@@ -201,13 +208,19 @@ body.bp-project-page--fixed-nav {
   border: 1px solid #e8e8eb;
   border-radius: 7px;
   background: #fff;
-  box-shadow: 0 3px 6px rgb(0 0 0 / 7%), 0 8px 18px rgb(0 0 0 / 3%);
-  transition: transform 160ms ease, box-shadow 160ms ease;
+  box-shadow:
+    0 3px 6px rgb(0 0 0 / 7%),
+    0 8px 18px rgb(0 0 0 / 3%);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .bp-project-page .bp-project-card[data-linked="true"]:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 10px rgb(0 0 0 / 9%), 0 10px 24px rgb(0 0 0 / 4%);
+  box-shadow:
+    0 5px 10px rgb(0 0 0 / 9%),
+    0 10px 24px rgb(0 0 0 / 4%);
 }
 
 .bp-project-page .bp-project-card__thumb {
@@ -419,4 +432,9 @@ body.bp-project-page--fixed-nav {
   .bp-project-page .bp-project-card[data-linked="true"]:hover {
     transform: none;
   }
+}
+
+body.bp-project-page,
+.bp-project-page .bp-project-stage {
+  background: #f5f5f7;
 }

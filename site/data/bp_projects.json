@@ -39,22 +39,28 @@
       "home_description": "최단 경로를 찾는 로봇청소기 프로젝트는 MDP (Markov Decision Process)를 사용하여 청소와 복귀를 최적화하는 시스템입니다. \n 이 프로젝트에서는 Python으로 로봇의 상태와 행동을 모델링하고, 가치 반복 알고리즘을 통해 최적의 경로를 계산합니다."
     },
     {
-      "title": "PROJECT 04",
-      "description": "프로젝트 소개가 들어갈 자리",
-      "people": "정보 입력 예정",
-      "period": "정보 입력 예정",
-      "page": "",
-      "image": "",
-      "color": "blue"
+      "title": "배부르면 행복합니다!",
+      "description": "Vue와 Express로 JWT 인증과 작성자 권한 검사를 구현한 맛집 공유 게시판입니다.",
+      "people": "1명 · 개인",
+      "period": "2026.10",
+      "page": "portfolio/jwt-food-board",
+      "image": "images/project/jwt-food-board-thumb.svg",
+      "color": "blue",
+      "home_title": "Food Board",
+      "home_dialog_title": "배부르면 행복합니다!",
+      "home_description": "'배부르면 행복합니다!' 프로젝트는 Vue와 Express를 사용하여 JWT 인증과 작성자 권한 검사를 구현한 맛집 공유 게시판입니다. \n 누구나 게시글 목록과 상세 내용을 읽을 수 있고, 로그인한 사용자는 글을 작성하며 본인이 쓴 글만 수정·삭제할 수 있습니다. \n 이 프로젝트에서는 JWT를 활용한 인증과 권한 관리, RESTful API 설계, Vue 컴포넌트 구조 등을 다루었습니다."
     },
     {
       "title": "PROJECT 05",
-      "description": "프로젝트 소개가 들어갈 자리",
-      "people": "정보 입력 예정",
-      "period": "정보 입력 예정",
+      "description": "추후 추가 예정입니다.",
+      "people": "0명",
+      "period": "미정",
       "page": "",
       "image": "",
-      "color": "purple"
+      "color": "purple",
+      "home_title": "",
+      "home_dialog_title": "",
+      "home_description": ""
     }
   ]
 }
