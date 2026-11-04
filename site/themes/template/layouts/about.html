@@ -470,6 +470,56 @@ body.bp-about-page-body #site-header .bp-nav-mobile-panel {
 #bp-about-page .bp-about-heading span {
   color: #1d1d1f;
 }
+#bp-about-page .bp-about-projects-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #0071e3;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+
+#bp-about-page .bp-about-projects-more,
+#bp-about-page .bp-about-projects-more:hover {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #0071e3;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+#bp-about-page .bp-about-projects-chevron {
+  display: block;
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  font-size: 0;
+  line-height: 0;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
+
+#bp-about-page .bp-about-cards {
+  padding-top: 32px;
+}
+
+#bp-about-page .bp-about-projects-more,
+#bp-about-page .bp-about-projects-more:hover {
+  text-decoration: none;
+}
+
+#bp-about-page .bp-about-projects-more:hover > span:first-child {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
 </style>
 {{ end }}
 
@@ -562,9 +612,11 @@ body.bp-about-page-body #site-header .bp-nav-mobile-panel {
         <div class="bp-about-projects-heading">
           <h2 id="bp-about-projects-title" class="bp-about-card-title">{{ $projectCard.title }}</h2>
           <a class="bp-about-projects-more" href="{{ $projectsHref }}">
-            <span>{{ $projectCard.link_label }}</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6" /></svg>
-          </a>
+  <span>{{ $projectCard.link_label }}</span>
+  <span class="bp-about-projects-chevron" aria-hidden="true">
+    &#8250;
+  </span>
+</a>
         </div>
         <ul class="bp-about-project-list">
           {{ range $projectCard.items }}
