@@ -1,11 +1,4 @@
 {{ define "main" }}
-  {{- $isEightPuzzle := false -}}
-  {{- with .File -}}
-    {{- $isEightPuzzle = eq .ContentBaseName "8-puzzle-solver" -}}
-  {{- end -}}
-  {{- $hideProjectExtras := or $isEightPuzzle (.Params.hide_theme_extras | default false) -}}
-
-
   <section class="section pt-46">
     <div class="container">
       <div class="mx-auto max-w-4xl">
@@ -28,8 +21,4 @@
       </div>
     </div>
   </section>
-
-  {{ if not $hideProjectExtras }}
-    {{ partial "call-to-action.html" . }}
-  {{ end }}
 {{ end }}
