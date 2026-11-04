@@ -53,7 +53,7 @@ skills_card:
       items:
         - "Java"
         - "Spring Boot"
-        - "Node.js"
+        - "Python"
         - "Express"
         - "MySQL"
 
