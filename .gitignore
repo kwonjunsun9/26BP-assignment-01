@@ -1,13 +1,24 @@
-# Dependencies and build output
-node_modules/
-public/
-resources/
+/public/
+/site/public/
+/site/resources/_gen/
 .hugo_build.lock
 hugo_stats.json
+
+
+node_modules/
+/.pages-tools/
+
+
 __pycache__/
 *.pyc
 
-# Local editor / operating-system files
+/.github-pages-setup-backups/
+
+
 .DS_Store
 Thumbs.db
+Desktop.ini
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
