@@ -7,7 +7,6 @@ banner:
   title: "My Blueprint"
   content: Software Engineer KWON JUNSUNG
   description: "디테일을 그리고, 더 나은 결과로."
-  image: /images/hero-background.jpg
 
 # Recent Works:
 recent_works:

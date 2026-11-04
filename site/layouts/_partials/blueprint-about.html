@@ -1,0 +1,569 @@
+{{/* Technology logos: Simple Icons (CC0-1.0); MySQL/Redis/C++/Java/Python: Devicon (MIT). https://github.com/simple-icons/simple-icons https://github.com/devicons/devicon */}}
+{{ $icons := dict
+  "ai" `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <g fill="none" stroke="#7c3aed" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="5" y="5" width="14" height="14" rx="3"/>
+  <path d="M9 2v3m6-3v3M9 19v3m6-3v3M2 9h3m-3 6h3M19 9h3m-3 6h3"/>
+  <path d="M8 15l2-6 2 6m-3.3-2h2.6M15 9v6"/>
+  </g>
+  </svg>`
+
+  "gamegraphics" `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <g fill="none" stroke="#0071e3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 7h10a3 3 0 0 1 2.9 2.2l1.7 6a2.5 2.5 0 0 1-4.2 2.4L15 15H9l-2.4 2.6a2.5 2.5 0 0 1-4.2-2.4l1.7-6A3 3 0 0 1 7 7Z"/>
+  <path d="M7 10v4m-2-2h4"/>
+  <circle cx="16" cy="11" r=".8" fill="#0071e3" stroke="none"/>
+  <circle cx="18" cy="13" r=".8" fill="#0071e3" stroke="none"/>
+  </g>
+  </svg>`
+  "nodejs" `<svg viewBox="0 0 128 128" aria-hidden="true" focusable="false">
+  <path fill="#5fa04e" d="m64.36 0.005859c-1.045 0-2.091 0.2701-3.027 0.8125l-49.82 28.75 53.63 98.38c0.7789-0.1012 1.542-0.3539 2.244-0.7578l50.17-28.97c1.21-0.7006 2.114-1.787 2.607-3.049l-55.23-95.13c-0.1908-0.01819-0.3808-0.03711-0.5723-0.03711zm1.9 0.3203 35.65 61.39 16.86-31.02c-0.3597-0.3535-0.7631-0.6666-1.211-0.9258l-50.17-28.95c-0.3597-0.2085-0.7391-0.3638-1.125-0.4922zm-55.6 29.79c-1.566 1.133-2.518 2.949-2.518 4.9v57.95c0 1.292 0.4194 2.521 1.15 3.537l19.36-33.38-18-33.01zm108.8 1.408-16.97 31.21 18.03 31.06c0.03737-0.2716 0.05859-0.5456 0.05859-0.8242v-57.95c0-1.275-0.4097-2.488-1.123-3.496zm-90.25 32.63-19.23 33.15c0.3538 0.344 0.7477 0.6527 1.186 0.9062l50.16 28.97c0.8345 0.4788 1.753 0.7317 2.682 0.7852l-34.79-63.82z"/>
+  </svg>`
+  "javascript" `<svg viewBox="0 0 128 128" aria-hidden="true" focusable="false">
+  <path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z"/>
+  <path fill="#323330" d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z"/>
+  </svg>`
+  "typescript" `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"/></svg>`
+  "react" `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"/></svg>`
+  "nextdotjs" `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z"/></svg>`
+  "mysql" `<svg viewBox="0 0 128 128" aria-hidden="true" focusable="false"><path fill="#00618A" d="M117.688 98.242c-6.973-.191-12.297.461-16.852 2.379-1.293.547-3.355.559-3.566 2.18.711.746.82 1.859 1.387 2.777 1.086 1.754 2.922 4.113 4.559 5.352 1.789 1.348 3.633 2.793 5.551 3.961 3.414 2.082 7.223 3.27 10.504 5.352 1.938 1.23 3.859 2.777 5.75 4.164.934.684 1.563 1.75 2.773 2.18v-.195c-.637-.812-.801-1.93-1.387-2.777l-2.578-2.578c-2.52-3.344-5.719-6.281-9.117-8.719-2.711-1.949-8.781-4.578-9.91-7.73l-.199-.199c1.922-.219 4.172-.914 5.949-1.391 2.98-.797 5.645-.59 8.719-1.387l4.164-1.187v-.793c-1.555-1.594-2.664-3.707-4.359-5.152-4.441-3.781-9.285-7.555-14.273-10.703-2.766-1.746-6.184-2.883-9.117-4.363-.988-.496-2.719-.758-3.371-1.586-1.539-1.961-2.379-4.449-3.566-6.738-2.488-4.793-4.93-10.023-7.137-15.066-1.504-3.437-2.484-6.828-4.359-9.91-9-14.797-18.687-23.73-33.695-32.508-3.195-1.867-7.039-2.605-11.102-3.57l-6.543-.395c-1.332-.555-2.715-2.184-3.965-2.977C16.977 3.52 4.223-3.312.539 5.672-1.785 11.34 4.016 16.871 6.09 19.746c1.457 2.012 3.32 4.273 4.359 6.539.688 1.492.805 2.984 1.391 4.559 1.438 3.883 2.695 8.109 4.559 11.695.941 1.816 1.98 3.727 3.172 5.352.727.996 1.98 1.438 2.18 2.973-1.227 1.715-1.297 4.375-1.984 6.543-3.098 9.77-1.926 21.91 2.578 29.137 1.383 2.223 4.641 6.98 9.117 5.156 3.918-1.598 3.043-6.539 4.164-10.902.254-.988.098-1.715.594-2.379v.199l3.57 7.133c2.641 4.254 7.324 8.699 11.297 11.699 2.059 1.555 3.68 4.242 6.344 5.152v-.199h-.199c-.516-.805-1.324-1.137-1.98-1.781-1.551-1.523-3.277-3.414-4.559-5.156-3.613-4.902-6.805-10.27-9.711-15.855-1.391-2.668-2.598-5.609-3.77-8.324-.453-1.047-.445-2.633-1.387-3.172-1.281 1.988-3.172 3.598-4.164 5.945-1.582 3.754-1.789 8.336-2.375 13.082-.348.125-.195.039-.398.199-2.762-.668-3.73-3.508-4.758-5.949-2.594-6.164-3.078-16.09-.793-23.191.59-1.836 3.262-7.617 2.18-9.316-.516-1.691-2.219-2.672-3.172-3.965-1.18-1.598-2.355-3.703-3.172-5.551-2.125-4.805-3.113-10.203-5.352-15.062-1.07-2.324-2.875-4.676-4.359-6.738-1.645-2.289-3.484-3.977-4.758-6.742-.453-.984-1.066-2.559-.398-3.566.215-.684.516-.969 1.191-1.191 1.148-.887 4.352.297 5.547.793 3.18 1.32 5.832 2.578 8.527 4.363 1.289.855 2.598 2.512 4.16 2.973h1.785c2.789.641 5.914.195 8.523.988 4.609 1.402 8.738 3.582 12.488 5.949 11.422 7.215 20.766 17.48 27.156 29.734 1.027 1.973 1.473 3.852 2.379 5.945 1.824 4.219 4.125 8.559 5.941 12.688 1.816 4.113 3.582 8.27 6.148 11.695 1.348 1.801 6.551 2.766 8.918 3.766 1.66.699 4.379 1.43 5.949 2.379 3 1.809 5.906 3.965 8.723 5.945 1.402.992 5.73 3.168 5.945 4.957zm-88.605-75.52c-1.453-.027-2.48.156-3.566.395v.199h.195c.695 1.422 1.918 2.34 2.777 3.566l1.98 4.164.199-.195c1.227-.867 1.789-2.25 1.781-4.363-.492-.52-.562-1.164-.992-1.785-.562-.824-1.66-1.289-2.375-1.98zm0 0"></path></svg>`
+  "redis" `<svg viewBox="0 0 128 128" aria-hidden="true" focusable="false"><path fill="#A41E11" d="M121.8 93.1c-6.7 3.5-41.4 17.7-48.8 21.6-7.4 3.9-11.5 3.8-17.3 1S13 98.1 6.3 94.9c-3.3-1.6-5-2.9-5-4.2V78s48-10.5 55.8-13.2c7.8-2.8 10.4-2.9 17-.5s46.1 9.5 52.6 11.9v12.5c0 1.3-1.5 2.7-4.9 4.4z"></path><path fill="#D82C20" d="M121.8 80.5C115.1 84 80.4 98.2 73 102.1c-7.4 3.9-11.5 3.8-17.3 1-5.8-2.8-42.7-17.7-49.4-20.9C-.3 79-.5 76.8 6 74.3c6.5-2.6 43.2-17 51-19.7 7.8-2.8 10.4-2.9 17-.5s41.1 16.1 47.6 18.5c6.7 2.4 6.9 4.4.2 7.9z"></path><path fill="#A41E11" d="M121.8 72.5C115.1 76 80.4 90.2 73 94.1c-7.4 3.8-11.5 3.8-17.3 1C49.9 92.3 13 77.4 6.3 74.2c-3.3-1.6-5-2.9-5-4.2V57.3s48-10.5 55.8-13.2c7.8-2.8 10.4-2.9 17-.5s46.1 9.5 52.6 11.9V68c0 1.3-1.5 2.7-4.9 4.5z"></path><path fill="#D82C20" d="M121.8 59.8c-6.7 3.5-41.4 17.7-48.8 21.6-7.4 3.8-11.5 3.8-17.3 1C49.9 79.6 13 64.7 6.3 61.5s-6.8-5.4-.3-7.9c6.5-2.6 43.2-17 51-19.7 7.8-2.8 10.4-2.9 17-.5s41.1 16.1 47.6 18.5c6.7 2.4 6.9 4.4.2 7.9z"></path><path fill="#A41E11" d="M121.8 51c-6.7 3.5-41.4 17.7-48.8 21.6-7.4 3.8-11.5 3.8-17.3 1C49.9 70.9 13 56 6.3 52.8c-3.3-1.6-5.1-2.9-5.1-4.2V35.9s48-10.5 55.8-13.2c7.8-2.8 10.4-2.9 17-.5s46.1 9.5 52.6 11.9v12.5c.1 1.3-1.4 2.6-4.8 4.4z"></path><path fill="#D82C20" d="M121.8 38.3C115.1 41.8 80.4 56 73 59.9c-7.4 3.8-11.5 3.8-17.3 1S13 43.3 6.3 40.1s-6.8-5.4-.3-7.9c6.5-2.6 43.2-17 51-19.7 7.8-2.8 10.4-2.9 17-.5s41.1 16.1 47.6 18.5c6.7 2.4 6.9 4.4.2 7.8z"></path><path fill="#fff" d="M80.4 26.1l-10.8 1.2-2.5 5.8-3.9-6.5-12.5-1.1 9.3-3.4-2.8-5.2 8.8 3.4 8.2-2.7L72 23zM66.5 54.5l-20.3-8.4 29.1-4.4z"></path><ellipse fill="#fff" cx="38.4" cy="35.4" rx="15.5" ry="6"></ellipse><path fill="#7A0C00" d="M93.3 27.7l17.2 6.8-17.2 6.8z"></path><path fill="#AD2115" d="M74.3 35.3l19-7.6v13.6l-1.9.8z"></path></svg>`
+  "kotlin" `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M24 24H0V0h24L12 12Z"/></svg>`
+  "android" `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg>`
+  "expo" `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M0 20.084c.043.53.23 1.063.718 1.778.58.849 1.576 1.315 2.303.567.49-.505 5.794-9.776 8.35-13.29a.761.761 0 011.248 0c2.556 3.514 7.86 12.785 8.35 13.29.727.748 1.723.282 2.303-.567.57-.835.728-1.42.728-2.046 0-.426-8.26-15.798-9.092-17.078-.8-1.23-1.044-1.498-2.397-1.542h-1.032c-1.353.044-1.597.311-2.398 1.542C8.267 3.991.33 18.758 0 19.77Z"/></svg>`
+  "cplusplus" `<svg viewBox="0 0 128 128" aria-hidden="true" focusable="false"><path fill="#00599c" d="M118.766 95.82c.89-1.543 1.441-3.28 1.441-4.843V36.78c0-1.558-.55-3.297-1.441-4.84l-55.32 31.94Zm0 0"></path><path fill="#004482" d="m68.36 126.586 46.933-27.094c1.352-.781 2.582-2.129 3.473-3.672l-55.32-31.94L8.12 95.82c.89 1.543 2.121 2.89 3.473 3.672l46.933 27.094c2.703 1.562 7.13 1.562 9.832 0Zm0 0"></path><path fill="#659ad2" d="M118.766 31.941c-.891-1.546-2.121-2.894-3.473-3.671L68.359 1.172c-2.703-1.563-7.129-1.563-9.832 0L11.594 28.27C8.89 29.828 6.68 33.66 6.68 36.78v54.196c0 1.562.55 3.3 1.441 4.843L63.445 63.88Zm0 0"></path><path fill="#fff" d="M63.445 26.035c-20.867 0-37.843 16.977-37.843 37.844s16.976 37.844 37.843 37.844c13.465 0 26.024-7.247 32.77-18.91L79.84 73.335c-3.38 5.84-9.66 9.465-16.395 9.465-10.433 0-18.922-8.488-18.922-18.922 0-10.434 8.49-18.922 18.922-18.922 6.73 0 13.017 3.629 16.39 9.465l16.38-9.477c-6.75-11.664-19.305-18.91-32.77-18.91zM92.88 57.57v4.207h-4.207v4.203h4.207v4.207h4.203V65.98h4.203v-4.203h-4.203V57.57H92.88zm15.766 0v4.207h-4.204v4.203h4.204v4.207h4.207V65.98h4.203v-4.203h-4.203V57.57h-4.207z"></path></svg>`
+  "java" `<svg viewBox="0 0 128 128" aria-hidden="true" focusable="false"><path fill="#0074BD" d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z"></path><path fill="#EA2D2E" d="M69.802 61.271c6.025 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.792 15.635-29.58 0 .001-42.731 10.67-22.324 34.187z"></path><path fill="#0074BD" d="M102.123 108.229s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.094.171-4.451-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.953-3.487-32.013 6.85-13.743 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM49.912 70.294s-22.686 5.389-8.033 7.348c6.188.828 18.518.638 30.011-.326 9.39-.789 18.813-2.474 18.813-2.474s-3.308 1.419-5.704 3.053c-23.042 6.061-67.544 3.238-54.731-2.958 10.832-5.239 19.644-4.643 19.644-4.643zm40.697 22.747c23.421-12.167 12.591-23.86 5.032-22.285-1.848.385-2.677.72-2.677.72s.688-1.079 2-1.543c14.953-5.255 26.451 15.503-4.823 23.725 0-.002.359-.327.468-.617z"></path><path fill="#EA2D2E" d="M76.491 1.587S89.459 14.563 64.188 34.51c-20.266 16.006-4.621 25.13-.007 35.559-11.831-10.673-20.509-20.07-14.688-28.815C58.041 28.42 81.722 22.195 76.491 1.587z"></path><path fill="#0074BD" d="M52.214 126.021c22.476 1.437 57-.8 57.817-11.436 0 0-1.571 4.032-18.577 7.231-19.186 3.612-42.854 3.191-56.887.874 0 .001 2.875 2.381 17.647 3.331z"></path></svg>`
+  "python" `<svg viewBox="0 0 128 128" aria-hidden="true" focusable="false"><path fill="#3776AB" d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137H29.977c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491V67.234c0-8.151 7.051-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548V15.833c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zM50.037 9.557c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z" transform="translate(0 10.26)"></path><path fill="#FFD43B" d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655H51.591c-6.756 0-12.346 5.783-12.346 12.549v23.515c0 6.691 5.818 10.628 12.346 12.547 7.816 2.297 15.312 2.713 24.665 0 6.216-1.801 12.346-5.423 12.346-12.547v-9.412H63.938v-3.138h37.012c7.176 0 9.852-5.005 12.348-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.348-12.521h-9.268zM77.809 87.927c2.561 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z" transform="translate(0 10.26)"></path></svg>`
+}}
+{{/* Native Hugo defaults: whitespace changes do not affect the card structure. */}}
+{{ $defaults := dict
+  "enable" true
+  "title" "Skilled Brush"
+  "intro" "숙련된 붓으로 다채롭게 색칠하기."
+  "link_label" "자세히 알아보기"
+  "columns" (slice
+  (dict
+  "title" "Frontend"
+  "items" (slice
+  (dict
+  "name" "JavaScript"
+  "icon" "javascript"
+  "points" (slice
+  "문법 · 비동기 처리"
+  "DOM 조작 · 이벤트 흐름 제어"
+  )
+  )
+  (dict
+  "name" "React"
+  "icon" "react"
+  "points" (slice
+  "컴포넌트 재사용성 극대화 · UI 설계"
+  "상태 관리 · 성능 최적화"
+  )
+  )
+  (dict
+  "name" "Next.js"
+  "icon" "nextdotjs"
+  "points" (slice
+  "API 라우트 구축·미들웨어 활용"
+  "이미지/폰트 최적화 · 웹 개선"
+  )
+  )
+  )
+  )
+  (dict
+  "title" "Backend"
+  "items" (slice
+  (dict
+  "name" "Java / Spring Boot"
+  "icon" "java"
+  "points" (slice
+  "객체지향 설계, REST API 구축"
+  "Spring Security 인증"
+  )
+  )
+  (dict
+  "name" "Node.js Express"
+  "icon" "nodejs"
+  "points" (slice
+  "이벤트 기반 비동기 논블로킹 처리"
+  "REST API 개발"
+  )
+  )
+  (dict
+  "name" "Database (MySQL)"
+  "icon" "mysql"
+  "points" (slice
+  "관계형 데이터 모델링·정규화 설계"
+  "인덱스 기반 쿼리 튜닝·트랜잭션 보장"
+  )
+  )
+  )
+  )
+  (dict
+  "title" "Language"
+  "items" (slice
+  (dict
+  "name" "C++"
+  "icon" "cplusplus"
+  "points" (slice
+  "알고리즘 문제 풀이"
+  "포인터, 메모리 관리 학습"
+  )
+  )
+  (dict
+  "name" "Java"
+  "icon" "java"
+  "points" (slice
+  "객체지향 프로그래밍 학습"
+  "컬렉션, 예외 처리 활용"
+  )
+  )
+  (dict
+  "name" "Python"
+  "icon" "python"
+  "points" (slice
+  "기초 문법, 자료구조 학습"
+  "데이터 처리, 자동화 실습"
+  )
+  )
+  )
+  )
+  (dict
+  "title" "Focus"
+  "items" (slice
+  (dict
+  "name" "인공지능 · 머신러닝(AI/Machine Learning)"
+  "icon" "ai"
+  "lang" "ko"
+  "points" (slice
+  "딥러닝 / 머신러닝: PyTorch, TensorFlow 기반 신경망 모델 설계 및 학습"
+  "자연어 처리, 컴퓨터 비전, 생성형 AI"
+  )
+  )
+  (dict
+  "name" "게임 개발 · 컴퓨터 그래픽스(Game & Graphics)"
+  "icon" "gamegraphics"
+  "lang" "ko"
+  "points" (slice
+  "게임 개발: Unity, Unreal Engine, Java(LibGDX), C++"
+  "컴퓨터 그래픽스: OpenGL, DirectX"
+  )
+  )
+  )
+  )
+  )
+  }}
+{{ $config := hugo.Data.blueprint_skills | default $defaults }}
+{{ if ne $config.enable false }}
+  <style>
+    /* Skilled Brush: one navigation offset and one layout definition. */
+    #after-projects.bp-about-catalog {
+      position: relative;
+      display: block;
+      isolation: isolate;
+      box-sizing: border-box;
+      height: auto;
+      min-height: 100vh;
+      min-height: calc(100svh - var(--bp-skill-landing, 80px));
+      margin: 0;
+      overflow: hidden;
+      padding-top: var(--bp-skill-content-top, 4rem);
+      padding-bottom: calc(48px + 3.25rem);
+      scroll-margin-top: var(--bp-skill-landing, 80px);
+      background: var(--catalog-ground, #fcfcfd);
+    }
+
+    #after-projects.bp-about-catalog > .bp-catalog-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    #after-projects .bp-catalog-header {
+      margin-top: 0;
+      margin-bottom: 1.25rem;
+      transform: none;
+    }
+
+    #after-projects .bp-catalog-card-list {
+      gap: 0.625rem;
+    }
+
+    #after-projects.bp-about-catalog .bp-catalog-next {
+      position: absolute;
+      top: auto;
+      left: 0;
+      right: 0;
+      bottom: 2rem;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin: 0 auto;
+      border-radius: 50%;
+      background: transparent;
+      color: #1d1d1f;
+      text-decoration: none;
+      transform: none;
+      touch-action: manipulation;
+    }
+
+    #after-projects .bp-catalog-next svg {
+      display: block;
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: currentColor;
+    }
+
+    #after-projects .bp-catalog-next:focus-visible {
+      outline: 3px solid var(--catalog-blue, #0071e3);
+      outline-offset: 4px;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      #after-projects.bp-about-catalog .bp-catalog-next:hover {
+        background: #eef0f3;
+      }
+    }
+
+    @media (min-width: 1100px) and (max-height: 850px) {
+      #after-projects .bp-catalog-title {
+        font-size: clamp(2.25rem, 3.5vw, 3rem);
+      }
+      #after-projects .bp-catalog-intro {
+        margin-top: 0.75rem;
+      }
+      #after-projects .bp-catalog-action-row {
+        margin-top: 0;
+      }
+      #after-projects .bp-catalog-header {
+        margin-bottom: 1rem;
+      }
+      #after-projects .bp-catalog-column-title {
+        margin-bottom: 0.5rem;
+      }
+      #after-projects .bp-tech-card {
+        min-height: 0;
+        padding: 0.75rem;
+      }
+      #after-projects .bp-tech-icon {
+        flex-basis: 2rem;
+        width: 2rem;
+        height: 2rem;
+        padding: 0.375rem;
+      }
+      #after-projects .bp-tech-card-points {
+        margin-top: 0.5rem;
+        font-size: 0.9375rem;
+        line-height: 1.5;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+    html:has(#bp-motion:checked) {
+      scroll-behavior: auto;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    #after-projects .bp-catalog-columns {
+      padding-top: 1.5rem;
+    }
+  </style>
+  <section
+    id="after-projects"
+    class="bp-about-catalog"
+    lang="ko"
+    aria-labelledby="bp-catalog-title">
+    <img
+      class="bp-catalog-brush"
+      src="{{ "images/rainbow-brush-vertical.webp" | relURL }}"
+      width="640"
+      height="533"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      decoding="async"
+      draggable="false" />
+    <div class="bp-catalog-inner">
+      <header class="bp-catalog-header">
+        <h2 id="bp-catalog-title" class="bp-catalog-title">
+          {{ $config.title | default $defaults.title }}
+        </h2>
+        <p class="bp-catalog-intro">
+          {{ $config.intro | default $defaults.intro }}
+        </p>
+        {{ with site.GetPage "about" }}
+          <div class="bp-catalog-action-row">
+            <a class="bp-catalog-more" href="{{ .RelPermalink }}">
+              <span
+                >{{ $config.link_label | default $defaults.link_label }}</span
+              >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false">
+                <path d="m9 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        {{ end }}
+      </header>
+
+      <div class="bp-catalog-columns">
+        {{ range $columnIndex, $column := ($config.columns | default $defaults.columns) }}
+          <section
+            class="bp-catalog-column"
+            aria-labelledby="bp-catalog-column-{{ $columnIndex }}">
+            <h3
+              id="bp-catalog-column-{{ $columnIndex }}"
+              class="bp-catalog-column-title">
+              {{ $column.title }}
+            </h3>
+            <div class="bp-catalog-card-list">
+              {{ range $cardIndex, $card := $column.items }}
+                {{ $iconKey := $card.icon | default "" }}
+                <article
+                  class="bp-tech-card"
+                  aria-labelledby="bp-catalog-card-{{ $columnIndex }}-{{ $cardIndex }}">
+                  <div class="bp-tech-card-head">
+                    <span
+                      class="bp-tech-icon bp-tech-icon--{{ $iconKey }}"
+                      aria-hidden="true">
+                      {{ with index $icons $iconKey }}
+                        {{ . | safeHTML }}
+                      {{ else }}
+                        <span class="bp-tech-initial"
+                          >{{ substr ($card.name | default "?") 0 1 }}</span
+                        >
+                      {{ end }}
+                    </span>
+                    <h4
+                      id="bp-catalog-card-{{ $columnIndex }}-{{ $cardIndex }}"
+                      class="bp-tech-card-name"
+                      lang="{{ $card.lang | default "en" }}">
+                      {{ $card.name }}
+                    </h4>
+                  </div>
+                  {{ with $card.points }}
+                    <ul class="bp-tech-card-points">
+                      {{ range . }}<li>{{ . }}</li>{{ end }}
+                    </ul>
+                  {{ end }}
+                </article>
+              {{ end }}
+            </div>
+          </section>
+        {{ end }}
+      </div>
+
+      {{ with $config.draft_note }}
+        <p class="bp-catalog-draft">{{ . }}</p>
+      {{ end }}
+    </div>
+
+    <a
+      class="bp-catalog-next"
+      href="#blueprint-next"
+      aria-label="MAKE OUR PRINT 섹션으로 이동">
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        focusable="false">
+        <path d="M12 4v16M5 13l7 7 7-7" />
+      </svg>
+    </a>
+  </section>
+{{ end }}
+
+
+<script>
+  (() => {
+    "use strict";
+    const section = document.getElementById("after-projects");
+    if (!section || section.dataset.bpSkillLandingReady) return;
+    section.dataset.bpSkillLandingReady = "true";
+
+    const header = document.getElementById("site-header");
+    const title = section.querySelector(".bp-catalog-title");
+    const brush = section.querySelector(".bp-catalog-brush");
+    const links = document.querySelectorAll(
+      '.bp-fan-next, .bp-hero a[href="#after-projects"]',
+    );
+    const arrow = section.querySelector(
+      'a.bp-catalog-next, a[href="#blueprint-next"]',
+    );
+    let pending = false;
+    let frame = 0;
+    let lastY = 0;
+    let lastInset = 0;
+    let requestedY = 0;
+    let startedAt = 0;
+    let moved = false;
+    let stableFrames = 0;
+
+    if (arrow) {
+      arrow.classList.add("bp-catalog-next");
+      arrow.setAttribute("href", "#blueprint-next");
+      section.appendChild(arrow);
+    }
+    links.forEach((link) => link.setAttribute("href", "#after-projects"));
+
+    function landingInset() {
+      if (!header || !/fixed|sticky/.test(getComputedStyle(header).position))
+        return 0;
+      return Math.max(0, Math.min(80, header.getBoundingClientRect().bottom));
+    }
+
+    function setVariable(name, value) {
+      if (section.style.getPropertyValue(name) !== value)
+        section.style.setProperty(name, value);
+    }
+
+    function measure() {
+      setVariable("--bp-skill-landing", landingInset().toFixed(2) + "px");
+      if (title && brush) {
+        const bounds = section.getBoundingClientRect();
+        const paint = brush.getBoundingClientRect();
+        const visibleTop = Math.max(0, paint.top - bounds.top);
+        const visibleBottom = Math.max(
+          visibleTop,
+          Math.min(bounds.height, paint.bottom - bounds.top),
+        );
+        const minimum = Math.max(
+          16,
+          parseFloat(getComputedStyle(section).fontSize) || 16,
+        );
+        const top = Math.max(
+          minimum,
+          (visibleTop + visibleBottom) / 2 -
+            title.getBoundingClientRect().height / 2,
+        );
+        setVariable("--bp-skill-content-top", top.toFixed(2) + "px");
+      }
+    }
+
+    function destination() {
+      return Math.max(
+        0,
+        window.scrollY + section.getBoundingClientRect().top - landingInset(),
+      );
+    }
+
+    function cancel() {
+      pending = false;
+      cancelAnimationFrame(frame);
+    }
+
+    function settleNavigation() {
+      if (!pending) return;
+      const y = window.scrollY;
+      const inset = landingInset();
+      const scrollChanged = Math.abs(y - lastY) > 0.25;
+      const headerChanged = Math.abs(inset - lastInset) > 0.25;
+      if (scrollChanged) moved = true;
+      stableFrames = scrollChanged || headerChanged ? 0 : stableFrames + 1;
+      lastY = y;
+      lastInset = inset;
+      const reached = Math.abs(y - requestedY) < 1;
+      if (
+        ((moved || reached) && stableFrames >= 4) ||
+        performance.now() - startedAt > 2500
+      ) {
+        cancel();
+        measure();
+        window.scrollTo({ top: destination(), behavior: "instant" });
+        return;
+      }
+      frame = requestAnimationFrame(settleNavigation);
+    }
+
+    links.forEach((link) =>
+      link.addEventListener(
+        "click",
+        (event) => {
+          if (
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          )
+            return;
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          cancel();
+          measure();
+          pending = true;
+          requestedY = destination();
+          lastY = window.scrollY;
+          lastInset = landingInset();
+          startedAt = performance.now();
+          moved = false;
+          stableFrames = 0;
+          if (location.hash !== "#after-projects")
+            history.pushState(history.state, "", "#after-projects");
+          const reduced =
+            matchMedia("(prefers-reduced-motion: reduce)").matches ||
+            document.getElementById("bp-motion")?.checked;
+          window.scrollTo({
+            top: requestedY,
+            behavior: reduced ? "instant" : "smooth",
+          });
+          frame = requestAnimationFrame(settleNavigation);
+        },
+        true,
+      ),
+    );
+
+    window.addEventListener("resize", measure, { passive: true });
+    window.addEventListener("popstate", cancel);
+    window.addEventListener("click", cancel, true);
+    for (const type of ["wheel", "touchstart", "pointerdown"])
+      window.addEventListener(type, cancel, { passive: true });
+    window.addEventListener("keydown", (event) => {
+      if (
+        [
+          "ArrowUp",
+          "ArrowDown",
+          "PageUp",
+          "PageDown",
+          "Home",
+          "End",
+          " ",
+        ].includes(event.key)
+      )
+        cancel();
+    });
+    if ("ResizeObserver" in window) {
+      const observer = new ResizeObserver(measure);
+      for (const element of [header, title, brush])
+        if (element) observer.observe(element);
+    }
+    brush?.addEventListener("load", measure, { once: true });
+    document.fonts?.ready.then(measure);
+    measure();
+  })();
+</script>

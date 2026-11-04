@@ -1,12 +1,15 @@
 ######################## default configuration ####################
 # The base URL of your site (required). This will be prepended to all relative URLs.
-baseURL = "/"
+baseURL = "https://kwonjunsun9.github.io/26BP-assignment-01/"
 # Title of your website (required).
 title = "My Blueprint"
-# Your theme name
+enableGitInfo = false
+timeout = "120s"
+disableKinds = ["taxonomy", "term"]
+# Site templates live in layouts/ and assets/.
 
 # Default time zone for time stamps; use any valid tz database name: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
-timeZone = "America/New_York"
+timeZone = "Asia/Seoul"
 # post excerpt
 summaryLength = 10 # see https://gohugo.io/content-management/summaries/#automatic-summary
 # disable language
@@ -59,7 +62,7 @@ target = 'assets/notwatching/hugo_stats.json'
 
 ############################# Outputs ############################
 [outputs]
-home     = ["HTML", "RSS", "WebAppManifest", "SearchIndex", "llms", "llmsfull", "md"]
+home     = ["HTML", "RSS", "WebAppManifest", "llms", "llmsfull", "md"]
 page     = ["HTML", "RSS", "md"]
 section  = ["HTML", "RSS", "md"]
 taxonomy = ["HTML", "RSS", "md"]
@@ -67,10 +70,13 @@ term     = ["HTML", "RSS", "md"]
 
 ############################# Imaging ############################
 [imaging]
+resampleFilter = "Lanczos"
 # See https://github.com/disintegration/imaging
 # Default JPEG or WebP quality setting. Default is 75.
+[imaging.jpeg]
 quality = 80
-resampleFilter = "Lanczos"
+[imaging.webp]
+quality = 80
 
 ############################ Caches ##############################
 [caches]
@@ -138,34 +144,6 @@ lazy = true
 link = "plugins/font-awesome/v6/icons.css"
 lazy = true
 
-# JS Plugins
-[[params.plugins.js]]
-link = "js/search.js" # https://github.com/gethugothemes/hugo-modules/tree/master/search
-lazy = false
-[[params.plugins.js]]
-link = "plugins/swiper/swiper-bundle.js"
-# https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider
-lazy = false
-[[params.plugins.js]]
-link = "plugins/glightbox/glightbox.js" # https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider
-lazy = true
-[[params.plugins.js]]
-link = "js/gallery-slider.js" # https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider
-lazy = true
-[[params.plugins.js]]
-link = "plugins/cookie.js" # https://github.com/gethugothemes/hugo-modules/tree/master/components/cookie-consent
-lazy = false
-[[params.plugins.js]]
-link = "js/accordion.js" # https://github.com/gethugothemes/hugo-modules/tree/master/accordion
-lazy = true
-[[params.plugins.js]]
-link = "js/tab.js" # https://github.com/gethugothemes/hugo-modules/tree/master/accordion
-lazy = true
-[[params.plugins.js]]
-link = "js/modal.js" # https://github.com/gethugothemes/hugo-modules/tree/master/modal
-lazy = true
-[[params.plugins.js]]
-link = "plugins/youtube-lite.js" # https://github.com/gethugothemes/hugo-modules/tree/master/videos
-lazy = true
+# Page scripts are loaded by the templates that use them.
 [security.exec]
-allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']
+allow = ['^go$', '^git$', '^node$', '^tailwindcss$']

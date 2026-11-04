@@ -1,33 +1,13 @@
-Thumbs.db
-.DS_Store
-.dist
-.tmp
-.lock
-.sass-cache
-npm-debug.log
-node_modules
-builds
-package-lock.json
-public
-resources
+# Dependencies and build output
+node_modules/
+public/
+resources/
 .hugo_build.lock
-jsconfig.json
-go.sum
-yarn.lock
+hugo_stats.json
+__pycache__/
+*.pyc
 
-# Prepared Hugo Pages site
-!/site/
-!/site/**
-!/.github/
-!/.github/**
-!/.github-pages.json
-/public/
-/.pages-tools/
-**/node_modules/
-**/resources/_gen/
-**/.hugo_build.lock
-/.github-pages-setup-backups/
-
-# Local Hugo preview output
-/site/public/
-/site/resources/
+# Local editor / operating-system files
+.DS_Store
+Thumbs.db
+npm-debug.log*

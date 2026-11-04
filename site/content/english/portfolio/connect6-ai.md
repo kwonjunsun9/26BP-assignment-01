@@ -6,7 +6,6 @@ summary: "두 돌의 순차 선택과 위협 패턴 분석을 바탕으로 공�
 type: "portfolio"
 category: ["Game AI", "Python", "Heuristic Search"]
 image: ""
-hide_theme_extras: true
 draft: false
 ---
 
