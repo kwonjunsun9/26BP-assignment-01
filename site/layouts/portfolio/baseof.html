@@ -40,6 +40,7 @@
       {{ partialCached "gtm-noscript.html" . }}
     {{ else }}
       {{ partial "preloader.html" . }}
+
     {{ end }}
 
     {{ partial "essentials/header.html" . }}
@@ -51,6 +52,121 @@
 
     {{ if and (not .IsHome) (ne .Layout "contact") (not $hideProjectExtras) }}
       {{ partial "essentials/footer.html" . }}
+    {{ end }}
+    {{ if .IsPage }}
+      <style>
+        #bp-project-back-to-top {
+          position: fixed;
+          right: calc(28px + env(safe-area-inset-right, 0px));
+          bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+          z-index: 900;
+          display: grid;
+          place-items: center;
+          box-sizing: border-box;
+          width: 48px;
+          height: 48px;
+          margin: 0;
+          padding: 0;
+          border: 1px solid #dedee3;
+          border-radius: 50%;
+          background: #fff;
+          color: #1d1d1f;
+          box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+          cursor: pointer;
+          transition: background-color 160ms ease, transform 160ms ease;
+        }
+
+        #bp-project-back-to-top[hidden] {
+          display: none;
+        }
+
+        @media (hover: hover) {
+          #bp-project-back-to-top:hover {
+            background: #f5f5f7;
+            transform: translateY(-2px);
+          }
+        }
+
+        #bp-project-back-to-top:focus-visible {
+          outline: 3px solid #0071e3;
+          outline-offset: 4px;
+        }
+
+        #bp-project-back-to-top svg {
+          display: block;
+          width: 22px;
+          height: 22px;
+        }
+
+        @media (max-width: 600px) {
+          #bp-project-back-to-top {
+            right: calc(18px + env(safe-area-inset-right, 0px));
+            bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          #bp-project-back-to-top {
+            transition: none;
+            transform: none;
+          }
+        }
+      </style>
+
+      <button
+        id="bp-project-back-to-top"
+        type="button"
+        aria-label="맨 위로 이동"
+        title="맨 위로 이동"
+        hidden>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path
+            d="M12 19V5M5 12l7-7 7 7"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+
+      <script>
+        (() => {
+          const button = document.getElementById("bp-project-back-to-top");
+          if (!button) return;
+
+          const updateVisibility = () => {
+            button.hidden = window.scrollY < 320;
+          };
+
+          window.addEventListener("scroll", updateVisibility, { passive: true });
+          window.addEventListener("pageshow", updateVisibility);
+          updateVisibility();
+
+          button.addEventListener("click", () => {
+            const motionSwitch = document.getElementById("bp-nav-motion-enabled");
+            const reduceMotion =
+              document.documentElement.classList.contains("bp-motion-off") ||
+              motionSwitch?.checked === false ||
+              window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            // 버튼이 사라져도 키보드 탐색이 페이지 제목에서 이어지도록 합니다.
+            const heading = document.querySelector("main h1");
+            if (heading) {
+              if (!heading.hasAttribute("tabindex")) {
+                heading.setAttribute("tabindex", "-1");
+                heading.addEventListener(
+                  "blur",
+                  () => heading.removeAttribute("tabindex"),
+                  { once: true },
+                );
+              }
+              heading.focus({ preventScroll: true });
+            }
+
+            window.scrollTo({ top: 0, behavior: reduceMotion ? "instant" : "smooth" });
+          });
+        })();
+      </script>
     {{ end }}
   </body>
 </html>
