@@ -3,25 +3,25 @@
   "tagline": "지금까지 칠해온 색깔들.",
   "projects": [
     {
-      "title": "8-Puzzle Solver",
+      "title": "How to Solve 8-Puzzle",
       "description": "8-Puzzle 문제를 다양한 탐색 알고리즘으로 해결하는 프로젝트입니다.",
       "people": "1명 · 개인",
-      "period": "2026.04 · 1개월",
+      "period": "2026.04",
       "page": "portfolio/8-puzzle-solver",
       "image": "images/project/8-puzzle-thumb.svg",
       "color": "coral"
     },
     {
-      "title": "Connect6 AI",
-      "description": "직접 구현한 AI와 대결하여 육목을 플레이합니다.",
+      "title": "육목 with AI",
+      "description": "직접 구현한 AI와 대결하며 육목을 플레이합니다.",
       "people": "1명 · 개인",
-      "period": "2026.05 · 1개월",
+      "period": "2026.05 ",
       "page": "portfolio/connect6-ai",
       "image": "images/project/connect6-thumb.svg",
       "color": "yellow"
     },
     {
-      "title": "Robot Vacuum MDP",
+      "title": "최단 경로를 찾는 로봇청소기",
       "description": "청소와 복귀를 최단 경로로 계획하는 로봇청소기를 만들었습니다.",
       "people": "1명 · 개인",
       "period": "2026.06",

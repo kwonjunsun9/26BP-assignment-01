@@ -1,0 +1,142 @@
+{{ with .Params.recent_works }}
+  {{ if .enable }}
+    {{/* Use the PROJECT data order; ignore placeholders and old demo featured pages. */}}
+    {{ $projects := slice }}
+    {{ with hugo.Data.bp_projects }}
+      {{ range .projects }}
+        {{ $card := . }}
+        {{ with .page }}
+          {{ with site.GetPage . }}
+            {{ $projects = $projects | append (dict "Page" . "Card" $card) }}
+          {{ else }}
+            {{ warnf "HOME card page not found: %s" . }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+
+    <section id="blueprint-work" class="bp-fan" aria-labelledby="bp-fan-title">
+      <header class="bp-fan-heading">
+        <h2 id="bp-fan-title">{{ .title }}</h2>
+        <p>{{ .description }}</p>
+
+        {{ with site.GetPage "portfolio" }}
+          <a
+            class="bp-button bp-button-primary bp-fan-more"
+            href="{{ .RelPermalink }}">
+            더 알아보기
+          </a>
+        {{ end }}
+      </header>
+
+      <div class="bp-fan-stage">
+        <div class="bp-fan-deck" aria-label="프로젝트 목록">
+          {{ range $index, $entry := $projects }}
+            {{ $project := $entry.Page }}
+            {{ $card := $entry.Card }}
+            {{ $title := $card.title | default $project.Title }}
+            {{ $summary := $project.Params.preview_summary | default $card.description | default $project.Description | default ($project.Summary | plainify) | plainify }}
+
+
+            <a
+              class="bp-fan-card"
+              href="{{ $project.RelPermalink }}"
+              data-title="{{ $title }}"
+              data-summary="{{ $summary }}"
+              data-number="{{ printf "%02d" (add $index 1) }}"
+              data-category="{{ with $project.Params.category }}
+                {{ delimit . " · " }}
+              {{ end }}
+              ">
+              <span class="bp-poster-meta">
+                COMPLETED<br />
+                PROJECT
+              </span>
+
+              <h3 class="bp-poster-title">
+                {{ $title }}
+              </h3>
+
+              <span class="bp-poster-bottom">
+                <span class="bp-poster-number">
+                  {{ printf "%02d" (add $index 1) }}
+                </span>
+                <span aria-hidden="true">↗</span>
+              </span>
+            </a>
+          {{ end }}
+
+        </div>
+        <!-- 카드 목록 끝 -->
+
+        <!-- 아래로 이동하는 화살표 -->
+        <a
+          class="bp-fan-next"
+          href="#after-projects"
+          aria-label="다음 섹션으로 이동">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false">
+            <path d="M12 4v16M5 13l7 7 7-7" />
+          </svg>
+        </a>
+      </div>
+      <!-- 흰색 바닥을 포함한 카드 영역 끝 -->
+    </section>
+
+    <dialog
+      id="bp-project-dialog"
+      class="bp-project-dialog"
+      aria-labelledby="bp-dialog-title"
+      aria-describedby="bp-dialog-summary">
+      <div class="bp-dialog-sheet">
+        <div class="bp-dialog-top">
+          <p id="bp-dialog-number">PROJECT</p>
+
+          <form method="dialog">
+            <button
+              class="bp-dialog-close"
+              type="submit"
+              aria-label="프로젝트 요약 닫기"
+              autofocus>
+              ×
+            </button>
+          </form>
+        </div>
+
+        <p id="bp-dialog-category" class="bp-dialog-category"></p>
+        <h2 id="bp-dialog-title"></h2>
+        <p id="bp-dialog-summary"></p>
+
+        <div class="bp-dialog-actions">
+          <form method="dialog">
+            <button class="bp-dialog-back" type="submit">
+              카드로 돌아가기
+            </button>
+          </form>
+
+          <a id="bp-dialog-detail" class="bp-dialog-detail">
+            자세한 설명 보기
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </dialog>
+
+    {{ with resources.Get "js/blueprint-projects.js" }}
+      {{ $script := . | fingerprint }}
+      <script src="{{ $script.RelPermalink }}" defer></script>
+    {{ else }}
+      {{ warnf "Project script not found: site/assets/js/blueprint-projects.js" }}
+    {{ end }}
+  {{ end }}
+{{ end }}
