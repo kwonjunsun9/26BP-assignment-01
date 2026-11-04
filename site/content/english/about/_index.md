@@ -72,16 +72,24 @@ projects_card:
   link_label: "자세히 알아보기"
   url: "/portfolio/"
   items:
-    - title: "가나 서비스 리디자인"
-      period: "2024 — 2025"
-      description: "사용자 경험을 개선하는 서비스 디자인"
-    - title: "홈페이지 리뉴얼"
-      period: "2023"
-      description: "사용하기 편한 웹사이트로 개선"
-    - title: "소셜미디어 캠페인 디자인"
-      period: "2023"
-      description: "브랜드의 이야기를 담은 콘텐츠"
-    - title: "포스터 및 인쇄물 디자인"
-      period: "2022"
-      description: "정보를 명확하게 전달하는 디자인"
+    - title: "Solve 8-Puzzle"
+      period: "2026.04"
+      description: "Python · Pygame 기반 8-Puzzle 탐색"
+      url: "/portfolio/8-puzzle-solver/"
+
+    - title: "육목 with AI"
+      period: "2026.05"
+      description: "패턴 분석과 휴리스틱 탐색을 활용한 육목 AI"
+      url: "/portfolio/connect6-ai/"
+
+    - title: "최단 경로를 찾는 로봇청소기"
+      period: "2026.06"
+      description: "MDP와 가치·정책 반복을 활용한 경로 계획"
+      url: "/portfolio/robot-vacuum-mdp/"
+
+    - title: "배부르면 행복합니다!"
+      period: "2026.10"
+      description: "JWT 인증·작성자 권한을 적용한 맛집 게시판"
+      url: "/portfolio/jwt-food-board/"
 ---
+

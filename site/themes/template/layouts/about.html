@@ -531,6 +531,18 @@ body.bp-about-page-body,
   border-color: #c7c7cc;
   box-shadow: 0 4px 20px rgb(0 0 0 / 3%);
 }
+
+/* Projects 카드 항목을 상세 소개에 연결 */
+#bp-about-page .bp-about-project-link {
+  display: block;
+  border-radius: 0.375rem;
+}
+
+#bp-about-page .bp-about-project-link:hover h3 {
+  color: #0071e3;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
 </style>
 {{ end }}
 
@@ -631,12 +643,19 @@ body.bp-about-page-body,
         </div>
         <ul class="bp-about-project-list">
           {{ range $projectCard.items }}
+            {{ $projectHref := "" }}
+            {{ with .url }}
+              {{ $projectHref = . | relLangURL }}
+              {{ with site.GetPage . }}{{ $projectHref = .RelPermalink }}{{ end }}
+            {{ end }}
             <li class="bp-about-project-item">
-              <div class="bp-about-project-meta">
-                <h3>{{ .title }}</h3>
-                {{ with .period }}<span class="bp-about-project-period">{{ . }}</span>{{ end }}
-              </div>
-              {{ with .description }}<p class="bp-about-project-description">{{ . }}</p>{{ end }}
+              {{ if $projectHref }}<a class="bp-about-project-link" href="{{ $projectHref }}">{{ end }}
+                <div class="bp-about-project-meta">
+                  <h3>{{ .title }}</h3>
+                  {{ with .period }}<span class="bp-about-project-period">{{ . }}</span>{{ end }}
+                </div>
+                {{ with .description }}<p class="bp-about-project-description">{{ . }}</p>{{ end }}
+              {{ if $projectHref }}</a>{{ end }}
             </li>
           {{ end }}
         </ul>
@@ -645,3 +664,4 @@ body.bp-about-page-body,
   </div>
 </section>
 {{ end }}
+
