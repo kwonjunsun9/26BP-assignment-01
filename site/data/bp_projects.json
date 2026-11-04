@@ -21,12 +21,12 @@
       "color": "yellow"
     },
     {
-      "title": "PROJECT 03",
-      "description": "프로젝트 소개가 들어갈 자리",
-      "people": "정보 입력 예정",
-      "period": "정보 입력 예정",
-      "page": "",
-      "image": "",
+      "title": "Robot Vacuum MDP",
+      "description": "청소와 복귀를 최단 경로로 계획하는 로봇청소기를 만들었습니다.",
+      "people": "1명 · 개인",
+      "period": "2026.06",
+      "page": "portfolio/robot-vacuum-mdp",
+      "image": "images/project/robot-vacuum-thumb.svg",
       "color": "green"
     },
     {
