@@ -1459,6 +1459,7 @@
     let runVersion = 0;
     let started = false;
     let complete = false;
+    let branchesPrepared = false;
     let inView = false;
     let observer;
 
@@ -1487,21 +1488,25 @@
 
     // Expand each compact static SVG path into branches for individual line drawing.
     // With JavaScript disabled the original three-tree SVG remains fully visible.
-    for (const level of levels) {
-      const compactPath = level.querySelector("path");
-      const paths = compactPath?.getAttribute("d")?.match(/M[^M]+/g);
-      if (!paths?.length) continue;
-      const fragment = document.createDocumentFragment();
-      for (const geometry of paths) {
-        const branch = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "path",
-        );
-        branch.setAttribute("d", geometry);
-        branch.setAttribute("pathLength", "1");
-        fragment.appendChild(branch);
+    function prepareBranches() {
+      if (branchesPrepared) return;
+      branchesPrepared = true;
+      for (const level of levels) {
+        const compactPath = level.querySelector("path");
+        const paths = compactPath?.getAttribute("d")?.match(/M[^M]+/g);
+        if (!paths?.length) continue;
+        const fragment = document.createDocumentFragment();
+        for (const geometry of paths) {
+          const branch = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path",
+          );
+          branch.setAttribute("d", geometry);
+          branch.setAttribute("pathLength", "1");
+          fragment.appendChild(branch);
+        }
+        level.replaceChildren(fragment);
       }
-      level.replaceChildren(fragment);
     }
 
     // Keep the replay handler available when motion is enabled later.
@@ -1533,6 +1538,7 @@
         showFinished();
         return;
       }
+      prepareBranches();
       const thisRun = ++runVersion;
       effects.forEach((effect) => effect.cancel());
       effects = [];
