@@ -12,12 +12,12 @@
       "color": "coral"
     },
     {
-      "title": "PROJECT 02",
-      "description": "프로젝트 소개가 들어갈 자리",
-      "people": "정보 입력 예정",
-      "period": "정보 입력 예정",
-      "page": "",
-      "image": "",
+      "title": "Connect6 AI",
+      "description": "직접 구현한 AI와 대결하여 육목을 플레이합니다.",
+      "people": "1명 · 개인",
+      "period": "2026.05 · 1개월",
+      "page": "portfolio/connect6-ai",
+      "image": "images/project/connect6-thumb.svg",
       "color": "yellow"
     },
     {

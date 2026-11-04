@@ -2,6 +2,8 @@
 {{- with .File -}}
   {{- $isEightPuzzle = eq .ContentBaseName "8-puzzle-solver" -}}
 {{- end -}}
+{{- $hideProjectExtras := or $isEightPuzzle (.Params.hide_theme_extras | default false) -}}
+
 
 <!doctype html>
 <html
@@ -11,7 +13,6 @@
   {{- end -}}"
   lang="{{ site.Language.Locale | default `en-US` }}"
   itemtype="http://schema.org/WebPage">
-
   <head>
     {{ partial "essentials/head.html" . }}
 
@@ -23,8 +24,8 @@
   <body
     class="flex flex-col min-h-screen{{ if eq .Layout "contact" }}
       bp-contact-page
-    {{ end }}">
-
+    {{ end }}
+    ">
     {{ if hugo.IsProduction }}
       {{ partialCached "preloader.html" . }}
       {{ partialCached "gtm-noscript.html" . }}
@@ -35,11 +36,12 @@
 
     {{ partial "essentials/header.html" . }}
 
+
     <main class="grow">
       {{ block "main" . }}{{ end }}
     </main>
 
-    {{ if and (not .IsHome) (ne .Layout "contact") (not $isEightPuzzle) }}
+    {{ if and (not .IsHome) (ne .Layout "contact") (not $hideProjectExtras) }}
       {{ partial "essentials/footer.html" . }}
     {{ end }}
   </body>

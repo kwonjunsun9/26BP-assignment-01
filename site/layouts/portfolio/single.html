@@ -3,6 +3,7 @@
   {{- with .File -}}
     {{- $isEightPuzzle = eq .ContentBaseName "8-puzzle-solver" -}}
   {{- end -}}
+  {{- $hideProjectExtras := or $isEightPuzzle (.Params.hide_theme_extras | default false) -}}
 
 
   <section class="section pt-46">
@@ -28,7 +29,7 @@
     </div>
   </section>
 
-  {{ if not $isEightPuzzle }}
+  {{ if not $hideProjectExtras }}
     {{ partial "call-to-action.html" . }}
   {{ end }}
 {{ end }}
