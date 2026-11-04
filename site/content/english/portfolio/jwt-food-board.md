@@ -6,7 +6,6 @@ summary: "공개 조회와 로그인 후 글쓰기를 구분하고, JWT 검증�
 type: "portfolio"
 category: ["Web Service", "Vue", "Express", "JWT", "SQLite"]
 image: "images/project/jwt-food-board-screen.jpeg"
-hide_theme_extras: true
 draft: false
 ---
 

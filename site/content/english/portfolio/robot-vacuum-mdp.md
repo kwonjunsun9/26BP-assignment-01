@@ -6,7 +6,6 @@ summary: "고양이·벽·젖은 바닥이 있는 환경에서 먼지 수집과 
 type: "portfolio"
 category: ["MDP", "Python", "Dynamic Programming"]
 image: "images/project/robot-vacuum-gui.png"
-hide_theme_extras: true
 draft: false
 ---
 
