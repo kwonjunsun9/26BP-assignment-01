@@ -304,4 +304,381 @@
   <!-- /About me -->
 
   {{ partial "blueprint-contact.html" . }}
+
+  <style id="bp-home-visual-style">
+    /* HOME 공통 기준 */
+    :is(
+      .bp-hero,
+      #blueprint-work,
+      #after-projects,
+      #blueprint-next,
+      #bp-project-dialog
+    ) {
+      --bp-home-font:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo",
+        "Noto Sans KR", "Malgun Gothic", sans-serif;
+      --bp-home-title-size: clamp(36px, min(4.5vw, 8svh), 72px);
+      --bp-home-copy-size: clamp(18px, min(1.8vw, 3svh), 28px);
+      --bp-home-blue: #0071e3;
+      --bp-home-blue-hover: #0066cc;
+      --bp-home-heading-color: #1d1d1f;
+      --bp-home-copy-color: #1d1d1f;
+      font-family: var(--bp-home-font);
+    }
+
+    /* 검은 배경의 글자색 */
+    #blueprint-work {
+      --bp-home-heading-color: #f5f5f7;
+      --bp-home-copy-color: #f5f5f7;
+    }
+
+    /* 네 구역의 제목 */
+    .bp-hero .bp-title,
+    #blueprint-work #bp-fan-title,
+    #after-projects #bp-catalog-title,
+    #blueprint-next #bp-print-title {
+      margin: 0;
+      max-width: 100%;
+      color: var(--bp-home-heading-color);
+      font-family: var(--bp-home-font);
+      font-size: var(--bp-home-title-size);
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+      text-align: center;
+      text-transform: none;
+      text-wrap: balance;
+      overflow-wrap: anywhere;
+    }
+
+    /* 네 구역의 설명 */
+    .bp-hero .bp-description,
+    #blueprint-work .bp-fan-heading > p,
+    #after-projects .bp-catalog-intro,
+    #blueprint-next .bp-print-tagline {
+      max-width: 48rem;
+      margin: 14px auto 0;
+      color: var(--bp-home-copy-color);
+      font-family: var(--bp-home-font);
+      font-size: var(--bp-home-copy-size);
+      font-style: normal;
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: -0.025em;
+      text-align: center;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    #blueprint-next .bp-print-header {
+      gap: 0;
+    }
+
+    #blueprint-next .bp-print-name {
+      margin: 16px 0 0;
+    }
+
+    /* 버튼 배치와 간격 */
+    .bp-hero .bp-actions,
+    #after-projects .bp-catalog-action-row,
+    #blueprint-next .bp-print-actions,
+    #bp-project-dialog .bp-dialog-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 24px 0 0;
+    }
+
+    #blueprint-work .bp-fan-more {
+      margin: 24px 0 0;
+    }
+
+    /* 공통 버튼 모양 */
+    :is(
+        .bp-hero,
+        #blueprint-work,
+        #after-projects,
+        #blueprint-next,
+        #bp-project-dialog
+      )
+      :is(
+        .bp-button,
+        .bp-fan-more,
+        .bp-catalog-more,
+        .bp-print-action,
+        .bp-dialog-back,
+        .bp-dialog-detail
+      ) {
+      --bp-home-button-bg: var(--bp-home-blue);
+      --bp-home-button-text: #fff;
+      --bp-home-button-hover-bg: var(--bp-home-blue-hover);
+      --bp-home-button-hover-text: #fff;
+
+      box-sizing: border-box;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 128px;
+      max-width: 100%;
+      min-height: 48px;
+      padding: 12px 24px;
+      border: 1px solid var(--bp-home-blue);
+      border-radius: 999px;
+      background: var(--bp-home-button-bg);
+      color: var(--bp-home-button-text);
+      box-shadow: none;
+      font-family: var(--bp-home-font);
+      font-size: 17px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      text-align: center;
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease,
+        transform 160ms ease;
+    }
+
+    /* 테두리형 버튼 */
+    :is(
+        .bp-hero,
+        #blueprint-work,
+        #after-projects,
+        #blueprint-next,
+        #bp-project-dialog
+      )
+      :is(
+        .bp-button-secondary,
+        .bp-catalog-more,
+        .bp-print-action--about,
+        .bp-dialog-back
+      ) {
+      --bp-home-button-bg: transparent;
+      --bp-home-button-text: var(--bp-home-blue);
+      --bp-home-button-hover-bg: rgb(0 113 227 / 8%);
+      --bp-home-button-hover-text: var(--bp-home-blue-hover);
+    }
+
+    #after-projects .bp-catalog-more svg,
+    #bp-project-dialog .bp-dialog-detail > span {
+      display: none;
+    }
+
+    /* 마우스를 올렸을 때 */
+    @media (hover: hover) and (pointer: fine) {
+      :is(
+          .bp-hero,
+          #blueprint-work,
+          #after-projects,
+          #blueprint-next,
+          #bp-project-dialog
+        )
+        :is(
+          .bp-button,
+          .bp-fan-more,
+          .bp-catalog-more,
+          .bp-print-action,
+          .bp-dialog-back,
+          .bp-dialog-detail
+        ):hover {
+        background: var(--bp-home-button-hover-bg);
+        border-color: var(--bp-home-blue-hover);
+        color: var(--bp-home-button-hover-text);
+        text-decoration: none;
+      }
+    }
+
+    /* 눌렀을 때 */
+    :is(
+        .bp-hero,
+        #blueprint-work,
+        #after-projects,
+        #blueprint-next,
+        #bp-project-dialog
+      )
+      :is(
+        .bp-button,
+        .bp-fan-more,
+        .bp-catalog-more,
+        .bp-print-action,
+        .bp-dialog-back,
+        .bp-dialog-detail
+      ):active {
+      background: var(--bp-home-button-hover-bg);
+      border-color: var(--bp-home-blue-hover);
+      color: var(--bp-home-button-hover-text);
+      transform: scale(0.97);
+    }
+
+    /* 키보드 포커스 */
+    :is(
+        .bp-hero,
+        #blueprint-work,
+        #after-projects,
+        #blueprint-next,
+        #bp-project-dialog
+      )
+      :is(
+        .bp-button,
+        .bp-fan-more,
+        .bp-catalog-more,
+        .bp-print-action,
+        .bp-dialog-back,
+        .bp-dialog-detail
+      ):focus-visible {
+      outline: 3px solid var(--bp-home-blue);
+      outline-offset: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :is(
+          .bp-hero,
+          #blueprint-work,
+          #after-projects,
+          #blueprint-next,
+          #bp-project-dialog
+        )
+        :is(
+          .bp-button,
+          .bp-fan-more,
+          .bp-catalog-more,
+          .bp-print-action,
+          .bp-dialog-back,
+          .bp-dialog-detail
+        ) {
+        transition: none;
+        transform: none;
+      }
+    }
+    #bp-title {
+      --bp-home-title-size: clamp(3rem, min(6vw, 11svh), 5.75rem);
+    }
+
+    #bp-fan-title {
+      --bp-home-title-size: clamp(1.75rem, 3.4vw, 3rem);
+    }
+
+    #bp-catalog-title {
+      --bp-home-title-size: clamp(2.75rem, 4.5vw, 4rem);
+    }
+
+    #bp-print-title {
+      --bp-home-title-size: clamp(1.75rem, 3.5vw, 3rem);
+    }
+
+    /* 설명 크기 복원 */
+    .bp-hero .bp-description {
+      --bp-home-copy-size: clamp(1.125rem, 1.7vw, 1.5rem);
+    }
+
+    #blueprint-work .bp-fan-heading > p {
+      --bp-home-copy-size: 16px;
+    }
+
+    #after-projects .bp-catalog-intro {
+      --bp-home-copy-size: 1.125rem;
+    }
+
+    #blueprint-next .bp-print-tagline {
+      --bp-home-copy-size: clamp(1rem, 1.3vw, 1.25rem);
+    }
+
+    /* 자세히 알아보기: 오른쪽 텍스트 링크 */
+    #after-projects .bp-catalog-action-row {
+      justify-content: flex-end;
+      margin-top: 0.75rem;
+    }
+
+    #after-projects a.bp-catalog-more {
+      min-width: 0;
+      min-height: 44px;
+      gap: 0.4rem;
+      padding: 0.5rem;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--bp-home-blue);
+      font-family: var(--bp-home-font);
+      font-size: 1.125rem;
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: normal;
+      text-decoration: none;
+      text-underline-offset: 0.2em;
+      transform: none;
+      transition: color 160ms ease;
+    }
+
+    #after-projects a.bp-catalog-more:hover,
+    #after-projects a.bp-catalog-more:active {
+      border: 0;
+      background: transparent;
+      color: var(--bp-home-blue-hover);
+      text-decoration: underline;
+      transform: none;
+    }
+
+    #after-projects .bp-catalog-more svg {
+      display: block;
+    }
+
+    /* 모바일의 이전 크기 */
+    @media (max-width: 599px) {
+      #bp-title {
+        --bp-home-title-size: clamp(2.6rem, 10.8vw, 3.5rem);
+      }
+
+      #after-projects .bp-catalog-intro {
+        --bp-home-copy-size: 1rem;
+      }
+
+      #after-projects .bp-catalog-action-row {
+        margin-top: 1rem;
+      }
+    }
+
+    /* 높이가 낮은 화면의 이전 크기 */
+    @media (max-height: 680px) and (min-width: 600px) {
+      #bp-title {
+        --bp-home-title-size: clamp(2.8rem, min(5vw, 10svh), 4.75rem);
+      }
+    }
+
+    @media (min-width: 1100px) and (max-height: 850px) {
+      #bp-catalog-title {
+        --bp-home-title-size: clamp(2.25rem, 3.5vw, 3rem);
+      }
+
+      #after-projects .bp-catalog-action-row {
+        margin-top: 0;
+      }
+    }
+
+    .bp-hero #bp-title {
+      position: relative;
+      top: -12px;
+    }
+
+    .bp-hero .bp-actions {
+      position: relative;
+      top: 10px;
+    }
+
+    #blueprint-work .bp-fan-more {
+      min-width: 112px;
+      min-height: 45px;
+      padding: 8px 18px;
+      font-size: 20px;
+    }
+  </style>
 {{ end }}
