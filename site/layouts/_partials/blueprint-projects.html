@@ -1,5 +1,42 @@
 {{ with .Params.recent_works }}
   {{ if .enable }}
+    <style>
+      #bp-project-dialog .bp-dialog-sheet {
+        display: flex;
+        flex-direction: column;
+        min-height: min(420px, calc(100dvh - 2rem));
+      }
+
+      #bp-project-dialog .bp-dialog-sheet > * {
+        min-width: 0;
+      }
+
+      #bp-project-dialog #bp-dialog-summary {
+        margin-bottom: 0;
+        white-space: pre-line;
+        overflow-wrap: anywhere;
+      }
+
+      #bp-project-dialog .bp-dialog-actions {
+        display: flex;
+        flex: 0 0 auto;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+        align-self: stretch;
+        width: 100%;
+        margin-top: auto;
+        padding-top: 2rem;
+        gap: 0;
+      }
+
+      #bp-project-dialog .bp-dialog-actions > .bp-dialog-detail {
+        flex: 0 1 auto;
+        max-width: 100%;
+        margin-left: auto;
+      }
+    </style>
+
     {{/* Use the PROJECT data order; ignore placeholders and old demo featured pages. */}}
     {{ $projects := slice }}
     {{ with hugo.Data.bp_projects }}
@@ -36,13 +73,15 @@
             {{ $project := $entry.Page }}
             {{ $card := $entry.Card }}
             {{ $title := $card.title | default $project.Title }}
-            {{ $summary := $project.Params.preview_summary | default $card.description | default $project.Description | default ($project.Summary | plainify) | plainify }}
+            {{ $homeTitle := $card.home_title | default $title }}
+            {{ $dialogTitle := $card.home_dialog_title | default $title }}
+            {{ $summary := $card.home_description | default $project.Params.preview_summary | default $card.description | default $project.Description | default ($project.Summary | plainify) | plainify }}
 
 
             <a
               class="bp-fan-card"
               href="{{ $project.RelPermalink }}"
-              data-title="{{ $title }}"
+              data-title="{{ $dialogTitle }}"
               data-summary="{{ $summary }}"
               data-number="{{ printf "%02d" (add $index 1) }}"
               data-category="{{ with $project.Params.category }}
@@ -55,7 +94,7 @@
               </span>
 
               <h3 class="bp-poster-title">
-                {{ $title }}
+                {{ $homeTitle }}
               </h3>
 
               <span class="bp-poster-bottom">
@@ -118,12 +157,6 @@
         <p id="bp-dialog-summary"></p>
 
         <div class="bp-dialog-actions">
-          <form method="dialog">
-            <button class="bp-dialog-back" type="submit">
-              카드로 돌아가기
-            </button>
-          </form>
-
           <a id="bp-dialog-detail" class="bp-dialog-detail">
             자세한 설명 보기
             <span aria-hidden="true">↗</span>

@@ -3,13 +3,16 @@
   "tagline": "지금까지 칠해온 색깔들.",
   "projects": [
     {
-      "title": "How to Solve 8-Puzzle",
+      "title": "Solve 8-Puzzle",
       "description": "8-Puzzle 문제를 다양한 탐색 알고리즘으로 해결하는 프로젝트입니다.",
       "people": "1명 · 개인",
       "period": "2026.04",
       "page": "portfolio/8-puzzle-solver",
       "image": "images/project/8-puzzle-thumb.svg",
-      "color": "coral"
+      "color": "coral",
+      "home_title": "Solve 8-Puzzle",
+      "home_dialog_title": "Solve 8-Puzzle",
+      "home_description": "8-Puzzle은 3×3 격자에 숫자 타일 8개와 빈칸 하나를 배치한 퍼즐입니다. \n 8-Puzzle Solver는 숫자 타일을 목표 순서로 정렬하는 8-Puzzle을 대상으로, 탐색 알고리즘의 동작과 해결 과정을 살펴보는 프로그램입니다. \n 이 프로젝트에서는 Python으로 퍼즐 상태와 탐색 문제를 다루고, 콘솔 실행과 Pygame 기반 GUI를 통해 해결 과정을 표현합니다."
     },
     {
       "title": "육목 with AI",
@@ -18,7 +21,10 @@
       "period": "2026.05 ",
       "page": "portfolio/connect6-ai",
       "image": "images/project/connect6-thumb.svg",
-      "color": "yellow"
+      "color": "yellow",
+      "home_title": "Connect6 with AI",
+      "home_dialog_title": "육목 with AI",
+      "home_description": "육목 AI는 현재 보드의 공격·수비 패턴을 분석해 다음 착수를 결정하는 Python 기반 육목 AI입니다. \n 즉시 승리할 수 있는 수를 먼저 확인하고, 상대의 위험 패턴을 차단한 뒤, 휴리스틱 평가와 제한 깊이 탐색으로 다음 수를 선택하도록 구현했습니다. \n 구현 전략과 실험 결과는 자세한 소개에서 확인할 수 있습니다."
     },
     {
       "title": "최단 경로를 찾는 로봇청소기",
@@ -27,7 +33,10 @@
       "period": "2026.06",
       "page": "portfolio/robot-vacuum-mdp",
       "image": "images/project/robot-vacuum-thumb.svg",
-      "color": "green"
+      "color": "green",
+      "home_title": "Find Shortest Path",
+      "home_dialog_title": "최단 경로를 찾는 로봇청소기",
+      "home_description": "최단 경로를 찾는 로봇청소기 프로젝트는 MDP (Markov Decision Process)를 사용하여 청소와 복귀를 최적화하는 시스템입니다. \n 이 프로젝트에서는 Python으로 로봇의 상태와 행동을 모델링하고, 가치 반복 알고리즘을 통해 최적의 경로를 계산합니다."
     },
     {
       "title": "PROJECT 04",
