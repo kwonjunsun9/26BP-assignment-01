@@ -18,11 +18,20 @@
 
     {{ partialCached "essentials/style.html" . }}
 
+    {{ if site.Params.navbar_fixed }}
+      <style>
+        body.bp-project-detail-page > main.grow {
+          box-sizing: border-box;
+          padding-top: var(--bp-shared-nav-height, 52px);
+        }
+      </style>
+    {{ end }}
+
     {{ block "page-head" . }}{{ end }}
   </head>
 
   <body
-    class="flex flex-col min-h-screen{{ if eq .Layout "contact" }}
+    class="flex flex-col min-h-screen bp-project-detail-page{{ if eq .Layout "contact" }}
       bp-contact-page
     {{ end }}
     ">
@@ -31,7 +40,6 @@
       {{ partialCached "gtm-noscript.html" . }}
     {{ else }}
       {{ partial "preloader.html" . }}
-      {{ partial "components/tw-size-indicator.html" . }}
     {{ end }}
 
     {{ partial "essentials/header.html" . }}

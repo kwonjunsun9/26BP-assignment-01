@@ -5,6 +5,7 @@ description: "위협 패턴 분석과 휴리스틱 평가, 제한 깊이 탐색�
 summary: "두 돌의 순차 선택과 위협 패턴 분석을 바탕으로 공격·수비를 판단하고, 후보 평가를 경량화해 시간 제한에 대응한 육목 AI 프로젝트입니다."
 type: "portfolio"
 category: ["Game AI", "Python", "Heuristic Search"]
+image: ""
 hide_theme_extras: true
 draft: false
 ---
