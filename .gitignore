@@ -7,7 +7,7 @@ hugo_stats.json
 
 node_modules/
 /.pages-tools/
-
+/resources/_gen/
 
 __pycache__/
 *.pyc
