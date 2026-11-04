@@ -5,12 +5,13 @@ description: "개발자 권준성의 소개, 기술과 프로젝트입니다."
 layout: "about"
 draft: false
 
-navigation_glow: true
+navigation_glow:
+  true
 
   # 예: /images/about/profile.webp
   # 실제 사진 파일은 site/static/images/about/profile.webp 에 넣으세요.
 profile:
-  greeting: "반갑습니다"  
+  greeting: "반갑습니다"
   heading: "개발자 권준성입니다."
   subtitle: ""
   initials: "KJS"
@@ -39,16 +40,32 @@ profile_card:
       value: "Software Engineer"
       note: "@ JBNU Computer Science & AI"
 
-
 skills_card:
   title: "Skills"
   groups:
     - title: "Frontend"
-      items: ["React", "TypeScript", "Next.js", "Supabase", "PostgreSQL"]
+      items:
+        - "JavaScript"
+        - "React"
+        - "Next.js"
+
     - title: "Backend"
-      items: ["Node.js", "Python", "FastAPI", "Supabase", "PostgreSQL"]
+      items:
+        - "Java"
+        - "Spring Boot"
+        - "Node.js"
+        - "Express"
+        - "MySQL"
+
     - title: "Focus"
-      items: ["React Native", "Android", "UI / UX"]
+      items:
+        - "Machine Learning"
+        - "AI"
+        - "PyTorch"
+        - "Unity"
+        - "LibGDX"
+        - "DirectX"
+        - "OpenGL"
 
 projects_card:
   title: "Projects"
