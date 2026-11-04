@@ -31,7 +31,7 @@
       {{ $href = .RelPermalink }}
       {{ if eq $current.RelPermalink .RelPermalink }}
         {{ $currentValue = "page" }}
-      {{ else if and (not .IsHome) (hasPrefix $current.RelPermalink .RelPermalink) }}
+      {{ else if and (not .IsHome) (or ($current.IsDescendant .) (hasPrefix $current.RelPermalink .RelPermalink)) }}
         {{ $currentValue = "location" }}
       {{ end }}
     {{ end }}
@@ -906,3 +906,4 @@
     updateLabel();
   })();
 </script>
+
