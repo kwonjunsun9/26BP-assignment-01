@@ -3,12 +3,12 @@
   "tagline": "지금까지 칠해온 색깔들.",
   "projects": [
     {
-      "title": "KIO-TAPE-BRAND",
-      "description": "프로젝트 상세 소개",
-      "people": "정보 입력 예정",
-      "period": "정보 입력 예정",
-      "page": "portfolio/kio-tape-2",
-      "image": "",
+      "title": "8-Puzzle Solver",
+      "description": "8-Puzzle 문제를 다양한 탐색 알고리즘으로 해결하는 프로젝트입니다.",
+      "people": "1명 · 개인",
+      "period": "2026.04 · 1개월",
+      "page": "portfolio/8-puzzle-solver",
+      "image": "images/project/8-puzzle-thumb.svg",
       "color": "coral"
     },
     {

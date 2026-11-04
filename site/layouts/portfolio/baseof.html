@@ -1,0 +1,46 @@
+{{- $isEightPuzzle := false -}}
+{{- with .File -}}
+  {{- $isEightPuzzle = eq .ContentBaseName "8-puzzle-solver" -}}
+{{- end -}}
+
+<!doctype html>
+<html
+  itemscope
+  class="{{- if not site.Params.theme_switcher -}}
+    {{- site.Params.theme_default -}}
+  {{- end -}}"
+  lang="{{ site.Language.Locale | default `en-US` }}"
+  itemtype="http://schema.org/WebPage">
+
+  <head>
+    {{ partial "essentials/head.html" . }}
+
+    {{ partialCached "essentials/style.html" . }}
+
+    {{ block "page-head" . }}{{ end }}
+  </head>
+
+  <body
+    class="flex flex-col min-h-screen{{ if eq .Layout "contact" }}
+      bp-contact-page
+    {{ end }}">
+
+    {{ if hugo.IsProduction }}
+      {{ partialCached "preloader.html" . }}
+      {{ partialCached "gtm-noscript.html" . }}
+    {{ else }}
+      {{ partial "preloader.html" . }}
+      {{ partial "components/tw-size-indicator.html" . }}
+    {{ end }}
+
+    {{ partial "essentials/header.html" . }}
+
+    <main class="grow">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ if and (not .IsHome) (ne .Layout "contact") (not $isEightPuzzle) }}
+      {{ partial "essentials/footer.html" . }}
+    {{ end }}
+  </body>
+</html>
